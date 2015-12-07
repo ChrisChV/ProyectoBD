@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.project.business" />
+<!--  MOCKS -->
+
+	<bean id="categoryDao" class="com.leitmotiff.business.mock.CategoryDaoImplMock" />
+	<bean id="productDao" class="com.leitmotiff.business.mock.ProductDaoImplMock"/>
+	<bean id="companyDao" class="com.leitmotiff.business.mock.CompanyDaoImplMock" />
+	<bean id="mostSearchedSentenceDao" class="com.leitmotiff.business.mock.MostSearchedSentencesDaoImplMock" />
+	<bean id="reviewProductDao" class="com.leitmotiff.business.mock.ReviewProductDaoImplMock" />
+	<bean id="reviewServiceDao" class="com.leitmotiff.business.mock.ReviewServiceDaoImplMock" />
+	<bean id="dictionaryDao" class="com.leitmotiff.business.mock.DictionaryDaoMock"/>
+	<bean id="serviceDao" class="com.leitmotiff.business.mock.ServiceDaoImplMock" />
+	<bean id="serviceHasProductDao" class="com.leitmotiff.business.mock.ServiceHasProductDaoImplMock" />
+	<bean id="userDao" class ="com.leitmotiff.business.mock.UserDaoImplMock"/>
+	
+</beans>
