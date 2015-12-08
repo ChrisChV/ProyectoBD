@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.project</groupId>
 	<version>${project.version}</version>
-	<artifactId>internet</artifactId>
+	<artifactId>baseD</artifactId>
 	<packaging>pom</packaging>
-	<name>internet</name>
+	<name>baseD</name>
 
 	<modules>
 		<module>web</module>
