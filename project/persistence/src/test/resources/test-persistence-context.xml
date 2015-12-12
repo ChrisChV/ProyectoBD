@@ -9,13 +9,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="com.leitmotiff.persistence" />
+	<context:component-scan base-package="com.project.persistence" />
 	
-
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://54.94.188.69:3306/parlakuytest" />
+		<property name="url" value="jdbc:mysql://localhost:3306/proyecto" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -25,22 +24,15 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name='annotatedClasses'>
 			<list>
-				<value>com.leitmotiff.persistence.entity.Category</value>
-		        <value>com.leitmotiff.persistence.entity.Company</value>
-		        <value>com.leitmotiff.persistence.entity.CompanyHasProduct</value>
-		        <value>com.leitmotiff.persistence.entity.CompanyHasProductId</value>
-		        <value>com.leitmotiff.persistence.entity.Product</value>
-		        <value>com.leitmotiff.persistence.entity.Reviewproduct</value>
-		        <value>com.leitmotiff.persistence.entity.Reviewservice</value>
-		        <value>com.leitmotiff.persistence.entity.Sentenceproduct</value>
-		        <value>com.leitmotiff.persistence.entity.Sentenceservice</value>
-		        <value>com.leitmotiff.persistence.entity.Services</value>
-		        <value>com.leitmotiff.persistence.entity.ServiceHasProduct</value>
-		        <value>com.leitmotiff.persistence.entity.ServiceHasProductId</value>
-		        <value>com.leitmotiff.persistence.entity.Source</value>
-		        <value>com.leitmotiff.persistence.entity.MostSearchedSentences</value>
-		    	<value>com.leitmotiff.persistence.entity.Dictionary</value>
-		    	<value>com.leitmotiff.persistence.entity.User</value>
+			<value>com.project.persistence.entity.Advisor</value>
+			<value>com.project.persistence.entity.Classroom</value>
+			<value>com.project.persistence.entity.Course</value>
+			<value>com.project.persistence.entity.Department</value>
+			<value>com.project.persistence.entity.Instructor</value>
+			<value>com.project.persistence.entity.Section</value>
+			<value>com.project.persistence.entity.Student</value>
+			<value>com.project.persistence.entity.Takes</value>
+			<value>com.project.persistence.entity.TimeSlot</value>
 	    	</list>
 		</property>
 		<property name="hibernateProperties">

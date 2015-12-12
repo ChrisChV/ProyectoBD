@@ -9,6 +9,16 @@
         <property name="show_sql">false</property>
         
         <!-- mappings for annotated classes -->
+        <mapping class="com.project.persistence.entity.Advisor" />
+        <mapping class="com.project.persistence.entity.Classroom" />
+        <mapping class="com.project.persistence.entity.Course" />
+        <mapping class="com.project.persistence.entity.Departament" />
+        <mapping class="com.project.persistence.entity.Instructor" />
+        <mapping class="com.project.persistence.entity.Section" />
+        <mapping class="com.project.persistence.entity.Student" />
+        <mapping class="com.project.persistence.entity.Takes" />
+        <mapping class="com.project.persistence.entity.TimeSlot" />
+        
         
     </session-factory>
 </hibernate-configuration>
