@@ -1,4 +1,4 @@
-package com.persistence.project.dao;
+package com.project.persistence.dao;
 
 import java.util.List;
 
@@ -24,9 +24,8 @@ public class CourseTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Before
 	public void setUp(){
-		Course cou = new Course("CSSSS");
-		cou.setTitle("BASE DE DATOS");
-		courseDao.saveOrUpdate(cou);
+		courseDao.insert("CSSSS", null, "BASE DE DATOS 1", (byte) 3);
+		courseDao.insert("CSSS2", null, "BASE DE DATOS 2", (byte) 3);
 	}
 	
 	@Test
@@ -49,10 +48,29 @@ public class CourseTest extends AbstractTransactionalJUnit4SpringContextTests {
 		System.out.println(cou.getTitle());
 	}
 	
+	@Test
+	public void delete(){
+		courseDao.delete("CSSSS");
+		List<Course> all = courseDao.findAll();
+		for(Course cou : all){
+			System.out.print("ID ");
+			System.out.println(cou.getCourseId());
+			System.out.print("Nombre ");
+			System.out.println(cou.getTitle());
+		}
+	}
 	
-	
-	
-	
-	
-	
+	@Test
+	public void update(){
+		Course temp = courseDao.getById("CSSSS");
+		temp.setTitle("BASE DE DATOS 3");
+		courseDao.update(temp);
+		List<Course> all = courseDao.findAll();
+		for(Course cou : all){
+			System.out.print("ID ");
+			System.out.println(cou.getCourseId());
+			System.out.print("Nombre ");
+			System.out.println(cou.getTitle());
+		}
+	}
 }

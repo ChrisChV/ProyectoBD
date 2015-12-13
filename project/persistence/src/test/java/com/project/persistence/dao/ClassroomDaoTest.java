@@ -1,4 +1,4 @@
-package com.persistence.project.dao;
+package com.project.persistence.dao;
 
 import java.util.List;
 
@@ -25,9 +25,8 @@ public class ClassroomDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 	
 	@Before
 	public void setUp(){
-		Classroom cla = new Classroom(new ClassroomId("CHRIS", "123"));
-		cla.setCapacity((short) 120);
-		classroomDao.saveOrUpdate(cla);
+		classroomDao.insert("CHRIS", "123", (short) 120);
+		classroomDao.insert("ALE", "321", (short) 500);
 	}
 	
 	@Test
@@ -55,8 +54,35 @@ public class ClassroomDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 	}
 	
 	
+	@Test
+	public void delete(){
+		classroomDao.delete(new ClassroomId("CHRIS", "123"));
+		List<Classroom> all = classroomDao.findAll();
+		for(Classroom cla : all){
+			System.out.print("Name ");
+			System.out.println(cla.getId().getBuilding());
+			System.out.print("Number ");
+			System.out.println(cla.getId().getRoomNumber());
+			System.out.print("Capacity ");
+			System.out.println(cla.getCapacity());
+		}	
+	}
 	
-	
+	@Test
+	public void update(){
+		Classroom cla1 = classroomDao.getById(new ClassroomId("ALE", "321"));
+		cla1.setCapacity((short) 1000);
+		classroomDao.update(cla1);
+		List<Classroom> all = classroomDao.findAll();
+		for(Classroom cla : all){
+			System.out.print("Name ");
+			System.out.println(cla.getId().getBuilding());
+			System.out.print("Number ");
+			System.out.println(cla.getId().getRoomNumber());
+			System.out.print("Capacity ");
+			System.out.println(cla.getCapacity());
+		}
+	}
 	
 	
 	

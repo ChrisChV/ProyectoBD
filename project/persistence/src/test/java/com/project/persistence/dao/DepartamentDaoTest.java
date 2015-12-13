@@ -1,4 +1,4 @@
-package com.persistence.project.dao;
+package com.project.persistence.dao;
 
 import static org.junit.Assert.*;
 

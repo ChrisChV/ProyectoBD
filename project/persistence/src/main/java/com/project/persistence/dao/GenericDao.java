@@ -31,10 +31,7 @@ public interface GenericDao <Entity extends Serializable>{
 	 */
 	void saveOrUpdate(Entity entity);
 	
-	/**
-	 * Remove an object from persistent storage in the database
-	 */
-	void delete(Entity entity);
+
 	
 	/**
 	 * Retrieve the list of entities by a criteria

@@ -1,4 +1,4 @@
-package com.persistence.project.dao;
+package com.project.persistence.dao;
 
 import java.util.List;
 
@@ -11,40 +11,42 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.persistence.dao.StudentDao;
-import com.project.persistence.entity.Student;
+import com.project.persistence.dao.InstructorDao;
+import com.project.persistence.entity.Instructor;
 
 @ContextConfiguration(locations = {"classpath:test-persistence-context.xml"})
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-public class StudentDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class InstructorDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Autowired
-	private StudentDao studentDao;
+	private InstructorDao instDao;
 	
 	@Before
 	public void setUp(){
-		Student st = new Student("C1234","Chris");
-		studentDao.saveOrUpdate(st);
+		Instructor ins = new Instructor("C4444","Chris");
+		instDao.saveOrUpdate(ins);
 	}
 	
 	@Test
-	public void findAll(){
-		List<Student> all = studentDao.findAll();
-		for(Student st : all){
+	public void getAll(){
+		List<Instructor> all = instDao.findAll();
+		for(Instructor ins : all){
 			System.out.print("ID ");
-			System.out.println(st.getId());
+			System.out.println(ins.getId());
 			System.out.print("Nombre ");
-			System.out.println(st.getName());
+			System.out.println(ins.getName());
 		}
 	}
 	
 	@Test
 	public void findById(){
-		Student st = studentDao.getById("C1234");
+		Instructor ins = instDao.getById("C4444");
 		System.out.print("ID ");
-		System.out.println(st.getId());
+		System.out.println(ins.getId());
 		System.out.print("Nombre ");
-		System.out.println(st.getName());
+		System.out.println(ins.getName());
+		
 	}
+	
 }

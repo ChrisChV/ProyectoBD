@@ -18,6 +18,8 @@
         <mapping class="com.project.persistence.entity.Student" />
         <mapping class="com.project.persistence.entity.Takes" />
         <mapping class="com.project.persistence.entity.TimeSlot" />
+        <mapping class="com.project.persistence.entity.Prereq" />
+        <mapping class="com.project.persistence.entity.Teaches" />
         
         
     </session-factory>

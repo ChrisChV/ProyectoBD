@@ -24,7 +24,6 @@ public class Course implements java.io.Serializable {
 	private Department department;
 	private String title;
 	private Byte credits;
-	private Set<Section> sections = new HashSet<Section>(0);
 
 	public Course() {
 	}
@@ -33,12 +32,11 @@ public class Course implements java.io.Serializable {
 		this.courseId = courseId;
 	}
 
-	public Course(String courseId, Department department, String title, Byte credits, Set<Section> sections) {
+	public Course(String courseId, Department department, String title, Byte credits) {
 		this.courseId = courseId;
 		this.department = department;
 		this.title = title;
 		this.credits = credits;
-		this.sections = sections;
 	}
 
 	@Id
@@ -78,15 +76,6 @@ public class Course implements java.io.Serializable {
 
 	public void setCredits(Byte credits) {
 		this.credits = credits;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
-	public Set<Section> getSections() {
-		return this.sections;
-	}
-
-	public void setSections(Set<Section> sections) {
-		this.sections = sections;
 	}
 
 

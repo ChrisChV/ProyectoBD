@@ -1,7 +1,9 @@
-package com.persistence.project.dao;
+package com.project.persistence.dao;
 
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +57,19 @@ public class TimeSlotDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 		System.out.println(ts.getEndMin());
 	}
 	
-	
+	@Test
+	public void findAllById(){
+		Criterion criterion = Restrictions.eq("id.timeSlotId", "M");
+		List<TimeSlot> all = timeSlotDao.findByCriteria(criterion);
+		for(TimeSlot ts : all){
+			System.out.print("ID ");
+			System.out.println(ts.getId().getTimeSlotId());
+			System.out.print("Day ");
+			System.out.println(ts.getId().getDay());
+			System.out.print("End ");
+			System.out.println(ts.getEndMin());
+		}
+	}
 	
 	
 	

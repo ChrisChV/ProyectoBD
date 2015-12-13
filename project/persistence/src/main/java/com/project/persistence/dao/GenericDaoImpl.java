@@ -29,6 +29,10 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 	
 	protected Criterion criterion;
 	
+	public static final String ANSI_GREEN = "\033[32m";
+	
+	public static final String ANSI_RESET = "\033[0m";
+	
 	protected GenericDaoImpl(final Class<T> entity){
 		this.entity = entity;
 		this.actualResult = 0;
@@ -63,11 +67,6 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 	@Transactional
 	public void saveOrUpdate(T entity) {
 		getCurrentSession().saveOrUpdate(entity);	
-	}
-
-	@Transactional
-	public void delete(T entity) {
-		getCurrentSession().delete(entity);		
 	}
 	
 	@Transactional
