@@ -48,14 +48,8 @@ public class SectionDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		Course cou = new Course("CSSSS");
 		cou.setTitle("BASE DE DATOS");
 		courseDao.saveOrUpdate(cou);
-		Section sec1 = new Section(new SectionId(cou.getCourseId(),"1", "1",(short)2015 ), cou);
-		sec1.setClassroom(cla);
-		sec1.setTimeSlotId(time.getId().getTimeSlotId());
-		Section sec2 = new Section(new SectionId(cou.getCourseId(),"1", "2",(short)2015 ), cou);
-		sec2.setClassroom(cla);
-		sec2.setTimeSlotId(time2.getId().getTimeSlotId());
-		sectionDao.saveOrUpdate(sec1);
-		sectionDao.saveOrUpdate(sec2);
+		sectionDao.insert("CSSSS", "1", "1", (short) 2015, new ClassroomId("CHRIS", "123"), "M");
+		sectionDao.insert("CSSSS", "1", "2", (short) 2015, new ClassroomId("CHRIS", "123"), "M");
 	}
 	
 	@Test
@@ -103,6 +97,25 @@ public class SectionDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	
 	@Test
 	public void delete(){
+		sectionDao.delete(new SectionId("CSSSS","1","2",(short) 2015));
+		List<Section> all = sectionDao.findAll();
+		for(Section sec : all){
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
+		}
+	}
+	
+	@Test
+	public void update(){
+		Section sec2 = sectionDao.getById(new SectionId("CSSSS","1","2",(short) 2015));
+		sec2.setTimeSlotId("N");
+		sectionDao.update(sec2);
 		List<Section> all = sectionDao.findAll();
 		for(Section sec : all){
 			System.out.print("Curso ");

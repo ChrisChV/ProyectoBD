@@ -9,7 +9,9 @@ public interface PrereqDao extends GenericDao<Prereq> {
 
 	public Prereq getById(PrereqId id);
 	
-	public void delete(Prereq pre);
+	public String insert(String courseId, String prereqId);
+	
+	public String delete(PrereqId id);
 	
 	public List<Prereq> getPrereq(String courseId);
 	

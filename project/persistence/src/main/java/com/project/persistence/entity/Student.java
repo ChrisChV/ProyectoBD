@@ -24,8 +24,6 @@ public class Student implements java.io.Serializable {
 	private Department department;
 	private String name;
 	private Short totCred;
-	private Set<Takes> takeses = new HashSet<Takes>(0);
-	private Advisor advisor;
 
 	public Student() {
 	}
@@ -35,13 +33,11 @@ public class Student implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Student(String id, Department department, String name, Short totCred, Set<Takes> takeses, Advisor advisor) {
+	public Student(String id, Department department, String name, Short totCred) {
 		this.id = id;
 		this.department = department;
 		this.name = name;
 		this.totCred = totCred;
-		this.takeses = takeses;
-		this.advisor = advisor;
 	}
 
 	@Id
@@ -82,23 +78,4 @@ public class Student implements java.io.Serializable {
 	public void setTotCred(Short totCred) {
 		this.totCred = totCred;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-	public Set<Takes> getTakeses() {
-		return this.takeses;
-	}
-
-	public void setTakeses(Set<Takes> takeses) {
-		this.takeses = takeses;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "student")
-	public Advisor getAdvisor() {
-		return this.advisor;
-	}
-
-	public void setAdvisor(Advisor advisor) {
-		this.advisor = advisor;
-	}
-
 }

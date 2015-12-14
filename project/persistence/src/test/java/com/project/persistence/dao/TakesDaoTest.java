@@ -67,12 +67,8 @@ public class TakesDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 		sectionDao.saveOrUpdate(sec2);
 		Student st = new Student("C1234","Chris");
 		studentDao.saveOrUpdate(st);
-		Takes take1 = new Takes(new TakesId(st.getId(), sec1.getId().getCourseId(), sec1.getId().getSecId()
-				, sec1.getId().getSemester(), sec1.getId().getYear()), sec1, st);
-		Takes take2 = new Takes(new TakesId(st.getId(), sec2.getId().getCourseId(), sec2.getId().getSecId()
-				, sec2.getId().getSemester(), sec2.getId().getYear()), sec2, st);
-		takesDao.saveOrUpdate(take1);
-		takesDao.saveOrUpdate(take2);
+		takesDao.insert("C1234", sec1.getId(), "A+");
+		takesDao.insert("C1234", sec2.getId(), null);
 	}
 	
 	@Test
@@ -91,6 +87,8 @@ public class TakesDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 			System.out.println(sec.getClassroom().getId().getBuilding());
 			System.out.print("Time ");
 			System.out.println(sec.getTimeSlotId());
+			System.out.print("Grade ");
+			System.out.println(take.getGrade());
 		}
 	}
 	
@@ -127,6 +125,50 @@ public class TakesDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 			System.out.println(sec.getClassroom().getId().getBuilding());
 			System.out.print("Time ");
 			System.out.println(sec.getTimeSlotId());
+		}
+	}
+	
+	@Test
+	public void delete(){
+		takesDao.delete(new TakesId("C1234", "CSSSS", "1", "1", (short)2015));
+		List<Takes> all = takesDao.findAll();
+		for(Takes take : all){
+			Section sec = take.getSection();
+			Student st = take.getStudent();
+			System.out.print("Nombre Student ");
+			System.out.println(st.getName());
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
+		}
+	}
+	
+	@Test
+	public void update(){
+		Takes take2 = takesDao.getById(new TakesId("C1234", "CSSSS", "1", "1", (short)2015));
+		take2.setGrade("F");
+		takesDao.update(take2);
+		List<Takes> all = takesDao.findAll();
+		for(Takes take : all){
+			Section sec = take.getSection();
+			Student st = take.getStudent();
+			System.out.print("Nombre Student ");
+			System.out.println(st.getName());
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
+			System.out.print("Grade ");
+			System.out.println(take.getGrade());
 		}
 	}
 }

@@ -41,14 +41,10 @@ public class PrereqDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 		courseDao.saveOrUpdate(cour2);
 		courseDao.saveOrUpdate(cour3);
 		courseDao.saveOrUpdate(cour4);
-		Prereq pre1 = new Prereq(new PrereqId("CS2", "CS1"));
-		Prereq pre2 = new Prereq(new PrereqId("CS3", "CS2"));
-		Prereq pre3 = new Prereq(new PrereqId("CS4", "CS2"));
-		Prereq pre4 = new Prereq(new PrereqId("CS4", "CS3"));
-		prereqDao.saveOrUpdate(pre1);
-		prereqDao.saveOrUpdate(pre2);
-		prereqDao.saveOrUpdate(pre3);
-		prereqDao.saveOrUpdate(pre4);
+		prereqDao.insert("CS2", "CS1");
+		prereqDao.insert("CS3", "CS2");
+		prereqDao.insert("CS4", "CS2");
+		prereqDao.insert("CS4", "CS3");
 	}
 	
 	@Test
@@ -84,5 +80,21 @@ public class PrereqDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 			System.out.println(cPre.getTitle());
 		}
 	}
+	
+	@Test
+	public void delete(){
+		prereqDao.delete(new PrereqId("CS2", "CS1"));
+		List<Prereq> all = prereqDao.findAll();
+		for(Prereq pre : all){
+			Course cour = courseDao.getById(pre.getId().getCourseId());
+			Course cPre = courseDao.getById(pre.getId().getPrereqId());
+			System.out.print("Curso ");
+			System.out.println(cour.getTitle());
+			System.out.print("Prereq ");
+			System.out.println(cPre.getTitle());
+		}
+	}
+	
+
 	
 }

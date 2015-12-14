@@ -28,10 +28,8 @@ public class DepartamentDaoTest extends AbstractTransactionalJUnit4SpringContext
 	
 	@Before
 	public void setUp(){
-		Department dep = new Department("CS");
-		dep.setBuilding("CS2");
-		dep.setBudget(new BigDecimal(10000));
-		dptDao.saveOrUpdate(dep);
+		dptDao.insert("CS", "CS2", new BigDecimal(10000));
+		dptDao.insert("CS2", "CS1", new BigDecimal(1031200));
 	}
 	
 	@Test
@@ -56,5 +54,35 @@ public class DepartamentDaoTest extends AbstractTransactionalJUnit4SpringContext
 		System.out.println(dep.getBuilding());
 		System.out.print("Budget ");
 		System.out.println(dep.getBudget());
+	}
+	
+	@Test
+	public void delete(){
+		dptDao.delete("CS");
+		List<Department> all = dptDao.findAll();
+		for(Department dep : all){
+			System.out.print("Nombre ");
+			System.out.println(dep.getDeptName());
+			System.out.print("Building ");
+			System.out.println(dep.getBuilding());
+			System.out.print("Budget ");
+			System.out.println(dep.getBudget());
+		}
+	}
+	
+	@Test
+	public void update(){
+		Department dep2 = dptDao.findById("CS");
+		dep2.setBudget(new BigDecimal(200000));
+		dptDao.update(dep2);
+		List<Department> all = dptDao.findAll();
+		for(Department dep : all){
+			System.out.print("Nombre ");
+			System.out.println(dep.getDeptName());
+			System.out.print("Building ");
+			System.out.println(dep.getBuilding());
+			System.out.print("Budget ");
+			System.out.println(dep.getBudget());
+		}
 	}
 }

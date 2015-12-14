@@ -24,8 +24,8 @@ public class StudentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	
 	@Before
 	public void setUp(){
-		Student st = new Student("C1234","Chris");
-		studentDao.saveOrUpdate(st);
+		studentDao.insert("C1234", null, "Chris", null);
+		studentDao.insert("C1235", null, "Ale", null);
 	}
 	
 	@Test
@@ -48,5 +48,30 @@ public class StudentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		System.out.println(st.getName());
 	}
 	
+	@Test
+	public void delete(){
+		studentDao.delete("C1234");
+		List<Student> all = studentDao.findAll();
+		for(Student st : all){
+			System.out.print("ID ");
+			System.out.println(st.getId());
+			System.out.print("Nombre ");
+			System.out.println(st.getName());
+		}
+	}
+	
+	@Test
+	public void update(){
+		Student st2 = studentDao.getById("C1234");
+		st2.setName("XNPIO");
+		studentDao.update(st2);
+		List<Student> all = studentDao.findAll();
+		for(Student st : all){
+			System.out.print("ID ");
+			System.out.println(st.getId());
+			System.out.print("Nombre ");
+			System.out.println(st.getName());
+		}
+	}
 	
 }

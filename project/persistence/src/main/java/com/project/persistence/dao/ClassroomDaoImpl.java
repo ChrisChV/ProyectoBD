@@ -45,8 +45,13 @@ public class ClassroomDaoImpl extends GenericDaoImpl<Classroom> implements Class
 
 	@Transactional
 	public String delete(ClassroomId classId) {
-		if(classId == null){
-			String m = "La clase no debe ser nula";
+		if(classId.getBuilding() == null){
+			String m = "El building no puede ser nulo";
+			System.out.println(m + " en DELETE FROM CLASSROOM");
+			return m;
+		}
+		if(classId.getRoomNumber() == null){
+			String m = "EL room number no puede ser null";
 			System.out.println(m + " en DELETE FROM CLASSROOM");
 			return m;
 		}

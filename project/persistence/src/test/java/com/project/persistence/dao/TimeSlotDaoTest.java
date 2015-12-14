@@ -27,10 +27,8 @@ public class TimeSlotDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	
 	@Before
 	public void setUp(){
-		TimeSlot time = new TimeSlot(new TimeSlotId("M", "M", (byte) 0, (byte) 13), (byte) 4, (byte) 5);
-		TimeSlot time2 = new TimeSlot(new TimeSlotId("M", "F", (byte) 0, (byte) 13), (byte) 4, (byte) 5);
-		timeSlotDao.saveOrUpdate(time);
-		timeSlotDao.saveOrUpdate(time2);
+		timeSlotDao.insert("M", "M",(byte) 0, (byte) 13, (byte) 4, (byte) 5);
+		timeSlotDao.insert("M", "F",(byte) 0, (byte) 13, (byte) 4, (byte) 5);
 	}
 	
 	@Test
@@ -71,7 +69,46 @@ public class TimeSlotDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 		}
 	}
 	
+	@Test
+	public void getByTimeId(){
+		List<TimeSlot> all = timeSlotDao.getByTimeId("M");
+		for(TimeSlot ts : all){
+			System.out.print("ID ");
+			System.out.println(ts.getId().getTimeSlotId());
+			System.out.print("Day ");
+			System.out.println(ts.getId().getDay());
+			System.out.print("End ");
+			System.out.println(ts.getEndMin());
+		}
+	}
 	
+	@Test
+	public void delete(){
+		timeSlotDao.delete(new TimeSlotId("M", "M",(byte) 0, (byte) 13));
+		List<TimeSlot> all = timeSlotDao.findAll();
+		for(TimeSlot ts : all){
+			System.out.print("ID ");
+			System.out.println(ts.getId().getTimeSlotId());
+			System.out.print("Day ");
+			System.out.println(ts.getId().getDay());
+			System.out.print("End ");
+			System.out.println(ts.getEndMin());
+		}
+	}
 	
-	
+	@Test
+	public void update(){
+		TimeSlot time = timeSlotDao.getById(new TimeSlotId("M", "M",(byte) 0, (byte) 13));
+		time.setEndMin((byte) 15);
+		timeSlotDao.update(time);
+		List<TimeSlot> all = timeSlotDao.findAll();
+		for(TimeSlot ts : all){
+			System.out.print("ID ");
+			System.out.println(ts.getId().getTimeSlotId());
+			System.out.print("Day ");
+			System.out.println(ts.getId().getDay());
+			System.out.print("End ");
+			System.out.println(ts.getEndMin());
+		}
+	}
 }

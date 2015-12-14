@@ -67,16 +67,12 @@ public class TeachesDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		sectionDao.saveOrUpdate(sec2);
 		Instructor ins = new Instructor("C4444","Chris");
 		instructorDao.saveOrUpdate(ins);
-		Teaches tea = new Teaches(new TeachesId(ins.getId(), sec1.getId().getCourseId(), sec1.getId().getSecId()
-				, sec1.getId().getSemester(), sec1.getId().getYear()));
-		Teaches tea2 = new Teaches(new TeachesId(ins.getId(), sec2.getId().getCourseId(), sec2.getId().getSecId()
-				, sec2.getId().getSemester(), sec2.getId().getYear()));
-		teachesDao.saveOrUpdate(tea);
-		teachesDao.saveOrUpdate(tea2);
+		teachesDao.insert("C4444", sec1.getId());
+		teachesDao.insert("C4444", sec2.getId());
 	}
 	
 	@Test
-	public void getAll(){
+	public void getAll(){	
 		List<Teaches> all = teachesDao.findAll();
 		for(Teaches tea : all){
 			Section sec = sectionDao.getById(new SectionId(tea.getId().getCourseId(), tea.getId().getSecId(), tea.getId().getSemester(), tea.getId().getYear()));
@@ -134,6 +130,26 @@ public class TeachesDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 			Instructor ins = instructorDao.getById(tea.getId().getId());
 			System.out.print("Nombre Instructor ");
 			System.out.println(ins.getName());
+		}
+	}
+	
+	@Test
+	public void delete(){
+		teachesDao.delete(new TeachesId("C4444", "CSSSS", "1", "1", (short) 2015));
+		List<Teaches> all = teachesDao.findAll();
+		for(Teaches tea : all){
+			Section sec = sectionDao.getById(new SectionId(tea.getId().getCourseId(), tea.getId().getSecId(), tea.getId().getSemester(), tea.getId().getYear()));
+			Instructor ins = instructorDao.getById(tea.getId().getId());
+			System.out.print("Nombre Instructor ");
+			System.out.println(ins.getName());
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
 		}
 	}
 	

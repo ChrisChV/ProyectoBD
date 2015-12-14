@@ -24,8 +24,8 @@ public class InstructorDaoTest extends AbstractTransactionalJUnit4SpringContextT
 	
 	@Before
 	public void setUp(){
-		Instructor ins = new Instructor("C4444","Chris");
-		instDao.saveOrUpdate(ins);
+		instDao.insert("C4444", null, "Chris", null);
+		instDao.insert("C4442", null, "Xnpio", null);
 	}
 	
 	@Test
@@ -49,4 +49,29 @@ public class InstructorDaoTest extends AbstractTransactionalJUnit4SpringContextT
 		
 	}
 	
+	@Test
+	public void delete(){
+		instDao.delete("C4444");
+		List<Instructor> all = instDao.findAll();
+		for(Instructor ins : all){
+			System.out.print("ID ");
+			System.out.println(ins.getId());
+			System.out.print("Nombre ");
+			System.out.println(ins.getName());
+		}
+	}
+	
+	@Test
+	public void update(){
+		Instructor ins2 = instDao.getById("C4442");
+		ins2.setName("Ale");
+		instDao.update(ins2);
+		List<Instructor> all = instDao.findAll();
+		for(Instructor ins : all){
+			System.out.print("ID ");
+			System.out.println(ins.getId());
+			System.out.print("Nombre ");
+			System.out.println(ins.getName());
+		}
+	}
 }
