@@ -18,4 +18,6 @@ public interface TakesDao extends GenericDao<Takes> {
 	
 	public List<Takes> getByStudent(String studentId);
 	
+	public List<Takes> getBySection(SectionId secId);
+	
 }

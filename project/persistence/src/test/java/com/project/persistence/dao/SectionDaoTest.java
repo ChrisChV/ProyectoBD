@@ -129,4 +129,19 @@ public class SectionDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		}
 	}
 	
+	@Test
+	public void getByClassroom(){
+		List<Section> all = sectionDao.getByClassroom(new ClassroomId("CHRIS", "123"));
+		for(Section sec : all){
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
+		}
+	}
+	
 }

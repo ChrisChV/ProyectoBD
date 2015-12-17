@@ -135,5 +135,11 @@ public class TakesDaoImpl extends GenericDaoImpl<Takes> implements TakesDao {
 		System.out.println(m);
 		return m;
 	}
+
+	@Transactional
+	public List<Takes> getBySection(SectionId secId) {
+		Criterion criterion = Restrictions.eq("section.id", secId);
+		return findByCriteria(criterion);
+	}
 		
 }

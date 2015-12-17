@@ -115,6 +115,12 @@ public class SectionDaoImpl extends GenericDaoImpl<Section> implements SectionDa
 		return m;
 	}
 
+	@Transactional
+	public List<Section> getByClassroom(ClassroomId id) {
+		Criterion criterion = Restrictions.ge("classroom.id", id);
+		return findByCriteria(criterion);
+	}
+
 	
 	
 	

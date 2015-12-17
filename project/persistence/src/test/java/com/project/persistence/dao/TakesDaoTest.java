@@ -171,4 +171,25 @@ public class TakesDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 			System.out.println(take.getGrade());
 		}
 	}
+	
+	@Test
+	public void getBySection(){
+		List<Takes> all = takesDao.getBySection(new SectionId("CSSSS", "1", "1", (short)2015));
+		for(Takes take : all){
+			Section sec = take.getSection();
+			Student st = take.getStudent();
+			System.out.print("Nombre Student ");
+			System.out.println(st.getName());
+			System.out.print("Curso ");
+			System.out.println(sec.getCourse().getTitle());
+			System.out.print("Semestre ");
+			System.out.println(sec.getId().getSemester());
+			System.out.print("Clase ");
+			System.out.println(sec.getClassroom().getId().getBuilding());
+			System.out.print("Time ");
+			System.out.println(sec.getTimeSlotId());
+			System.out.print("Grade ");
+			System.out.println(take.getGrade());
+		}
+	}
 }

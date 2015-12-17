@@ -1,5 +1,6 @@
 package com.project.persistence.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Before;
@@ -22,10 +23,14 @@ public class StudentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Autowired
 	private StudentDao studentDao;
 	
+	@Autowired
+	private DepartamentDao deptDao;
+	
 	@Before
 	public void setUp(){
-		studentDao.insert("C1234", null, "Chris", null);
-		studentDao.insert("C1235", null, "Ale", null);
+		deptDao.insert("CS", "COMP", new BigDecimal(2000));
+		studentDao.insert("C1234", "CS", "Chris", null);
+		studentDao.insert("C1235", "CS", "Ale", null);
 	}
 	
 	@Test
@@ -66,6 +71,17 @@ public class StudentDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		st2.setName("XNPIO");
 		studentDao.update(st2);
 		List<Student> all = studentDao.findAll();
+		for(Student st : all){
+			System.out.print("ID ");
+			System.out.println(st.getId());
+			System.out.print("Nombre ");
+			System.out.println(st.getName());
+		}
+	}
+	
+	@Test
+	public void getByDept(){
+		List<Student> all = studentDao.getByDept("CS");
 		for(Student st : all){
 			System.out.print("ID ");
 			System.out.println(st.getId());

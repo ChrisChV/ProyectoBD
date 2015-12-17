@@ -1,7 +1,10 @@
 package com.project.persistence.dao;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,5 +83,11 @@ public class InstructorDaoImpl extends GenericDaoImpl<Instructor> implements Ins
 		String m = "El instructor a sido actualizado con exito";
 		System.out.println(m + " en UPDATE FROM INSTRUCTOR");
 		return m;
+	}
+
+	@Transactional
+	public List<Instructor> getByDept(String deptName) {
+		Criterion criterion = Restrictions.eq("department.deptName", deptName);
+		return findByCriteria(criterion);
 	}
 }

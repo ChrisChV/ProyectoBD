@@ -19,4 +19,6 @@ public interface SectionDao extends GenericDao<Section> {
 	
 	public List<Section> getByCourse(String courseId);
 	
+	public List<Section> getByClassroom(ClassroomId id);
+	
 }

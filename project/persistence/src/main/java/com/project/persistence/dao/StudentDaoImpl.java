@@ -1,5 +1,9 @@
 package com.project.persistence.dao;
 
+import java.util.List;
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,6 +87,12 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
 		String m = "EL estudiante se actualizo correctamente";
 		System.out.println(m);
 		return m;
+	}
+
+	@Transactional
+	public List<Student> getByDept(String deptName) {
+		Criterion criterion = Restrictions.eq("department.deptName", deptName);
+		return findByCriteria(criterion);
 	}
 	
 }
