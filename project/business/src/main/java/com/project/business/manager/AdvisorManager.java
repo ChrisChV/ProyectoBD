@@ -2,8 +2,7 @@ package com.project.business.manager;
 
 import java.util.List;
 
-import org.springframework.aop.config.AdvisorComponentDefinition;
-
+import com.project.business.dto.AdvisorDTO;
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.StudentDTO;
 import com.project.persistence.entity.Advisor;
@@ -21,6 +20,8 @@ public interface AdvisorManager {
 	public Instructor mappingDTO(InstructorDTO ins);
 	
 	public InstructorDTO mappingDTOI(Advisor ad);
+	
+	public Advisor mappingDTO(AdvisorDTO ad);
 	
 	public List<InstructorDTO> mappingListI(List<Advisor> lins);
 	

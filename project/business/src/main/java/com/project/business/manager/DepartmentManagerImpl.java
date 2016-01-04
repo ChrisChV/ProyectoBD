@@ -145,6 +145,22 @@ public class DepartmentManagerImpl implements DepartmentManager {
 		return departmentDao.update(dept);
 	}
 
+	@Override
+	public DepartmentDTO getByIndex(int index) {
+		return mappingDTO(departmentDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return departmentDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return departmentDao.getLastIndex();
+	}
+
+
 	
 	
 }

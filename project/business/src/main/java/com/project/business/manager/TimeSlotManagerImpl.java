@@ -68,4 +68,18 @@ public class TimeSlotManagerImpl implements TimeSlotManager {
 		return timeSlotDao.update(time);
 	}
 
+	@Override
+	public TimeSlotDTO getByIndex(int index) {
+		return mappingDTO(timeSlotDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return timeSlotDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return timeSlotDao.getLastIndex();
+	}
 }

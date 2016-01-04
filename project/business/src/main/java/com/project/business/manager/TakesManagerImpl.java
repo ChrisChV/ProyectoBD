@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.project.business.dto.SectionDTO;
 import com.project.business.dto.StudentDTO;
+import com.project.business.dto.TakesDTO;
 import com.project.persistence.dao.ClassroomDao;
 import com.project.persistence.dao.CourseDao;
 import com.project.persistence.dao.DepartamentDao;
+import com.project.persistence.dao.SectionDao;
+import com.project.persistence.dao.StudentDao;
 import com.project.persistence.dao.TakesDao;
 import com.project.persistence.entity.Classroom;
 import com.project.persistence.entity.ClassroomId;
@@ -36,6 +39,12 @@ public class TakesManagerImpl implements TakesManager {
 	
 	@Autowired
 	private DepartamentDao departmentDao;
+	
+	@Autowired
+	private SectionDao sectionDao;
+	
+	@Autowired
+	private StudentDao studentDao;
 	
 	@Override
 	public Section mappingDTO(SectionDTO sec) {
@@ -112,6 +121,16 @@ public class TakesManagerImpl implements TakesManager {
 	@Override
 	public List<StudentDTO> getBySection(SectionId secId) {
 		return mappingListSt(takesDao.getBySection(secId));
+	}
+
+	@Override
+	public Takes mappingDTO(TakesDTO take) {
+		Student st = studentDao.getById(take.getStudentId());
+		Section sec = sectionDao.getById(new SectionId(take.getCourseId()
+				, take.getSecId(), take.getSemester(), (short) take.getYear()));
+		return new Takes(new TakesId(take.getStudentId(),take.getCourseId(),take.getSecId()
+				, take.getSemester(), (short) take.getYear())
+				, sec, st, take.getGrade());
 	}
 	
 	

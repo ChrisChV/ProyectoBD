@@ -103,6 +103,19 @@ public class CourseManagerImpl implements CourseManager {
 		return courseDao.update(course);
 	}
 
-	
+	@Override
+	public CourseDTO getByIndex(int index) {
+		return mappingDTO(courseDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return courseDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return courseDao.getLastIndex();
+	}	
 	
 }

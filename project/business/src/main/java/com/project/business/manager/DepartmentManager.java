@@ -18,6 +18,12 @@ public interface DepartmentManager {
 	
 	public List<DepartmentDTO> getAll();
 	
+	public DepartmentDTO getByIndex(int index);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
+	
 	public String insert(String depName, String building, BigDecimal budget);
 	
 	public String delete(String depName);

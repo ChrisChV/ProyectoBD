@@ -89,5 +89,20 @@ public class InstructorManagerImpl implements InstructorManager {
 	public String update(Instructor ins) {
 		return instructorDao.update(ins);
 	}
+
+	@Override
+	public InstructorDTO getByIndex(int index) {
+		return mappingDTO(instructorDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return instructorDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return instructorDao.getLastIndex();
+	}
 	
 }

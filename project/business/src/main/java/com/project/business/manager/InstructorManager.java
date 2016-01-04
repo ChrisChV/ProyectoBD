@@ -16,6 +16,12 @@ public interface InstructorManager {
 	
 	public List<InstructorDTO> getAll();
 	
+	public InstructorDTO getByIndex(int index);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
+	
 	public InstructorDTO getById(String instructorId);
 	
 	public List<InstructorDTO> getByDept(String deptName);

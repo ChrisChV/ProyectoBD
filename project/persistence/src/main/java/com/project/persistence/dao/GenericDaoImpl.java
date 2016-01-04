@@ -50,7 +50,7 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 	public List<T> findAll() {
 		return (List<T>) getCurrentSession().createQuery("from " + entity.getSimpleName()).list();
 	}
-
+	
 	@Transactional
 	public List<T> findAll(int maxResults) {
 		this.actualResult = 0;
@@ -61,7 +61,6 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 		limitedQuery.setMaxResults(this.maxResults);
 		polarity = false;
 		return (List<T>) limitedQuery.list();
-		
 	}
 	
 	@Transactional
@@ -109,5 +108,30 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 			limitedCriteria.setMaxResults(this.maxResults);
 			return (List<T>) limitedCriteria.list();
 		}
+	}
+	
+	@Transactional
+	public T getByIndex(int index) {
+		Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+		quer.setFirstResult(index);
+		quer.setMaxResults(1);
+		List<T> temp = quer.list();
+		return temp.get(0);
+	}
+
+	@Transactional
+	public int verificarIndex(int index) {
+		if(index == -1) return -1;
+		Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+		List<T> temp = quer.list();
+		if(index == temp.size()) return 0;
+		return 1;
+	}
+
+	@Transactional
+	public int getLastIndex() {
+		Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+		List<T> temp = quer.list();
+		return temp.size() - 1;
 	}
 }

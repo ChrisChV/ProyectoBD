@@ -15,6 +15,12 @@ public interface CourseManager {
 	
 	public List<CourseDTO> getAll();
 	
+	public CourseDTO getByIndex(int index);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
+	
 	public CourseDTO getById(String courseId);
 	
 	public String insert(String courseId, String departmentId, String title, byte credits);

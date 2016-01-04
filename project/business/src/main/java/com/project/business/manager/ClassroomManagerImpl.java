@@ -87,7 +87,19 @@ public class ClassroomManagerImpl implements ClassroomManager {
 	public String update(Classroom cla) {
 		return classroomDao.update(cla);
 	}
-	
-	
-	
+
+	@Override
+	public ClassroomDTO getByIndex(int index) {
+		return mappingDTO(classroomDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return classroomDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return classroomDao.getLastIndex();
+	}
 }

@@ -89,5 +89,20 @@ public class StudentManagerImpl implements StudentManager {
 		return studentDao.update(st);
 	}
 
+	@Override
+	public StudentDTO getByIndex(int index) {
+		return mappingDTO(studentDao.getByIndex(index));
+	}
+
+	@Override
+	public int verificarIndex(int index) {
+		return studentDao.verificarIndex(index);
+	}
+
+	@Override
+	public int getLastIndex() {
+		return studentDao.getLastIndex();
+	}
+	
 	
 }

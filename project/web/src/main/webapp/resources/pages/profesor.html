@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="css/stiles.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="js/eventos.js"></script>
+<div id="profesor">
+    <table>
+        <tr>
+            <td>
+                <input type="button" value="nuevo"  name="nuevo"  id="nuevop" />
+                <input type="button" value="editar" name="editar" id="editarp" />
+                <input type="button" value="buscar" name="buscar" id="buscarp" />
+                <input type="button" value="borrar" name="borrar" id="borrarp" />
+            </td>
+
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Profesor ID</td>
+            <td>
+                <input type="text" name="profesor_id" id="profesor_id" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <input type="text" name="nombre_p" id="nombre_p" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>Departamento</td>
+            <td>
+                <select name="departamentop" id="departamentop"></select>
+                <input type="text" name="departamentop1" id="departamentop1" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>Salario</td>
+            <td>
+                <input type="text" name="salario" id="salario" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <input type="button" name="first" value="<|" />
+                <input type="button" name="previous" value="<<" />
+                <input type="button" name="next" value=">>" />
+                <input type="button" name="last" value="|>" />
+            </td>
+            <td>
+                <div id="botones">
+                    <input type="submit" name="guardar" value="guardar" />
+                    <input type="submit" name="cancelar" value="cancelar" />
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>

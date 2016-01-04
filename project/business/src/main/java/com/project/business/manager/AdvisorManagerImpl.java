@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.business.dto.AdvisorDTO;
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.StudentDTO;
 import com.project.persistence.dao.AdvisorDao;
@@ -26,6 +27,12 @@ public class AdvisorManagerImpl implements AdvisorManager {
 	
 	@Autowired
 	private DepartamentDao departmentDao;
+	
+	@Autowired
+	private StudentDao studentDao;
+	
+	@Autowired
+	private InstructorDao instructorDao;
 	
 	@Override
 	public Student mappingDTO(StudentDTO st) {
@@ -103,6 +110,13 @@ public class AdvisorManagerImpl implements AdvisorManager {
 	@Override
 	public String delete(String id) {
 		return advisorDao.delete(id);
+	}
+
+	@Override
+	public Advisor mappingDTO(AdvisorDTO ad) {
+		Student st = studentDao.getById(ad.getStudentId());
+		Instructor ins = instructorDao.getById(ad.getInstructorId());
+		return new Advisor(ins, st);
 	}
 
 }

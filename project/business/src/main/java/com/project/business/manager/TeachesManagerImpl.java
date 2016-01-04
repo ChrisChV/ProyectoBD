@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.SectionDTO;
+import com.project.business.dto.TeachesDTO;
 import com.project.persistence.dao.ClassroomDao;
 import com.project.persistence.dao.CourseDao;
 import com.project.persistence.dao.DepartamentDao;
@@ -124,6 +125,12 @@ public class TeachesManagerImpl implements TeachesManager{
 	@Override
 	public List<InstructorDTO> getBySection(SectionId sectionId) {
 		return mappingListI(teachesDao.getBySection(sectionId));
+	}
+
+	@Override
+	public Teaches mappingDTO(TeachesDTO tea) {
+		return new Teaches(new TeachesId(tea.getInstructorId()
+				, tea.getCourseId(), tea.getSecId(), tea.getSemester(), (short) tea.getYear()));
 	}
 
 	

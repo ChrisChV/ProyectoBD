@@ -17,6 +17,12 @@ public interface StudentManager {
 	
 	public StudentDTO getById(String studentId);
 	
+	public StudentDTO getByIndex(int index);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
+	
 	public List<StudentDTO> getByDept(String deptName);
 	
 	public String insert(String id, String deptId, String name, Short totCred);

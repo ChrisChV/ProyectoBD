@@ -18,10 +18,16 @@ public interface ClassroomManager {
 	
 	public ClassroomDTO getById(ClassroomId id);
 	
+	public ClassroomDTO getByIndex(int index);
+	
 	public String insert(String building, String roomN, short capacity);
 	
 	public String delete(ClassroomId classId);
 	
 	public String update(Classroom cla);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
 	
 }

@@ -18,6 +18,12 @@ public interface TimeSlotManager {
 	
 	public TimeSlotDTO getById(TimeSlotId id);
 	
+	public TimeSlotDTO getByIndex(int index);
+	
+	public int verificarIndex(int index);
+	
+	public int getLastIndex();
+	
 	public List<TimeSlotDTO> getByTime(String timeSlotId);
 	
 	public String insert(String timeSlotId, String day, byte startHr, byte startMin

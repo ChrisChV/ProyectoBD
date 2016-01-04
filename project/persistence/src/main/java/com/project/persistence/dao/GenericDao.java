@@ -31,6 +31,8 @@ public interface GenericDao <Entity extends Serializable>{
 	 */
 	void saveOrUpdate(Entity entity);
 	
+	
+	Entity getByIndex(int index);
 
 	
 	/**
@@ -56,4 +58,10 @@ public interface GenericDao <Entity extends Serializable>{
 	 * @return
 	 */
 	List getMore();
+	
+	int verificarIndex(int index);
+	
+	int getLastIndex();
+	
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.business.dto.SectionDTO;
 import com.project.business.dto.StudentDTO;
+import com.project.business.dto.TakesDTO;
 import com.project.persistence.entity.Section;
 import com.project.persistence.entity.SectionId;
 import com.project.persistence.entity.Student;
@@ -23,6 +24,8 @@ public interface TakesManager {
 	public StudentDTO mappingDTOSt(Takes take);
 	
 	public List<StudentDTO> mappingListSt(List<Takes> lst);
+	
+	public Takes mappingDTO(TakesDTO take);
 	
 	public Takes getById(TakesId id);
 	

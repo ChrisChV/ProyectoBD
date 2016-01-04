@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.SectionDTO;
+import com.project.business.dto.TeachesDTO;
 import com.project.persistence.entity.Instructor;
 import com.project.persistence.entity.Section;
 import com.project.persistence.entity.SectionId;
@@ -23,6 +24,8 @@ public interface TeachesManager {
 	public InstructorDTO mappingDTOI(Teaches ins);
 	
 	public List<InstructorDTO> mappingListI(List<Teaches> ltea);
+	
+	public Teaches mappingDTO(TeachesDTO tea);
 	
 	public List<Teaches> getAll();
 	
