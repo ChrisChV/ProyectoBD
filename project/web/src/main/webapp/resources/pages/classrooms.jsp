@@ -15,35 +15,82 @@
 
 
 <script>
+$('#cancelarc').click(function(){
+	$('#building').attr('readonly',true);
+	$('.edit').attr('readonly',true);
+	$('#botones').hide();
+	$('#clase0').hide();
+	$('#clase1').show();
+	$('#cambio_2').hide();
+	$('.iteradores').show();
+	$('.botonesc').prop('disabled',false);
+	getDpt();
+});
+
+$('#guardarc').click(function(){
+	$('#building').attr('readonly',true);
+	$('.edit').attr('readonly',true);
+	$('#botones').hide();
+	$('#clase0').hide();
+	$('#clase1').show();
+	$('#cambio_2').hide();
+	$('.iteradores').show();
+	$('.botonesc').prop('disabled',false);
+	var building = $('#building').val();
+	var clase = $('#clase1').val();
+	var capacidad = $('#capacidad').val();
+	var json = {"building" : building, "roomNumber" : clase, "capacity" : capacidad};
+	DML(entityActual, DMLActual, json);
+	if(DMLActual == "delete"){
+		actualizarEntity(entityActual, "first");
+	}
+});
+
+
 $('#nuevoc').click(function () {
+	DMLActual = "insert";
+	$('#building').attr('readonly',false);
     $('#cambio_2').hide();
     $('#clase1').show();
     $('#clase0').hide();
     $('.edit').attr('readonly', false);
     $('#botones').show();
+    $('.iteradores').hide();
+    $('.botonesc').prop('disabled',true);
+    $('#building').val('');
+    $('#clase1').val('');
+    $('#capacidad').val('');
 });
 $('#borrarc').click(function () {
+	DMLActual = "delete";
     $('#cambio_2').hide();
+    $('.iteradores').hide();
     $('#clase1').show();
     $('#clase0').hide();
     $('.edit').attr('readonly', true);
     $('#botones').show();
+    $('.botonesc').prop('disabled',true);
 });
 
 $('#editarc').click(function () {
+	DMLActual = "update";
     $('#cambio_2').hide();
-    $('#clase1').hide();
-    $('#clase0').show();
+    $('.iteradores').hide();
+    $('#clase0').hide();
+    $('#clase1').show();
     $('.edit').attr('readonly', false);
+    $('#clase1').attr('readonly', true);
     $('#botones').show();
+    $('.botonesc').prop('disabled',true);
 });
 
 $('#outsidec').click(function () {
     $('.edit').attr('readonly', true);
+    $('.iteradores').hide();
     $('#cambio_2').show();
     $('#botones').show();
+    $('.botonesc').prop('disabled',true);
 });
-
 
 $('#fc').click(function () {
     actualizarEntity('classroom', 'first');
@@ -65,10 +112,10 @@ $('#pc').click(function () {
     <table>
         <tr>
             <td>
-                <input type="button" value="nuevo" name="nuevo"   id="nuevoc" />
-                <input type="button" value="editar" name="editar" id="editarc" />
-                <input type="button" value="buscar" name="buscar" id="outsidec" />
-                <input type="button" value="borrar" name="borrar" id="borrarc"/>
+                <input type="button" value="nuevo" name="nuevo"   id="nuevoc" class="botonesc"/>
+                <input type="button" value="editar" name="editar" id="editarc" class="botonesc"/>
+                <input type="button" value="buscar" name="buscar" id="outsidec" class="botonesc"/>
+                <input type="button" value="borrar" name="borrar" id="borrarc" class="botonesc"/>
             </td>
 
         </tr>
@@ -92,15 +139,15 @@ $('#pc').click(function () {
         </tr>
         <tr>
             <td>
-                <input type="button" name="first" value="<|" id="fc"/>
-                <input type="button" name="previous" value="<<"id="pc"/>
-                <input type="button" name="next" value=">>"  id="nc"/>
-                <input type="button" name="last" value="|>"  id="lc"/>
+                <input type="button" name="first" value="<|" id="fc" class="iteradores"/>
+                <input type="button" name="previous" value="<<"id="pc"class="iteradores"/>
+                <input type="button" name="next" value=">>"  id="nc"class="iteradores"/>
+                <input type="button" name="last" value="|>"  id="lc"class="iteradores"/>
             </td>
             <td>
                 <div id="botones">
-                <input type="submit" name="guardar" value="guardar" />
-                <input type="submit" name="cancelar" value="cancelar" />
+                <input type="submit" name="guardar" value="guardar" id="guardarc"/>
+                <input type="submit" name="cancelar" value="cancelar" id="cancelarc"/>
                 </div>           
             </td>
 

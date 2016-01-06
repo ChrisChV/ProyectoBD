@@ -94,7 +94,7 @@ public class TimeSlotDaoImpl extends GenericDaoImpl<TimeSlot> implements TimeSlo
 			System.out.print(m + " en UPDATE FROM TIMESLOT");
 			return m;
 		}
-		saveOrUpdate(time);
+		updateSession(time);
 		String m = "El time a sido actualizado correctamente";
 		System.out.print(m);
 		return m;

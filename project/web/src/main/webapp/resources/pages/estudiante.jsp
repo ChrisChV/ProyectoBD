@@ -13,6 +13,7 @@
 
 <script>
 $('#borrare').click(function () {
+	DMLActual = "delete";
     $('#cambio_2').hide();
     $('#departamentoe').hide();
     $('#departamentoe1').show();
@@ -21,7 +22,7 @@ $('#borrare').click(function () {
 });
 
 $('#nuevoe').click(function () {
-
+	DMLActual = "insert";
 });
 
 $('#buscare').click(function () {
@@ -74,7 +75,7 @@ $('#buscare').click(function () {
 });
 
 $('#editare').click(function () {
-
+	DMLActual = "update";
 });
 
 $('#fe').click(function () {

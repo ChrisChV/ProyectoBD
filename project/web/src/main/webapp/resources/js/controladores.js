@@ -9,7 +9,8 @@ var entityActual = "null";
 var DMLActual = "null";
 
 function DML(classEntity, polarity, json){
-	if(polarity == "null" || classEntity) return;
+	if(polarity == "null" || classEntity == "null") return;
+	console.log(json);
 	$.ajax({
         dataType:'json',
         type:'post',
@@ -231,9 +232,10 @@ function getTime(){
 	    data: json,
 	    success: function(data, textStatus, jqXHR){
 	        if (data) {
-	            $('#day1').val(data.day);
-	            $('#start1').val(data.start);
-	            $('#end1').val(data.end);
+	            $('#day2').val(data.day);
+	            $('#start2').val(data.start);
+	            $('#end2').val(data.end);
+	            $('#idtime').val(data.id);
 	        }
 	        else {
 	        	console.log('msg_internal_server_error');

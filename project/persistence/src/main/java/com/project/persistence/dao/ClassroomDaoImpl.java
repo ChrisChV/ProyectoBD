@@ -88,7 +88,7 @@ public class ClassroomDaoImpl extends GenericDaoImpl<Classroom> implements Class
 			System.out.println(m + " en UPDATE FROM CLASSROOM");
 			return m;
 		}
-		saveOrUpdate(classA);
+		updateSession(classA);
 		String m = "La clase ha sido actualizada correctamente";
 		System.out.println(m);
 		return m;

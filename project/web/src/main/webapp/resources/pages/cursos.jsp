@@ -16,9 +16,7 @@
 $('#buscarcu').click(function () {
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
-    console.log("holaaaaaaaaaaaa");
     $('#tablasa').html('');
-    
     $('#tablasa').load('resources/pages/cursos_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
                         $('#cur_tab').DataTable({
@@ -68,6 +66,7 @@ $('#buscarcu').click(function () {
     });
     }); 
 $('#borrarcu').click(function () {
+	DMLActual = "delete";
     $('#cambio_2').hide();
     $('#departamento0').hide();
     $('#departamento1').show();
@@ -76,11 +75,11 @@ $('#borrarcu').click(function () {
 });
 
 $('#nuevocu').click(function () {
-
+	DMLActual = "insert";
 });
 
 $('#editarcu').click(function () {
-    
+	DMLActual = "update";
 });
 
 $('#fcu').click(function () {

@@ -38,7 +38,7 @@ public class DepartamentDaoImpl extends GenericDaoImpl<Department> implements De
 			return m;
 		}
 		dep = new Department(depName, building, budget);
-		saveOrUpdate(dep);
+		getCurrentSession().update(dep);
 		String m = "El departamento a sido ingresado correctamente";
 		System.out.println(m);
 		return m;
@@ -70,13 +70,16 @@ public class DepartamentDaoImpl extends GenericDaoImpl<Department> implements De
 			System.out.println(m + " en UPDATE FROM DEPARTMENT");
 			return m;
 		}
+		System.out.println(dept.getDeptName());
+		System.out.println(dept.getBuilding());
+		System.out.println(dept.getBudget());
 		Department temp = findById(dept.getDeptName());
 		if(temp == null){
 			String m = "El departamento que quiere actualizar no existe";
 			System.out.println(m + " en UPDATE FROM DEPARTMENT");
 			return m;
 		}
-		saveOrUpdate(dept);
+		updateSession(dept);
 		String m = "El departamento se a actualizado correctamente";
 		System.out.println(m);
 		return m;

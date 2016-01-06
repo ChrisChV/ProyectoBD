@@ -14,65 +14,142 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 
 <script>
-$('#nuevot').click(function () {
-    $('#cambio_2').hide();
-    $('#day1').hide();
-    $('#start1').hide();
-    $('#end1').hide();
+var a = $('#day2').val();
+console.log(a);
+$('#cancelart').click(function(){
+	$('#botones').hide();
+	$('#cambio_2').hide();
+	$('.iteradores').show();
+	$('.botonest').prop('disabled',false);
 
-    $('#day').show();
-    $('#start').show();
-    $('#end').show();
+    $('#day1').hide();
+    $('#starth1').hide();
+    $('#startm1').hide();
+    $('#endh1').hide();
+	$('#endm1').hide();
+    $('#day2').show();
+    $('#start2').show();
+	$('#end2').show();
+	$('#idtime').attr('readonly',true);
+	
+	$('.iteradores').show();
+	getDpt();
+});
+
+$('#guardart').click(function(){
+	$('#botones').hide();
+	$('#cambio_2').hide();
+	$('.iteradores').show();
+	$('.botonest').prop('disabled',false);
+
+
+    $('#day1').hide();
+    $('#starth1').hide();
+    $('#startm1').hide();
+    $('#endh1').hide();
+	$('#endm1').hide();
+    $('#day2').show();
+    $('#start2').show();
+	$('#end2').show();
+	$('#idtime').attr('readonly',true);
+	$('.iteradores').show();
+	var id = $('#idtime').val();
+	var day = $('#day1').val();
+	var Ih = $('#starth1').val();
+	var Im = $('#startm1').val();
+	var Eh = $('#endh1').val();
+	var Em = $('#endm1').val();
+	
+	var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMIn" : Em};
+	DML(entityActual, DMLActual, json);
+	if(DMLActual == "delete"){
+		actualizarEntity(entityActual, "first");
+	}
+});
+
+$('#nuevot').click(function () {
+	DMLActual = "insert";
+    $('#cambio_2').hide();
+    $('.selectores').hide();
+
+
+    $('#day1').show();
+    $('#starth1').show();
+    $('#startm1').show();
+    $('#endh1').show();
+	$('#endm1').show();
+    $('#day2').hide();
+    $('#start2').hide();
+	$('#end2').hide();
+	$('#idtime').attr('readonly',false);
+    $('.iteradores').hide();
+    $('.botonest').prop('disabled',true);
 
     $('#botones').show();
 });
 $('#borrart').click(function () {
+	DMLActual = "delete";
     $('#cambio_2').hide();
-    $('#day1').show();
-    $('#start1').show();
-    $('#end1').show();
 
-    $('#day').hide();
-    $('#start').hide();
-    $('#end').hide();
-
+    $('#day1').hide();
+    $('#starth1').hide();
+    $('#startm1').hide();
+    $('#endh1').hide();
+	$('#endm1').hide();
+    $('#day2').show();
+    $('#start2').show();
+	$('#end2').show();
+	$('#idtime').attr('readonly',true);
+	$('#day2').attr('readonly',true);
+    $('#start2').attr('readonly',true);
+	$('#end2').attr('readonly',true);
+	
+	 $('.iteradores').hide();
+	$('.botonest').prop('disabled',true);
     $('#botones').show();
 });
 
 $('#editart').click(function () {
-    $('#cambio_2').hide();
-    $('#day1').hide();
-    $('#start1').hide();
-    $('#end1').hide();
+	DMLActual = "update";
+	$('#cambio_2').hide();
+    $('.selectores').hide();
 
-    $('#day').show();
-    $('#start').show();
-    $('#end').show();
+    $('#day1').show();
+    $('#starth1').show();
+    $('#startm1').show();
+    $('#endh1').show();
+	$('#endm1').show();
+    $('#day2').hide();
+    $('#start2').hide();
+	$('#end2').hide();
+	
+    $('.iteradores').hide();
+    $('#idtime').attr('readonly',true);
+    $('.botonest').prop('disabled',true);
 
     $('#botones').show();
+
 });
 
 $('#outsidet').click(function () {
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
     $('#botones').show();
+    $('.botonest').prop('disabled',true);
+    $('.iteradores').hide();
 });
 
 $('#ft').click(function () {
-	console.log("holaaaaaaaaaaaaaaa");
    	actualizarEntity('time', 'first');
 })
 
 $('#lt').click(function () {
-	console.log("holaaaaaaaaaaaaaaa");
     actualizarEntity('time', 'last');
 })
 $('#nt').click(function () {
-	console.log("holaaaaaaaaaaaaaaa");
     actualizarEntity('time', 'next');
 })
 $('#pt').click(function () {
-	console.log("holaaaaaaaaaaaaaaa");
     actualizarEntity('time', 'prev');
 })
 </script>
@@ -80,44 +157,121 @@ $('#pt').click(function () {
     <table>
         <tr>
             <td>
-                <input type="button" value="nuevo" name="nuevo"   id="nuevot"/>
-                <input type="button" value="editar" name="editar" id="editart"/>
-                <input type="button" value="buscar" name="buscar" id="outsidet"/>
-                <input type="button" value="borrar" name="borrar" id="borrart"/>
+                <input type="button" value="nuevo" name="nuevo"   id="nuevot" class="botonest"/>
+                <input type="button" value="editar" name="editar" id="editart"class="botonest"/>
+                <input type="button" value="buscar" name="buscar" id="outsidet"class="botonest"/>
+                <input type="button" value="borrar" name="borrar" id="borrart"class="botonest"/>
             </td>
 
         </tr>
     </table>
     <table>
+    	<tr>
+    		<td>ID </td>
+    		<td> <input type="text" name="IDtime" id="idtime"/> </td>
+    	
+    	</tr>
         <tr>
             <td>day</td>
-            <td><select name="day" id="day"></select> 
-                <input type="text" name="day1" id="day1" /> </td>
+            <td><select name="day" id="day1">
+            	<option value="M">Monday</option>
+            	<option value="T">Tuesday</option>
+            	<option value="W">Wednesday</option>
+            	<option value="R">Thursday</option>
+            	<option value="F">Freeday</option>
+            
+            </select> 
+                <input type="text" name="day1" id="day2" class="nselecotres"/> </td>
 
         </tr>
         <tr>
             <td>start time</td>
-            <td><select name="start" id="start"></select>
-                <input type="text" name="start1" id="start1" /> </td>
+            <td><select name="start" id="starth1" class="selectores">
+            	<option value="00">00</option>
+            	<option value="01">01</option>
+            	<option value="02">02</option>
+            	<option value="03">03</option>
+            	<option value="04">04</option>
+            	<option value="05">05</option>
+            	<option value="06">06</option>
+            	<option value="07">07</option>
+            	<option value="08">08</option>
+            	<option value="09">09</option>
+            	<option value="10">10</option>
+            	<option value="11">11</option>
+            	<option value="12">12</option>
+            	<option value="13">13</option>
+            	<option value="14">14</option>
+            	<option value="15">15</option>
+            	<option value="16">16</option>
+            	<option value="17">17</option>
+            	<option value="18">18</option>
+            	<option value="19">19</option>
+            	<option value="20">20</option>
+            	<option value="21">21</option>
+            	<option value="22">22</option>
+            	<option value="23">23</option>
+            </select><select name="start" id="startm1" class="selectores">
+            	<option value="00">00</option>
+            	<option value="10">10</option>
+            	<option value="20">20</option>
+            	<option value="30">30</option>
+            	<option value="40">40</option>
+            	<option value="50">50</option>
+            </select>
+                <input type="text" name="start2" id="start2" /> </td>
         
         </tr>
         <tr>
             <td>end time</td>
-            <td><select name="end" id="end"></select> 
-                <input type="text" name="end1" id="end1" /> </td>
+                        <td><select name="end" id="endh1" class="selectores">
+            	<option value="00">00</option>
+            	<option value="01">01</option>
+            	<option value="02">02</option>
+            	<option value="03">03</option>
+            	<option value="04">04</option>
+            	<option value="05">05</option>
+            	<option value="06">06</option>
+            	<option value="07">07</option>
+            	<option value="08">08</option>
+            	<option value="09">09</option>
+            	<option value="10">10</option>
+            	<option value="11">11</option>
+            	<option value="12">12</option>
+            	<option value="13">13</option>
+            	<option value="14">14</option>
+            	<option value="15">15</option>
+            	<option value="16">16</option>
+            	<option value="17">17</option>
+            	<option value="18">18</option>
+            	<option value="19">19</option>
+            	<option value="20">20</option>
+            	<option value="21">21</option>
+            	<option value="22">22</option>
+            	<option value="23">23</option>
+            </select>
+            <select name="end" id="endm1" class="selectores">
+            	<option value="00">00</option>
+            	<option value="10">10</option>
+            	<option value="20">20</option>
+            	<option value="30">30</option>
+            	<option value="40">40</option>
+            	<option value="50">50</option>
+            </select>
+                <input type="text" name="end2" id="end2" /></td>
         
         </tr>
         <tr>
             <td>
-                <input type="button" name="first" value="<|" id="ft"/>
-                <input type="button" name="previous" value="<<"id="pt"/>
-                <input type="button" name="next" value=">>" id="nt"/>
-                <input type="button" name="last" value="|>" id="lt"/>
+                <input type="button" name="first" value="<|" id="ft" class="iteradores"/>
+                <input type="button" name="previous" value="<<"id="pt"class="iteradores"/>
+                <input type="button" name="next" value=">>" id="nt"class="iteradores"/>
+                <input type="button" name="last" value="|>" id="lt"class="iteradores"/>
             </td>
             <td>
                 <div id="botones">
-                <input type="submit" name="guardar" value="guardar" />
-                <input type="submit" name="cancelar" value="cancelar" />
+                <input type="submit" name="guardar" value="guardar" id="guardart"/>
+                <input type="submit" name="cancelar" value="cancelar"id="cancelart" />
                 </div> 
            </td>
         </tr>

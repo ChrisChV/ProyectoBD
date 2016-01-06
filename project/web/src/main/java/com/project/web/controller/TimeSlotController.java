@@ -58,23 +58,34 @@ public class TimeSlotController {
 	
 	@RequestMapping(value = "/time/insert", method=RequestMethod.POST )
 	public @ResponseBody String insert(@RequestParam("id") String timeSlotId, @RequestParam("day") String day
-			, @RequestParam("startHr") int startHr, @RequestParam("startMin") int startMin
-			, @RequestParam("endHr") int endHr, @RequestParam("endMin") int endMin){
-		return timeSlotManager.insert(timeSlotId, day, (byte) startHr, (byte) startMin
-				, (byte) endHr, (byte) endMin);
+			, @RequestParam("startHr") String startHr, @RequestParam("startMin") String startMin
+			, @RequestParam("endHr") String endHr, @RequestParam("endMin") String endMin){
+		int a = Integer.parseInt(startHr);
+		int b = Integer.parseInt(startMin);
+		int c = Integer.parseInt(endHr);
+		int d = Integer.parseInt(endMin);
+		return timeSlotManager.insert(timeSlotId, day, (byte) a, (byte) b
+				, (byte) c, (byte) d);
 	}
 	
 	@RequestMapping(value = "time/delete", method=RequestMethod.POST)
 	public @ResponseBody String delete(@RequestParam("id") String timeSlotId, @RequestParam("day") String day
-			, @RequestParam("startHr") int startHr, @RequestParam("startMin") int startMin){
-		return timeSlotManager.delete(new TimeSlotId(timeSlotId, day,(byte) startHr, (byte) startMin));
+			, @RequestParam("startHr") String startHr, @RequestParam("startMin") String startMin){
+		int a = Integer.parseInt(startHr);
+		int b = Integer.parseInt(startMin);
+		return timeSlotManager.delete(new TimeSlotId(timeSlotId, day,(byte) a, (byte) b));
 	}
 	
 	@RequestMapping(value = "time/update", method=RequestMethod.POST)
 	public @ResponseBody String update(@RequestParam("id") String timeSlotId, @RequestParam("day") String day
-			, @RequestParam("startHr") int startHr, @RequestParam("startMin") int startMin
-			, @RequestParam("endHr") int endHr, @RequestParam("endMin") int endMin){
-		TimeSlotDTO time = new TimeSlotDTO(timeSlotId, day, startHr, startMin, endHr, endMin);
+			, @RequestParam("startHr") String startHr, @RequestParam("startMin") String startMin
+			, @RequestParam("endHr") String endHr, @RequestParam("endMin") String endMin){
+		int a = Integer.parseInt(startHr);
+		int b = Integer.parseInt(startMin);
+		int c = Integer.parseInt(endHr);
+		int d = Integer.parseInt(endMin);
+		TimeSlotDTO time = new TimeSlotDTO(timeSlotId, day, a, b, c,d);
+		
 		return timeSlotManager.update(timeSlotManager.mappingDTO(time));
 	}
 	

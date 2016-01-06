@@ -64,6 +64,10 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 		return (List<T>) limitedQuery.list();
 	}
 	
+	@Transactional void updateSession(T entity){
+		T en2 = (T) getCurrentSession().merge(entity);
+	}
+	
 	@Transactional
 	public void saveOrUpdate(T entity) {
 		getCurrentSession().saveOrUpdate(entity);	

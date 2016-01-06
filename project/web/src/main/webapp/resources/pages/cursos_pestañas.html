@@ -73,50 +73,9 @@
         </div>
 </html>
 <script>
-$('#cur_tab1').DataTable({
-	"bProcessing": true,
-    "bServerSide": true,
-    "bLenthChange" : false,
-    "iDisplayLength" : 10,
-    "sAjaxSource": "departmenttable.do",
-    'bJQueryUI': true,
-    "aoColumns":[
-                 {
-                	 "sTitle":"Nombre",
-                	 "mData":"dptName"
-                 },
-                 {
-                	 "sTitle":"Edificio",
-                	 "mData":"building"
-                 },
-                 {
-                	 "sTitle":"Presupuesto",
-                	 "mData":"budget"
-                 },
-             ],
-    "fnServerData": function ( sSource, aoData, fnCallback ) {
-        $.ajax( {
-            "dataType": "json",
-            "type": "GET",
-            "url": sSource,
-            "data": aoData,
-            "success": function(data, textStatus, jqXHR){
-            	if(data){
-            		console.log(data);
-            		fnCallback(data);
-            	}
-            }
-        } );
-    },
-    "sPaginationType" : "full_numbers"
-});
+
 </script>
 
 <script>
-    $('#cur_tab1').DataTable({
-        columns: [
-        
-
-        ]
-    });
+    
 </script>

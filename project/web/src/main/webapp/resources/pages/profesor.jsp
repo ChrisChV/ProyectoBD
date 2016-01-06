@@ -14,6 +14,7 @@
 <script>
 
 $('#borrarp').click(function () {
+	DMLActual = "delete";
     $('#cambio_2').hide();
     $('#departamentop').hide();
     $('#departamentop1').show();
@@ -22,7 +23,7 @@ $('#borrarp').click(function () {
 });
 
 $('#nuevop').click(function () {
-
+	DMLActual = "insert";
 });
 
 $('#buscarp').click(function () {
@@ -75,7 +76,7 @@ $('#buscarp').click(function () {
 });
 
 $('#editarp').click(function () {
-
+	DMLActual = "update";
 });
 
 $('#fp').click(function () {
