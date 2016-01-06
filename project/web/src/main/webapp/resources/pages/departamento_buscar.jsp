@@ -22,6 +22,8 @@
                 <th>Presupuesto</th>
             </tr>
         </thead>
+		<tbody id="body_dep">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Nombre</th>

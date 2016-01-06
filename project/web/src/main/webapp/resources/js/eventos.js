@@ -17,7 +17,7 @@ $(document).ready(function () {
                 $('#tablasa').load('resources/pages/departamento_buscar.jsp', function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "success"){
                         $('#cambio_2').hide();
-                        $('#dep_tab').DataTable({
+                        var tab_dep =$('#dep_tab').DataTable({
                     		"bProcessing": true,
                             "bServerSide": true,
                             "bLenthChange" : false,
@@ -54,6 +54,15 @@ $(document).ready(function () {
                                 } );
                             },
                             "sPaginationType" : "full_numbers"
+                        });
+                        $('#dep_body').on('click', 'tr', function () {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            }
+                            else {
+                                tab_dep.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
                         });
                        }
                     if (statusTxt == "error")
