@@ -22,6 +22,8 @@
                 <th>Creditos</th>
             </tr>
         </thead>
+		<tbody id="body_cur">
+		</tbody>
         <tfoot>
             <tr>
                 <th>ID del Curso</th>

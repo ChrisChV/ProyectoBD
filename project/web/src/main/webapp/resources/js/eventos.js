@@ -88,7 +88,7 @@ $(document).ready(function () {
                 $('#tablasa').html('');
                 $('#tablasa').load('resources/pages/classroom_buscar.jsp', function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "success"){
-                    	$('#clas_tab').DataTable({
+                    	var tab_clas =$('#clas_tab').DataTable({
                     		"bProcessing": true,
                             "bServerSide": true,
                             "bLenthChange" : false,
@@ -124,7 +124,16 @@ $(document).ready(function () {
                                 } );
                             },
                             "sPaginationType" : "full_numbers"
-                        });
+                    	});
+                    	$('#body_clas').on('click', 'tr', function () {
+                    	    if ($(this).hasClass('selected')) {
+                    	        $(this).removeClass('selected');
+                    	    }
+                    	    else {
+                    	        tab_clas.$('tr.selected').removeClass('selected');
+                    	        $(this).addClass('selected');
+                    	    }
+                    	});
                       }
                     	$('#cambio_2').hide();
                     if (statusTxt == "error")
@@ -161,7 +170,7 @@ $(document).ready(function () {
                 $('#tablasa').load('resources/pages/timeslot_buscar.jsp', function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "success"){
                         $('#cambio_2').hide();
-                            $('#time_tab').DataTable({
+                            var tab_time =$('#time_tab').DataTable({
                         		"bProcessing": true,
                                 "bServerSide": true,
                                 "bLenthChange" : false,
@@ -197,6 +206,15 @@ $(document).ready(function () {
                                     } );
                                 },
                                 "sPaginationType" : "full_numbers"
+                            });
+                            $('#body_time').on('click', 'tr', function () {
+                                if ($(this).hasClass('selected')) {
+                                    $(this).removeClass('selected');
+                                }
+                                else {
+                                    tab_dep.$('tr.selected').removeClass('selected');
+                                    $(this).addClass('selected');
+                                }
                             });
                            }
                     if (statusTxt == "error")

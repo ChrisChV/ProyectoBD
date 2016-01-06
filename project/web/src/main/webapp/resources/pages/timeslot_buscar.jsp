@@ -21,6 +21,8 @@
                 <th>Final</th>
             </tr>
         </thead>
+		<tbody id="body_time">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Dia</th>

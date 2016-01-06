@@ -21,6 +21,8 @@
                 <th>Salario</th>
             </tr>
         </thead>
+		<tbody id="body_prof">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Name</th>               	

@@ -37,14 +37,21 @@ $('#guardard').click(function(){
 	$('#cambio_2').hide();
 	$('.iteradores').show();
 	$('.botonesd').prop('disabled',false);
-	var nombre = $('#departamentos').val();
-	var edificio = $('#edificio1').val();
-	var presupuesto = $('#presupuesto').val();
-	var json = {"name" : nombre, "building" : edificio, "budget" : presupuesto};
-	DML(entityActual, DMLActual, json);
+	if(DMLActual == "search")
+	{
+		
+	}
+	else {
+		var nombre = $('#departamentos').val();
+		var edificio = $('#edificio1').val();
+		var presupuesto = $('#presupuesto').val();
+		var json = {"name" : nombre, "building" : edificio, "budget" : presupuesto};
+		DML(entityActual, DMLActual, json);
+	}
 	if(DMLActual == "delete"){
 		actualizarEntity(entityActual, "first");
 	}
+
 });
 
 $('#nuevod').click(function () {

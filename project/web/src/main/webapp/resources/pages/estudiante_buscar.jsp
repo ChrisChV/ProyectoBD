@@ -21,6 +21,8 @@
                 <th>Creditos</th>
             </tr>
         </thead>
+		<tbody id="body_est">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Nombre</th>
