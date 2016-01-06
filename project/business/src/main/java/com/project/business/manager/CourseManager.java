@@ -2,6 +2,7 @@ package com.project.business.manager;
 
 import java.util.List;
 
+import com.project.business.dto.ClassroomDTO;
 import com.project.business.dto.CourseDTO;
 import com.project.persistence.entity.Course;
 
@@ -28,5 +29,7 @@ public interface CourseManager {
 	public String delete(String courseId);
 	
 	public String update(Course course);
+	
+	public List<CourseDTO> getTable(int start, int length, String s);
 	
 }

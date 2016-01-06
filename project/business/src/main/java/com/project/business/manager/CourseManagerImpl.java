@@ -116,6 +116,10 @@ public class CourseManagerImpl implements CourseManager {
 	@Override
 	public int getLastIndex() {
 		return courseDao.getLastIndex();
-	}	
-	
+	}
+
+	@Override
+	public List<CourseDTO> getTable(int start, int length, String s) {
+		return mappingList(courseDao.getTable(start, length, s));
+	}
 }

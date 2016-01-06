@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.business.DataTablesTO.DataTablesTO;
+import com.project.business.dto.ClassroomDTO;
 import com.project.business.dto.TimeSlotDTO;
 import com.project.business.manager.TimeSlotManager;
 import com.project.persistence.entity.TimeSlotId;
@@ -18,6 +21,20 @@ public class TimeSlotController {
 
 	@Autowired
 	private TimeSlotManager timeSlotManager;
+	
+	@RequestMapping(value = "/timetable", produces = "application/json")
+	 public @ResponseBody String showUser(@RequestParam int iDisplayStart,
+	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String sSearch) throws IOException {
+		String method="showUser";
+		DataTablesTO<TimeSlotDTO> dt = new DataTablesTO<TimeSlotDTO>();
+		List<TimeSlotDTO> accts = timeSlotManager.getTable(iDisplayStart, iDisplayLength, sSearch);
+		List<TimeSlotDTO> accts2 = timeSlotManager.getAll();
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts2.size());
+		dt.setiTotalRecords(accts2.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	 }
 	
 	@RequestMapping(value = "/time/last", method=RequestMethod.POST)
 	public @ResponseBody int getLast(){

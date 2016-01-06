@@ -2,11 +2,14 @@ package com.project.persistence.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.persistence.entity.Classroom;
 import com.project.persistence.entity.TimeSlot;
 import com.project.persistence.entity.TimeSlotId;
 
@@ -95,6 +98,24 @@ public class TimeSlotDaoImpl extends GenericDaoImpl<TimeSlot> implements TimeSlo
 		String m = "El time a sido actualizado correctamente";
 		System.out.print(m);
 		return m;
+	}
+
+	@Transactional
+	public List<TimeSlot> getTable(int iDisplayStart, int iDisplayLength, String s) {
+		if(s == ""){
+			Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+			quer.setFirstResult(iDisplayStart);
+			quer.setMaxResults(iDisplayLength);
+		}
+		String ss = "%" + s + "%";
+		Criterion criterion2 = Restrictions.like("id.day", ss);
+		//int t = Integer.parseInt(s);
+		//Criterion criterion3 = Restrictions.like("capacity", (short) t);
+		Criteria criteria = getCurrentSession().createCriteria(entity);
+		criteria.add(Restrictions.or(criterion2));
+		criteria.setFirstResult(iDisplayStart);
+		criteria.setMaxResults(iDisplayLength);
+		return (List<TimeSlot>) criteria.list();
 	}
 	
 	

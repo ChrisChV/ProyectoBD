@@ -102,4 +102,9 @@ public class ClassroomManagerImpl implements ClassroomManager {
 	public int getLastIndex() {
 		return classroomDao.getLastIndex();
 	}
+
+	@Override
+	public List<ClassroomDTO> getTable(int start, int length, String s) {
+		return mappingList(classroomDao.getTable(start, length, s));
+	}
 }

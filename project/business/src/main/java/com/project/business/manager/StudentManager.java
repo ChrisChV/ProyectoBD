@@ -3,6 +3,7 @@ package com.project.business.manager;
 import java.util.List;
 
 import com.project.business.dto.StudentDTO;
+import com.project.business.dto.TimeSlotDTO;
 import com.project.persistence.entity.Student;
 
 public interface StudentManager {
@@ -30,5 +31,7 @@ public interface StudentManager {
 	public String delete(String id);
 	
 	public String update(Student st);
+	
+	public List<StudentDTO> getTable(int start, int length, String s);
 	
 }

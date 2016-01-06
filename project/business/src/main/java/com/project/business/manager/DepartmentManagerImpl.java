@@ -160,6 +160,11 @@ public class DepartmentManagerImpl implements DepartmentManager {
 		return departmentDao.getLastIndex();
 	}
 
+	@Override
+	public List<DepartmentDTO> getTable(int start, int length, String s) {
+		return mappingList(departmentDao.getTable(start, length, s));
+	}
+
 
 	
 	

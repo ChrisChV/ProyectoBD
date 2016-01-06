@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.project.business.dto.InstructorDTO;
+import com.project.business.dto.TimeSlotDTO;
 import com.project.persistence.entity.Instructor;
 
 public interface InstructorManager {
@@ -31,5 +32,7 @@ public interface InstructorManager {
 	public String delete(String insId);
 	
 	public String update(Instructor ins);
+	
+	public List<InstructorDTO> getTable(int start, int length, String s);
 	
 }

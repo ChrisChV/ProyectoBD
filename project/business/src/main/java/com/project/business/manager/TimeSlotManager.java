@@ -2,6 +2,7 @@ package com.project.business.manager;
 
 import java.util.List;
 
+import com.project.business.dto.ClassroomDTO;
 import com.project.business.dto.TimeSlotDTO;
 import com.project.persistence.entity.TimeSlot;
 import com.project.persistence.entity.TimeSlotId;
@@ -32,5 +33,7 @@ public interface TimeSlotManager {
 	public String delete(TimeSlotId timeId);
 	
 	public String update(TimeSlot time);
+	
+	public List<TimeSlotDTO> getTable(int start, int length, String s);
 	
 }

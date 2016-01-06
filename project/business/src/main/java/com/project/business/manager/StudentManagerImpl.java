@@ -103,6 +103,11 @@ public class StudentManagerImpl implements StudentManager {
 	public int getLastIndex() {
 		return studentDao.getLastIndex();
 	}
+
+	@Override
+	public List<StudentDTO> getTable(int start, int length, String s) {
+		return mappingList(studentDao.getTable(start, length, s));
+	}
 	
 	
 }

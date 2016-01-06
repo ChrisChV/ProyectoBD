@@ -63,5 +63,4 @@ public interface GenericDao <Entity extends Serializable>{
 	
 	int getLastIndex();
 	
-	
 }

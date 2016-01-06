@@ -1,7 +1,12 @@
 package com.project.persistence.dao;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,6 +80,26 @@ public class DepartamentDaoImpl extends GenericDaoImpl<Department> implements De
 		String m = "El departamento se a actualizado correctamente";
 		System.out.println(m);
 		return m;
+	}
+	
+	@Transactional
+	public List<Department> getTable(int iDisplayStart, int iDisplayLength, String s) {
+		if(s == ""){
+			Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+			quer.setFirstResult(iDisplayStart);
+			quer.setMaxResults(iDisplayLength);
+			return (List<Department>) quer.list();
+		}
+		String ss = "%" + s + "%";
+		Criterion criterion1 = Restrictions.like("deptName", ss);
+		Criterion criterion2 = Restrictions.like("building", ss);
+		//int t = Integer.parseInt(s);
+		//Criterion criterion3 = Restrictions.like("budget", new BigDecimal(t));
+		Criteria criteria = getCurrentSession().createCriteria(entity);
+		criteria.add(Restrictions.or(criterion1, criterion2));
+		criteria.setFirstResult(iDisplayStart);
+		criteria.setMaxResults(iDisplayLength);
+		return (List<Department>) criteria.list();
 	}
 	
 }

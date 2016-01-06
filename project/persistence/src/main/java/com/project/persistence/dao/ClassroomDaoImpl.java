@@ -1,10 +1,18 @@
 package com.project.persistence.dao;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.persistence.entity.Classroom;
 import com.project.persistence.entity.ClassroomId;
+import com.project.persistence.entity.Department;
 
 @Repository("classroomDao")
 public class ClassroomDaoImpl extends GenericDaoImpl<Classroom> implements ClassroomDao {
@@ -86,6 +94,24 @@ public class ClassroomDaoImpl extends GenericDaoImpl<Classroom> implements Class
 		return m;
 	}
 	
+	@Transactional
+	public List<Classroom> getTable(int iDisplayStart, int iDisplayLength, String s) {
+		if(s == ""){
+			Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+			quer.setFirstResult(iDisplayStart);
+			quer.setMaxResults(iDisplayLength);
+		}
+		String ss = "%" + s + "%";
+		Criterion criterion1 = Restrictions.like("id.building", ss);
+		Criterion criterion2 = Restrictions.like("id.roomNumber", ss);
+		//int t = Integer.parseInt(s);
+		//Criterion criterion3 = Restrictions.like("capacity", (short) t);
+		Criteria criteria = getCurrentSession().createCriteria(entity);
+		criteria.add(Restrictions.or(criterion1, criterion2));
+		criteria.setFirstResult(iDisplayStart);
+		criteria.setMaxResults(iDisplayLength);
+		return (List<Classroom>) criteria.list();
+	}
 	
 	
 }

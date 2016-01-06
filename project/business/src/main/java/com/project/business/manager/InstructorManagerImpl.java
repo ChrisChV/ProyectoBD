@@ -104,5 +104,10 @@ public class InstructorManagerImpl implements InstructorManager {
 	public int getLastIndex() {
 		return instructorDao.getLastIndex();
 	}
+
+	@Override
+	public List<InstructorDTO> getTable(int start, int length, String s) {
+		return mappingList(instructorDao.getTable(start, length, s));
+	}
 	
 }

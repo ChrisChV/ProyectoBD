@@ -30,4 +30,6 @@ public interface DepartmentManager {
 	
 	public String update(Department dept);
 	
+	public List<DepartmentDTO> getTable(int start, int length, String s);
+	
 }

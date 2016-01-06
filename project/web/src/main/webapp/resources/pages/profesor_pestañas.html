@@ -1,0 +1,63 @@
+<html>
+<head>
+    <link rel="stylesheet" href="css/stiles.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css" />
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#tab").tabs();
+        });
+    </script>
+</head>
+<body>
+    <div id="tab">
+        <ul class="tabs">
+            <li><a href="#tabs-1">Alumnos</a></li>
+            <li><a href="#tabs-2">Cursos</a></li>
+        </ul>
+        <div class="tab-content" id="tabs-1">
+            <input type="button" id="nuevo" value="nuevo" />
+            <input type="button" id="borrar" value="borrar" />
+            <input type="button" id="editar" value="editar" /></p>
+            
+            <table id="curs_tab1" class="display" width="100%"></table>
+
+        </div>
+        <div class="tab-content" id="tabs-2">
+            <input type="button" id="nuevo" value="nuevo" />
+            <input type="button" id="borrar" value="borrar" />
+            <input type="button" id="editar" value="editar" /></p>
+            <table id="curs_tab2" class="display" width="100%"></table>
+        </div>
+</html>
+
+
+<script>
+    $('#curs_tab2').DataTable({
+        columns: [
+        { title: "ID curso" },
+        { title: "Semestre" },
+        { title: "Edificio" },
+        { title: "Room nO" },
+        { title: "ID time" },
+        { title: "Año" }
+
+        ]
+    });
+</script>
+
+<script>
+    $('#curs_tab1').DataTable({
+        columns: [
+        { title: "ID curso" },
+        { title: "Curso" }
+
+        ]
+    });
+</script>

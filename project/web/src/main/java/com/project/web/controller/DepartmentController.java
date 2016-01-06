@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.business.DataTablesTO.DataTablesTO;
+import com.project.business.dto.ClassroomDTO;
 import com.project.business.dto.DepartmentDTO;
 import com.project.business.manager.DepartmentManager;
 import com.project.persistence.entity.PrereqId;
@@ -19,6 +22,20 @@ public class DepartmentController {
 
 	@Autowired
 	private DepartmentManager departmentManager;
+	
+	@RequestMapping(value = "/departmenttable", produces = "application/json")
+	 public @ResponseBody String showUser(@RequestParam int iDisplayStart,
+	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String sSearch) throws IOException {
+		String method="showUser";
+		DataTablesTO<DepartmentDTO> dt = new DataTablesTO<DepartmentDTO>();
+		List<DepartmentDTO> accts = departmentManager.getTable(iDisplayStart, iDisplayLength, sSearch);
+		List<DepartmentDTO> accts2 = departmentManager.getAll();
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts2.size());
+		dt.setiTotalRecords(accts2.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	 }
 	
 	@RequestMapping(value = "/department/last", method=RequestMethod.POST)
 	public @ResponseBody int getLast(){

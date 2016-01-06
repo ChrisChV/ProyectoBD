@@ -29,5 +29,7 @@ public interface ClassroomManager {
 	public int verificarIndex(int index);
 	
 	public int getLastIndex();
+
+	public List<ClassroomDTO> getTable(int start, int length, String s);
 	
 }

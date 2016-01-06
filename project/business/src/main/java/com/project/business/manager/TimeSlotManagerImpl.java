@@ -82,4 +82,9 @@ public class TimeSlotManagerImpl implements TimeSlotManager {
 	public int getLastIndex() {
 		return timeSlotDao.getLastIndex();
 	}
+
+	@Override
+	public List<TimeSlotDTO> getTable(int start, int length, String s) {
+		return mappingList(timeSlotDao.getTable(start, length, s));
+	}
 }

@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	private Class<T> entity;
+	protected Class<T> entity;
 	
 	protected int maxResults;
 	
@@ -134,4 +135,6 @@ public class GenericDaoImpl <T extends Serializable> implements	GenericDao<T>{
 		List<T> temp = quer.list();
 		return temp.size() - 1;
 	}
+
+	
 }

@@ -2,11 +2,14 @@ package com.project.persistence.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.persistence.entity.Course;
 import com.project.persistence.entity.Department;
 import com.project.persistence.entity.Student;
 
@@ -94,5 +97,27 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
 		Criterion criterion = Restrictions.eq("department.deptName", deptName);
 		return findByCriteria(criterion);
 	}
+	
+	@Transactional
+	public List<Student> getTable(int iDisplayStart, int iDisplayLength, String s) {
+		if(s == ""){
+			Query quer = getCurrentSession().createQuery("from " + entity.getSimpleName());
+			quer.setFirstResult(iDisplayStart);
+			quer.setMaxResults(iDisplayLength);
+			return (List<Student>) quer.list();
+		}
+		String ss = "%" + s + "%";
+		Criterion criterion1 = Restrictions.like("id", ss);
+		Criterion criterion2 = Restrictions.like("department.deptName", ss);
+		Criterion criterion3 = Restrictions.like("name", ss);
+		//int t = Integer.parseInt(s);
+		//Criterion criterion3 = Restrictions.like("budget", new BigDecimal(t));
+		Criteria criteria = getCurrentSession().createCriteria(entity);
+		criteria.add(Restrictions.or(criterion1, criterion2,criterion3));
+		criteria.setFirstResult(iDisplayStart);
+		criteria.setMaxResults(iDisplayLength);
+		return (List<Student>) criteria.list();
+	}
+
 	
 }

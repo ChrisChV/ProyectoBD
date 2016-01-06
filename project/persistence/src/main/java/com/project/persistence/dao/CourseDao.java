@@ -3,6 +3,7 @@ package com.project.persistence.dao;
 import java.util.List;
 
 import com.project.persistence.entity.Course;
+import com.project.persistence.entity.Department;
 
 public interface CourseDao extends GenericDao<Course> {
 
@@ -15,5 +16,7 @@ public interface CourseDao extends GenericDao<Course> {
 	public String delete(String courseId);
 	
 	public String update(Course course);
+	
+	public List<Course> getTable(int iDisplayStart, int iDisplayLength, String s);
 	
 }

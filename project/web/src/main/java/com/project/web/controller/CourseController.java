@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.LastModified;
 
+import com.project.business.DataTablesTO.DataTablesTO;
+import com.project.business.dto.ClassroomDTO;
 import com.project.business.dto.CourseDTO;
 import com.project.business.manager.CourseManager;
 
@@ -18,6 +21,20 @@ public class CourseController {
 	
 	@Autowired
 	private CourseManager courseManager;
+	
+	@RequestMapping(value = "/coursetable", produces = "application/json")
+	 public @ResponseBody String showUser(@RequestParam int iDisplayStart,
+	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String sSearch) throws IOException {
+		String method="showUser";
+		DataTablesTO<CourseDTO> dt = new DataTablesTO<CourseDTO>();
+		List<CourseDTO> accts = courseManager.getTable(iDisplayStart, iDisplayLength, sSearch);
+		List<CourseDTO> accts2 = courseManager.getAll();
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts2.size());
+		dt.setiTotalRecords(accts2.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	 }
 	
 	@RequestMapping(value = "/course/last", method = RequestMethod.POST)
 	public @ResponseBody int getLast(){

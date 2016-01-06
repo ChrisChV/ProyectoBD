@@ -2,6 +2,7 @@ package com.project.persistence.dao;
 
 import java.util.List;
 
+import com.project.persistence.entity.Classroom;
 import com.project.persistence.entity.TimeSlot;
 import com.project.persistence.entity.TimeSlotId;
 
@@ -17,5 +18,7 @@ public interface TimeSlotDao extends GenericDao<TimeSlot> {
 	public String update(TimeSlot time);
 	
 	public List<TimeSlot> getByTimeId(String timeSlotId);
+	
+	public List<TimeSlot> getTable(int iDisplayStart, int iDisplayLength, String s);
 	
 }

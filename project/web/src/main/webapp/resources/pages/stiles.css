@@ -1,0 +1,60 @@
+body
+{
+    background-image:url(../img/background_index_white.jpeg);
+    margin-left:90px;
+    margin-right:90px;
+}
+#Tittle
+{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:200%;
+    padding:5%;
+    background-image:url(../img/1.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center top;
+    background-size:100%;
+    margin-bottom: 30px;
+    color:red;
+}
+#student_table{
+    font-family: verdana,arial,sans-serif;
+    color:#e07525;
+}
+.barras{
+     /*background-image:url(../img/background_index_tapiz.jpeg);*/
+     background-color:#808080;
+     margin: 3px;
+     text-align:center;
+}
+#barra_lateral {
+    background-image:url(../img/background_index_tapiz.jpeg);
+    float: left;
+    padding:5px;
+    padding-left:15px;
+    padding-top: 20px;
+    width:120px;
+    height:500px;
+    font-size: 130%;
+    line-height: 60px;
+}
+#cambio_1{
+    background-image:url(../img/background_index_tapiz.jpeg);
+    float:left;
+    width:980px;
+    height:300px;   
+    
+
+}
+#cambio_2{
+    background-image:url(../img/background_index_tapiz.jpeg);
+    float:left;
+    width:980px;
+    height:220px;
+}
+
+#departamento{
+
+    text-align:center;
+}
