@@ -37,6 +37,7 @@ $('#cancelart').click(function(){
 });
 
 $('#guardart').click(function(){
+	
 	$('#botones').hide();
 	$('#cambio_2').hide();
 	$('.iteradores').show();
@@ -53,17 +54,22 @@ $('#guardart').click(function(){
 	$('#end2').show();
 	$('#idtime').attr('readonly',true);
 	$('.iteradores').show();
-	var id = $('#idtime').val();
-	var day = $('#day1').val();
-	var Ih = $('#starth1').val();
-	var Im = $('#startm1').val();
-	var Eh = $('#endh1').val();
-	var Em = $('#endm1').val();
-	
-	var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMIn" : Em};
-	DML(entityActual, DMLActual, json);
-	if(DMLActual == "delete"){
-		actualizarEntity(entityActual, "first");
+	if(DMLActual = "search"){
+		
+	}
+	else{
+		var id = $('#idtime').val();
+		var day = $('#day1').val();
+		var Ih = $('#starth1').val();
+		var Im = $('#startm1').val();
+		var Eh = $('#endh1').val();
+		var Em = $('#endm1').val();
+		
+		var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMIn" : Em};
+		DML(entityActual, DMLActual, json);
+		if(DMLActual == "delete"){
+			actualizarEntity(entityActual, "first");
+		}
 	}
 });
 
@@ -132,6 +138,7 @@ $('#editart').click(function () {
 });
 
 $('#outsidet').click(function () {
+	DMLActual = "search";
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
     $('#botones').show();
