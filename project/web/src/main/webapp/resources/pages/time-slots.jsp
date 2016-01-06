@@ -66,10 +66,10 @@ $('#guardart').click(function(){
 		var Em = $('#endm1').val();
 		
 		var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMIn" : Em};
-		DML(entityActual, DMLActual, json);
-		if(DMLActual == "delete"){
-			actualizarEntity(entityActual, "first");
-		}
+		DML(entityActual, DMLActual, json);		
+	}
+	if(DMLActual == "delete"){
+		actualizarEntity(entityActual, "first");
 	}
 });
 

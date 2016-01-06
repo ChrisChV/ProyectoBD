@@ -55,7 +55,7 @@ $(document).ready(function () {
                             },
                             "sPaginationType" : "full_numbers"
                         });
-                        $('#dep_body').on('click', 'tr', function () {
+                        $('#body_dep').on('click', 'tr', function () {
                             if ($(this).hasClass('selected')) {
                                 $(this).removeClass('selected');
                             }
