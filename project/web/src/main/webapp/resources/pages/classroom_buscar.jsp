@@ -22,6 +22,8 @@
                 <th>Capacity</th>
             </tr>
         </thead>
+		<tbody id="body_clas">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Building</th>
