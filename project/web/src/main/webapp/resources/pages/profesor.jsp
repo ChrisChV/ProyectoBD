@@ -167,6 +167,8 @@ $('#nuevop').click(function () {
 });
 
 $('#buscarp').click(function () {
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
     $('#tablasa').load('resources/pages/profesor_buscar.jsp', function (responseTxt, statusTxt, xhr) {

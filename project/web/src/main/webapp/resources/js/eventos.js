@@ -6,10 +6,10 @@ var tab_alumno;
 var tab_profesor;
 var tab_pre_cur;
 var tab_det_cur;
-var tab_pre_ase;
-var tab_det_cur;
-var tab_pre_est;
-var tab_det_cur;
+var tab_ase_est;
+var tab_cur_est;
+var tab_est_pro;
+var tab_cur_pro;
 
 $(document).ready(function () {	
 	console.log("inicie correctamente");

@@ -13,6 +13,16 @@
 
 <script>
 
+$('#guardarcu').click(function(){
+
+});
+$('#cancelarcu').click(function(){
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+	pestanasC();
+	$('.tab_cursos').show();
+});
+
 $('#buscarcu').click(function () {
     $('.edit').attr('readonly', true);
     $('#cambio_2').html('');
@@ -107,6 +117,8 @@ $('#editarcu').click(function () {
 	$('#botones').show();
 	$('#botonescu').show();
 	$('.iteradores').hide();
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
 	pestanasC();
 	$('.tab_cursos').show();
 
