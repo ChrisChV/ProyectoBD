@@ -53,8 +53,9 @@
 				var year = tab_curso.cell('.selected',7).data();
 
 		$('#tablasa').append(" <input type='button' id='agregar_tab_det' value='nuevo' class='tabs_cursos'/>  <input type='button' id='cancelar_tab_det' value='borrar' class='tabs_cursos'/>);
-				});		
-		if(DMLActual == "insert")	
+				});
+		$('#agregar_tab_pre').click(function(){		
+		if(DMLActual == "insert"){	
 			var idcurso = tab_curso.cell('.selected',0).data();
 			var curso = tab_curso.cell('.selected',1).data();
 			$('#idcurso').val(idcurso);
