@@ -61,7 +61,7 @@ function pestanasS(){
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
-    	$('#est_tab2').DataTable({
+    		 $('#est_tab2').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -152,7 +152,7 @@ $('#buscare').click(function () {
     $('#tablasa').load('resources/pages/estudiante_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
         	$('#botones').show();
-        	$('#es_tab').DataTable({
+        	tab_alumno=$('#es_tab').DataTable({
         		"bProcessing": true,
                 "bServerSide": true,
                 "bLenthChange" : false,
@@ -189,6 +189,16 @@ $('#buscare').click(function () {
                 },
                 "sPaginationType" : "full_numbers"
             });
+			
+							$('#body_est').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_alumno.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
         }
         if (statusTxt == "error")
             alert("Error: " + xhr.status + ": " + xhr.statusText);

@@ -21,7 +21,7 @@ $('#buscarcu').click(function () {
     $('#tablasa').html('');
     $('#tablasa').load('resources/pages/cursos_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
-                        $('#cur_tab').DataTable({
+                       tab_curso = $('#cur_tab').DataTable({
                     		"bProcessing": true,
                             "bServerSide": true,
                             "bLenthChange" : false,
@@ -62,7 +62,16 @@ $('#buscarcu').click(function () {
                             },
                             "sPaginationType" : "full_numbers"
                         });
-                       }
+							$('#body_cur').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_curso.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
                 if (statusTxt == "error")
                     alert("Error: " + xhr.status + ": " + xhr.statusText);
     });
