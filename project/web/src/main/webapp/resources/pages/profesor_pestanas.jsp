@@ -40,6 +40,8 @@
                	<th>Credits</th>
             </tr>
         </thead>
+		<tbody id="body_est_pro">
+		</tbody>
         <tfoot>
             <tr>
                 <th>ID del estudiante</th>
@@ -70,6 +72,8 @@
                	<th>Time Slot Id</th>
             </tr>
         </thead>
+		<tbody id="body_cur_pro">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Id del Curso</th>

@@ -131,10 +131,11 @@ $('#pcu').click(function () {
 })
 
 function pestanasC(){
+
 			$('.tab_cursos').hide();
         	$('#cambio_2').html('');
         	$('#cambio_2').load('resources/pages/cursos_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
-        		$('#cur_tab2').DataTable({
+        		tab_det_cur = $('#cur_tab2').DataTable({
             		"bProcessing": true,
         		    "bServerSide": true,
         		    "bLenthChange" : false,
@@ -192,7 +193,17 @@ function pestanasC(){
         		    },
         		    "sPaginationType" : "full_numbers"
                 });
-        		$('#cur_tab1').DataTable({
+				$('#body_det_cur').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_det_cur.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
+        		tab_pre_cur = $('#cur_tab1').DataTable({
         			"bProcessing": true,
         		    "bServerSide": true,
         		    "bLenthChange" : false,
@@ -231,6 +242,16 @@ function pestanasC(){
         		    },
         		    "sPaginationType" : "full_numbers"
         		});
+				$('#body_pre_cur').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_pre_cur.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
         	});
         };
  

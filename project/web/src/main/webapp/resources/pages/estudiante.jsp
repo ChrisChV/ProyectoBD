@@ -16,7 +16,7 @@
 function pestanasS(){
 	$('#cambio_2').html('');
 	$('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
-    	$('#est_tab1').DataTable({
+tab_ase_est=$('#est_tab1').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -61,7 +61,17 @@ function pestanasS(){
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
-    		 $('#est_tab2').DataTable({
+		$('#body_ase_est').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_ase_est.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
+    		 tab_ase_est=$('#est_tab2').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -130,6 +140,17 @@ function pestanasS(){
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
+		$('#body_ase_est').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_ase_est.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
+    	
 	});
 }
 

@@ -4,7 +4,12 @@ var tab_time;
 var tab_curso;
 var tab_alumno;
 var tab_profesor;
-
+var tab_pre_cur;
+var tab_det_cur;
+var tab_pre_ase;
+var tab_det_cur;
+var tab_pre_est;
+var tab_det_cur;
 
 $(document).ready(function () {	
 	console.log("inicie correctamente");

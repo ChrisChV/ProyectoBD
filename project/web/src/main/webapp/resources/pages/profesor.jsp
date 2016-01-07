@@ -16,7 +16,7 @@
 function pestanasP(){
 	$('#cambio_2').html('');
 	$('#cambio_2').load('resources/pages/profesor_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
-    	$('#curs_tab1').DataTable({
+    	tab_est_pro=$('#curs_tab1').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -61,7 +61,17 @@ function pestanasP(){
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
-    	$('#curs_tab2').DataTable({
+				$('#body_est_pro').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_est_pro.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+
+    	tab_cur_pro=$('#curs_tab2').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -130,6 +140,16 @@ function pestanasP(){
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
+				$('#body_cur_pro').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_cur_pro.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+
 	});
 }
 

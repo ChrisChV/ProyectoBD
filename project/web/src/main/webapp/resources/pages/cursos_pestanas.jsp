@@ -58,6 +58,8 @@
                	<th>Nombre</th>
             </tr>
         </thead>
+		<tbody id="body_pre_cur">
+		</tbody>
         <tfoot>
             <tr>
                 <th>ID del Curso</th>
@@ -86,6 +88,8 @@
                 <th>Year</th>
             </tr>
         </thead>
+		<tbody id="body_det_cur">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Id del Curso</th>

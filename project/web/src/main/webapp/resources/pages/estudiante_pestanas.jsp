@@ -40,6 +40,8 @@
                	<th>Salario</th>
             </tr>
         </thead>
+		<tbody id="body_ase_est">
+		</tbody>
         <tfoot>
             <tr>
                 <th>ID del Profesor</th>
@@ -71,6 +73,8 @@
                	<th>Nota</th>
             </tr>
         </thead>
+		<tbody id="body_cur_est">
+		</tbody>
         <tfoot>
             <tr>
                 <th>Id del curso</th>
