@@ -24,18 +24,18 @@
 		$('#nuevo_tab_pre').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-				$('#tablasa').append("Nombre");
-				$('#tablasa').append("<select id ='idpre'></select> <select id ='cursopre'></select>");	
-				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
+				
+				$('#tablasa').append("'ID curso' <select id ='idpre'></select> 'Curso' <select id ='cursopre'></select>");
 				
 				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
+				
 		});
 		
 		$('#borrar_tab_pre').click(function(){
-				var ID = tab_curso.cell('.selected',0).data();
-				var nombre = tab_curso.cell('.selected',1).data();
-				tab_curso.row('.selected').remove().draw( false );
+			    $('#cambio_2').html('');
+				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
 				
+		
 				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
 		});		
 		
@@ -57,7 +57,6 @@
 				
 				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
 		});		
-		
 		
 		$('#nuevo_tab_pre').click(function(){
 		
