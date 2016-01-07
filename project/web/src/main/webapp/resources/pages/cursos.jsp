@@ -16,10 +16,12 @@
 $('#buscarcu').click(function () {
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
+	$('.iteradores').hide();
+
     $('#tablasa').html('');
     $('#tablasa').load('resources/pages/cursos_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
-                        $('#cur_tab').DataTable({
+                       tab_curso = $('#cur_tab').DataTable({
                     		"bProcessing": true,
                             "bServerSide": true,
                             "bLenthChange" : false,
@@ -60,7 +62,16 @@ $('#buscarcu').click(function () {
                             },
                             "sPaginationType" : "full_numbers"
                         });
-                       }
+							$('#body_cur').on('click', 'tr', function () {
+							if ($(this).hasClass('selected')) {
+							$(this).removeClass('selected');
+							}
+							else {
+							tab_curso.$('tr.selected').removeClass('selected');
+							$(this).addClass('selected');
+							}
+							});
+						   }
                 if (statusTxt == "error")
                     alert("Error: " + xhr.status + ": " + xhr.statusText);
     });
@@ -72,14 +83,31 @@ $('#borrarcu').click(function () {
     $('#departamento1').show();
     $('.edit').attr('readonly', true);
     $('#botones').show();
+	$('.iteradores').hide();
+	$('.botonescu').hide();
 });
 
 $('#nuevocu').click(function () {
 	DMLActual = "insert";
+	$('#cambio_2').hide();
+	$('#departamento0').hide();
+	$('#departamento1').show();
+	$('.edit').attr('readonly',true);
+	$('#botones').show();
+	$('.iteradores').hide();
 });
 
 $('#editarcu').click(function () {
 	DMLActual = "update";
+	$('#departamento1').hide();
+	$('#departamento0').show();
+	$('.edit').attr('readonly',false);
+	$('#botones').show();
+	$('#botonescu').show();
+	$('.iteradores').hide();
+	pestañasC();
+	$('.tab_cursos').show();
+
 });
 
 $('#fcu').click(function () {
@@ -101,6 +129,7 @@ $('#pcu').click(function () {
 })
 
 function pestanasC(){
+			$('.tab_cursos').hide();
         	$('#cambio_2').html('');
         	$('#cambio_2').load('resources/pages/cursos_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
         		$('#cur_tab2').DataTable({
@@ -210,10 +239,10 @@ function pestanasC(){
     <table>
         <tr>
             <td>
-                <input type="button" value="nuevo" name="nuevo" id="nuevocu" />
-                <input type="button" value="editar" name="editar" id="editarcu" />
-                <input type="button" value="buscar" name="buscar" id="buscarcu" />
-                <input type="button" value="borrar" name="borrar" id="borrarcu" />
+                <input type="button" value="nuevo" name="nuevo" id="nuevocu" class="botonescu"/>
+                <input type="button" value="editar" name="editar" id="editarcu" class="botonescu"/>
+                <input type="button" value="buscar" name="buscar" id="buscarcu" class="botonescu"/>
+                <input type="button" value="borrar" name="borrar" id="borrarcu" class="botonescu"/>
             </td>
 
         </tr>
@@ -229,7 +258,7 @@ function pestanasC(){
         <tr>
             <td>Titulo</td>
             <td>
-                <input type="text" name="titulo" id="titulo" />
+                <input type="text" name="titulo" id="titulo" class="edit" />
             </td>
 
         </tr>
@@ -237,7 +266,7 @@ function pestanasC(){
             <td>Departamento</td>
             <td>
                 <select name="departamento" id="departamento0"></select>
-                <input type="text" name="departamento1" id="departamento1" />
+                <input type="text" name="departamento1" id="departamento1" class="edit"/>
             </td>
 
         </tr>
@@ -250,15 +279,15 @@ function pestanasC(){
         </tr>
         <tr>
             <td>
-                <input type="button" name="first" value="<|" id="fcu"/>
-                <input type="button" name="previous" value="<<"id="pcu"/>
-                <input type="button" name="next" value=">>" id="ncu"/>
-                <input type="button" name="last" value="|>" id="lcu"/>
+                <input type="button" name="first" value="<|" id="fcu"class="iteradores"/>
+                <input type="button" name="previous" value="<<"id="pcu"class="iteradores"/>
+                <input type="button" name="next" value=">>" id="ncu"class="iteradores"/>
+                <input type="button" name="last" value="|>" id="lcu"class="iteradores"/>
             </td>
             <td>
                 <div id="botones">
-                    <input type="submit" name="guardar" value="guardar" />
-                    <input type="submit" name="cancelar" value="cancelar" />
+                    <input type="submit" name="guardar" value="guardar" id="guardarcu"/>
+                    <input type="submit" name="cancelar" value="cancelar"id="cancelarcu" />
                 </div>
             </td>
         </tr>

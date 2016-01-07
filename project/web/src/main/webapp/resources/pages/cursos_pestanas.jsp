@@ -20,7 +20,26 @@
         $(function () {
             $("#tab").tabs();
         });
-        
+
+		$('#nuevo_tab_pre').click(function(){
+			$(tablasa).empty();
+		});
+		
+		$('#borrar_tab_pre').click(function(){
+		
+		});
+		
+		$('#nuevo_tab_det').click(function(){
+		
+		});
+
+		$('#borrar_tab_det').click(function(){
+		
+		});
+		
+		$('#editar_tab_det').click(function(){
+		
+		});
     </script>
 </head>
 <body>
@@ -30,9 +49,8 @@
             <li><a href="#tabs-2">Detalles</a></li>
         </ul>
         <div class="tab-content" id="tabs-1">
-            <input type="button" id="nuevo" value="nuevo" />
-            <input type="button" id="borrar" value="borrar" />
-            <input type="button" id="editar" value="editar" /></p>
+            <input type="button" id="nuevo_tab_pre" value="nuevo" class="tabs_cursos"/>
+            <input type="button" id="borrar_tab_pre" value="borrar" class="tabs_cursos"/></p>
             <table id="cur_tab1" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -52,9 +70,9 @@
             
         </div>
         <div class="tab-content" id="tabs-2">
-            <input type="button" id="nuevo" value="nuevo" />
-            <input type="button" id="borrar" value="borrar" />
-            <input type="button" id="editar" value="editar" /></p>
+            <input type="button" id="nuevo_tab_det" value="nuevo" />
+            <input type="button" id="borrar_tab_det" value="borrar" />
+            <input type="button" id="editar_tab_det" value="editar" /></p>
 
             <table id="cur_tab2" class="display" cellspacing="0" width="100%">
                 <thead>

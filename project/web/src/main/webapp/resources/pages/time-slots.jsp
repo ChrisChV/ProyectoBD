@@ -145,7 +145,6 @@ $('#editart').click(function () {
     $('.iteradores').hide();
     $('#idtime').attr('readonly',true);
     $('.botonest').prop('disabled',true);
-
     $('#botones').show();
 
 });

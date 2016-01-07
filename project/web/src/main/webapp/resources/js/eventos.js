@@ -1,6 +1,10 @@
 var tab_dep;
 var tab_clas;
 var tab_time;
+var tab_curso;
+var tab_alumno;
+var tab_profesor;
+
 
 $(document).ready(function () {	
 	console.log("inicie correctamente");
@@ -74,6 +78,7 @@ $(document).ready(function () {
             if (statusTxt == "success"){
             	getCourse();
             	$("#botones").hide();
+                $(".bto")
                 $("#departamento0").hide();
                 $("#curso_id").attr('readonly', true);
                 $("#titulo").attr('readonly', true);
