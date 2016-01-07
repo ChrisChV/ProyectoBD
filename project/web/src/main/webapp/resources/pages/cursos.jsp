@@ -104,7 +104,8 @@ $('#nuevocu').click(function () {
 	$('#cambio_2').hide();
 	$('#departamento0').hide();
 	$('#departamento1').show();
-	$('.edit').attr('readonly',true);
+	$('#departamento1').attr('readonly',false);
+	$('.edit').attr('readonly',false);
 	$('#botones').show();
 	$('.iteradores').hide();
 });
@@ -303,7 +304,7 @@ function pestanasC(){
         <tr>
             <td>Creditos</td>
             <td>
-                <input type="text" name="creditos" id="creditos" />
+                <input type="text" name="creditos" id="creditos" class ="edit"/>
             </td>
 
         </tr>

@@ -22,24 +22,40 @@
         });
 
 		$('#nuevo_tab_pre').click(function(){
-			$(tablasa).empty();
+			    $('#cambio_2').html('');
+				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+				$('#tablasa').append("<select id ="idpre"></select> <select id ="cursopre"></select>");	
 		});
 		
 		$('#borrar_tab_pre').click(function(){
-		
-		});
+				var ID = tab_curso.cell('.selected',0).data();
+				var nombre = tab_curso.cell('.selected',1).data();
+				tab_curso.row('.selected').remove().draw( false );
+		});		
 		
 		$('#nuevo_tab_det').click(function(){
-		
+			    $('#cambio_2').html('');
+				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+				$('#tablasa').append("<select id ="idcurso"></select> <select id ="idsection"></select> <select id ="semestre"> <select id ="edificio"> <select id ="room_no"><select id ="idtime"><select id ="year">");
 		});
-
+		
 		$('#borrar_tab_det').click(function(){
+				var IDcurso = tab_curso.cell('.selected',0).data();
+				var IDsection = tab_curso.cell('.selected',1).data();
+				var semester = tab_curso.cell('.selected',2).data();
+				var year = tab_curso.cell('.selected',7).data();
+
+				tab_curso.row('.selected').remove().draw( false );
+		});		
+		
+		$('#guardarcu').click(function(){
 		
 		});
 		
-		$('#editar_tab_det').click(function(){
+		$('#cancelarcu').click(function(){
 		
 		});
+		
     </script>
 </head>
 <body>
@@ -50,7 +66,9 @@
         </ul>
         <div class="tab-content" id="tabs-1">
             <input type="button" id="nuevo_tab_pre" value="nuevo" class="tabs_cursos"/>
-            <input type="button" id="borrar_tab_pre" value="borrar" class="tabs_cursos"/></p>
+            <input type="button" id="borrar_tab_pre" value="borrar" class="tabs_cursos"/>
+            <input type="button" id="guardarpc" value="guardar" class="tabs_cursos"/>
+            <input type="button" id="cancelarpc" value="cancelar" class="tabs_cursos"/></p>
             <table id="cur_tab1" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -73,8 +91,7 @@
         </div>
         <div class="tab-content" id="tabs-2">
             <input type="button" id="nuevo_tab_det" value="nuevo" />
-            <input type="button" id="borrar_tab_det" value="borrar" />
-            <input type="button" id="editar_tab_det" value="editar" /></p>
+            <input type="button" id="borrar_tab_det" value="borrar" /></p>
 
             <table id="cur_tab2" class="display" cellspacing="0" width="100%">
                 <thead>
@@ -102,12 +119,8 @@
             </tr>
         </tfoot>
             </table>
+			<input  type="submit" value="guardar"id="guardar_tabpre"/>
+			
+			<input  type="submit"value="cancelar" id="cancelar_tabpre"/>
         </div>
 </html>
-<script>
-
-</script>
-
-<script>
-    
-</script>
