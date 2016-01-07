@@ -174,6 +174,30 @@ $('#nd').click(function () {
 $('#pd').click(function () {
     actualizarEntity('department', 'prev');
 })
+$( "#departamentos" ).validate({
+  rules: {
+    field: {
+      required: true
+    }
+  }
+});
+
+$( "#edificio1" ).validate({
+  rules: {
+    field: {
+      required: true
+    }
+  }
+});
+
+$( "#presupuesto" ).validate({
+  rules: {
+    field: {
+      required: true,
+      number: true
+    }
+  }
+});
 </script>
 
 <div id="departamento">

@@ -12,6 +12,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
 
 <script>
 var a = $('#day2').val();
@@ -227,6 +229,42 @@ $('#nt').click(function () {
 $('#pt').click(function () {
     actualizarEntity('time', 'prev');
 })
+$( "#id_time" ).validate({
+  rules: {
+    field: {
+      required: true,
+	  number: true
+    }
+  }
+});
+
+$( "#day2" ).validate({
+  rules: {
+    field: {
+      required: true,
+	  number: true;
+    }
+  }
+});
+
+$( "#start2" ).validate({
+  rules: {
+    field: {
+      required: true,
+      number: true
+    }
+  }
+});
+
+$( "#end2" ).validate({
+  rules: {
+    field: {
+      required: true,
+      number: true
+    }
+  }
+});
+
 </script>
 <div id="time">
     <table>
@@ -243,7 +281,7 @@ $('#pt').click(function () {
     <table>
     	<tr>
     		<td>ID </td>
-    		<td> <input type="text" name="IDtime" id="idtime"/> </td>
+    		<td> <input type="text" name="IDtime" id="idtime"minlenght="1" maxlength="4"/> </td>
     	
     	</tr>
         <tr>
@@ -256,7 +294,7 @@ $('#pt').click(function () {
             	<option value="F">Freeday</option>
             
             </select> 
-                <input type="text" name="day1" id="day2" class="nselecotres"/> </td>
+                <input type="text" name="day1" id="day2" class="nselecotres"minlenght="1" maxlength="1"/> </td>
 
         </tr>
         <tr>
@@ -294,7 +332,7 @@ $('#pt').click(function () {
             	<option value="40">40</option>
             	<option value="50">50</option>
             </select>
-                <input type="text" name="start2" id="start2" /> </td>
+                <input type="text" name="start2" id="start2" minlenght="1" maxlength="5"/> </td>
         
         </tr>
         <tr>
@@ -333,7 +371,7 @@ $('#pt').click(function () {
             	<option value="40">40</option>
             	<option value="50">50</option>
             </select>
-                <input type="text" name="end2" id="end2" /></td>
+                <input type="text" name="end2" id="end2" minlenght="1" maxlength="5"/></td>
         
         </tr>
         <tr>
