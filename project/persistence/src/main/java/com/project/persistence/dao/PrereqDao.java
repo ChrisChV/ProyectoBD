@@ -15,4 +15,6 @@ public interface PrereqDao extends GenericDao<Prereq> {
 	
 	public List<Prereq> getPrereq(String courseId);
 	
+	public List<Prereq> getCourses(String prereqId);
+	
 }

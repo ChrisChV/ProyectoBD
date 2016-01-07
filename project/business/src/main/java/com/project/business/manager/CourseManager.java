@@ -32,4 +32,12 @@ public interface CourseManager {
 	
 	public List<CourseDTO> getTable(int start, int length, String s);
 	
+	public List<Course> getAprobados(String studentId);
+	
+	public List<Course> getSinRequisito(String dptName);
+	
+	public List<CourseDTO> puedeLlevar(String studentId);
+	
+	public boolean llevar(Course course,List<Course> aprobados);
+	
 }

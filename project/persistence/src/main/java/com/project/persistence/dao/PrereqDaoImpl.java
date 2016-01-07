@@ -89,4 +89,10 @@ public class PrereqDaoImpl extends GenericDaoImpl<Prereq> implements PrereqDao {
 		System.out.println(m);
 		return m;
 	}
+
+	@Transactional
+	public List<Prereq> getCourses(String prereqId) {
+		Criterion criterion = Restrictions.eq("id.prereqId", prereqId);
+		return findByCriteria(criterion);
+	}
 }

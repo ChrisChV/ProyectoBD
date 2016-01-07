@@ -22,6 +22,19 @@ public class CourseController {
 	@Autowired
 	private CourseManager courseManager;
 	
+	@RequestMapping(value = "/coursellevar", produces = "application/json")
+	 public @ResponseBody String puedeLlevar(@RequestParam int iDisplayStart,
+	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String studentId) throws IOException {
+		String method="showUser";
+		DataTablesTO<CourseDTO> dt = new DataTablesTO<CourseDTO>();
+		List<CourseDTO> accts = courseManager.puedeLlevar(studentId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	 }
+	
 	@RequestMapping(value = "/coursetable", produces = "application/json")
 	 public @ResponseBody String showUser(@RequestParam int iDisplayStart,
 	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String sSearch) throws IOException {

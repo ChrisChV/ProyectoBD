@@ -202,7 +202,6 @@ function pestanasC(){
 							$(this).addClass('selected');
 							}
 							});
-						   }
         		tab_pre_cur = $('#cur_tab1').DataTable({
         			"bProcessing": true,
         		    "bServerSide": true,
@@ -251,7 +250,6 @@ function pestanasC(){
 							$(this).addClass('selected');
 							}
 							});
-						   }
         	});
         };
  

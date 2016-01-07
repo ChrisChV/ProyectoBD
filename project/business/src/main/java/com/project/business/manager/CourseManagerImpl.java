@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.business.dto.CourseDTO;
+import com.project.business.dto.SectionDTO;
 import com.project.persistence.dao.CourseDao;
 import com.project.persistence.dao.DepartamentDao;
 import com.project.persistence.dao.PrereqDao;
 import com.project.persistence.dao.SectionDao;
+import com.project.persistence.dao.StudentDao;
 import com.project.persistence.dao.TakesDao;
 import com.project.persistence.dao.TeachesDao;
 import com.project.persistence.entity.Course;
@@ -40,6 +42,9 @@ public class CourseManagerImpl implements CourseManager {
 	
 	@Autowired
 	private TakesDao takesDao;
+	
+	@Autowired
+	private StudentDao studentDao;
 	
 	@Override
 	public Course mappingDTO(CourseDTO course) {
@@ -121,5 +126,102 @@ public class CourseManagerImpl implements CourseManager {
 	@Override
 	public List<CourseDTO> getTable(int start, int length, String s) {
 		return mappingList(courseDao.getTable(start, length, s));
+	}
+
+	@Override
+	public List<Course> getAprobados(String studentId) {
+		List<Takes> sec = takesDao.getByStudent(studentId);
+		List<Takes> app = new ArrayList<Takes>();
+		for(Takes t : sec){
+			if(!t.getGrade().equals("F")) app.add(t);
+		}
+		List<Course> res = new ArrayList<Course>();
+		for(Takes t : app){
+			res.add(courseDao.getById(t.getId().getCourseId()));
+		}
+		return res;
+	}
+
+	
+	@Override
+	public List<Course> getSinRequisito(String dptName) {
+		List<Prereq> pre = prereqDao.findAll();
+		List<Course> cour = courseDao.findAll();
+		List<Course> sin = new ArrayList<Course>();
+		List<Course> res = new ArrayList<Course>();
+		for(Course c : cour){
+			boolean flag = true;
+			for(Prereq p : pre){
+				if(p.getId().getCourseId().equals(c.getCourseId())){
+					flag = false;
+					break;
+				}
+			}
+			if(flag) sin.add(c);
+		}
+		for(Course c : sin){
+			if(c.getDepartment().getDeptName().equals(dptName)) res.add(c);
+		}
+		return res;
+	}
+
+	@Override
+	public List<CourseDTO> puedeLlevar(String studentId) {
+		List<Course> aprobados = getAprobados(studentId);
+		String dpt = studentDao.getById(studentId).getDepartment().getDeptName();
+		List<Course> sinPre = getSinRequisito(dpt);
+		List<Course> allDpt = courseDao.getByDept(dpt);
+		List<Course> res = new ArrayList<Course>();
+		for(Course c : sinPre){
+			boolean flag = true;
+			for(Course cc : aprobados){
+				if(cc.getCourseId().equals(c.getCourseId())){
+					flag = false;
+					break;
+				}
+			}
+			if(flag) res.add(c);
+		}
+		List<Course> posibles = new ArrayList<Course>();
+		for(Course c : allDpt){
+			boolean flag = true;
+			for(Course cc : sinPre){
+				if(cc.getCourseId().equals(c.getCourseId())){
+					flag = false;
+					break;
+				}
+			}
+			if(flag) posibles.add(c);
+			flag = true;
+			for(Course cc : aprobados){
+				if(cc.getCourseId().equals(c.getCourseId())){
+					flag = false;
+					break;
+				}
+			}
+			if(flag) posibles.add(c);
+		}
+		for(Course c : posibles){
+			if(llevar(c, aprobados)){
+				res.add(c);
+			}
+		}
+		return mappingList(res);
+	}
+
+	@Override
+	public boolean llevar(Course course, List<Course> aprobados) {
+		List<Prereq> pre = prereqDao.getPrereq(course.getCourseId());
+		int cont = 0;
+		for(Prereq p : pre){
+			for(Course c : aprobados){
+				if(c.getCourseId().equals(p.getId().getPrereqId())){
+					cont++;
+					break;
+				}
+			}
+		}
+		if(cont == pre.size()) return true;
+		return false;
 	}
 }

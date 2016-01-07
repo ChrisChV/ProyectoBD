@@ -70,7 +70,6 @@ tab_ase_est=$('#est_tab1').DataTable({
 							$(this).addClass('selected');
 							}
 							});
-						   }
     		 tab_ase_est=$('#est_tab2').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
@@ -149,8 +148,6 @@ tab_ase_est=$('#est_tab1').DataTable({
 							$(this).addClass('selected');
 							}
 							});
-						   }
-    	
 	});
 }
 

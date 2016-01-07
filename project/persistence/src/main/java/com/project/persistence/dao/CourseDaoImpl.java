@@ -117,4 +117,10 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
 		criteria.setMaxResults(iDisplayLength);
 		return (List<Course>) criteria.list();
 	}
+
+	@Transactional
+	public List<Course> getByDpt(String dptName) {
+		Criterion criterion2 = Restrictions.eq("department.deptName", dptName);
+		return findByCriteria(criterion2);
+	}
 }
