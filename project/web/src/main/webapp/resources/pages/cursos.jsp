@@ -117,10 +117,7 @@ $('#editarcu').click(function () {
 	$('#botones').show();
 	$('#botonescu').show();
 	$('.iteradores').hide();
-	$('#cambio_2').html('');
-    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-	pestanasC();
-	$('.tab_cursos').show();
+	$('#cambio_2').hide();
 
 });
 
