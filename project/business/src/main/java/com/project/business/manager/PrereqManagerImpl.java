@@ -92,4 +92,17 @@ public class PrereqManagerImpl implements PrereqManager{
 		return mappingListP(prereqDao.getPrereq(courseId));
 	}
 
+	@Override
+	public List<CourseDTO> getPrereqByDepartment(String courseId) {
+		List<CourseDTO> cour = mappingListC(prereqDao.findAll());
+		Course cc = courseDao.getById(courseId);
+		List<CourseDTO> res = new ArrayList<CourseDTO>();
+		for(CourseDTO dto : cour){
+			if(cc.getDepartment().getDeptName().equals(dto.getDptName())){
+			 res.add(dto);
+			}
+		}
+		return res;
+	}
+
 }

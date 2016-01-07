@@ -59,10 +59,12 @@ public class TeachesManagerImpl implements TeachesManager{
 	public SectionDTO mappingDTOSec(Teaches tea) {
 		Section sec = sectonDao.getById(new SectionId(tea.getId().getCourseId(), tea.getId().getSecId()
 				, tea.getId().getSemester(), tea.getId().getYear()));
+		Course cour = courseDao.getById(sec.getId().getCourseId());
+		Classroom cla = classroomDao.getById(sec.getClassroom().getId());
 		return new SectionDTO(sec.getId().getCourseId(), sec.getId().getSecId(), sec.getId().getSemester()
-				, sec.getId().getYear(), sec.getCourse().getDepartment().getDeptName()
-				, sec.getCourse().getTitle(), sec.getCourse().getCredits()
-				, sec.getClassroom().getId().getBuilding(), sec.getClassroom().getId().getRoomNumber()
+				, sec.getId().getYear(), cour.getDepartment().getDeptName()
+				, cour.getTitle(), cour.getCredits()
+				, cla.getId().getBuilding(), cla.getId().getRoomNumber()
 				, sec.getTimeSlotId());
 	}
 

@@ -35,6 +35,19 @@ public class PereqController {
 		return dt.toJson(dt);
 	}
 	
+	@RequestMapping(value = "/prereqDept", produces = "application/json")
+	public @ResponseBody String getPrereqByDepartament(@RequestParam int iDisplayStart,
+            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String courseId) throws IOException{
+		String method="showUser";
+		DataTablesTO<CourseDTO> dt = new DataTablesTO<CourseDTO>();
+		List<CourseDTO> accts = prereqManager.getPrereqByDepartment(courseId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	}
+	
 	@RequestMapping(value = "/prereq/insert", method = RequestMethod.POST)
 	public @ResponseBody String insert(@RequestParam("courseId") String courseId
 			,@RequestParam("prereqId") String prereqId){

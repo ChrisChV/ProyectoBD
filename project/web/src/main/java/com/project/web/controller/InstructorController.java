@@ -76,9 +76,17 @@ public class InstructorController {
 		return instructorManager.update(instructorManager.mappingDTO(ins));
 	}
 	
-	@RequestMapping(value = "/instructor/byDep" , method = RequestMethod.POST)
-	public @ResponseBody List<InstructorDTO> getByDep(@RequestParam("depId") String deptName){
-		return instructorManager.getByDept(deptName);
-	}
+	@RequestMapping(value = "/instructortable", produces = "application/json")
+	 public @ResponseBody String getByDpt(@RequestParam int iDisplayStart,
+	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String studentId) throws IOException {
+		String method="showUser";
+		DataTablesTO<InstructorDTO> dt = new DataTablesTO<InstructorDTO>();
+		List<InstructorDTO> accts = instructorManager.getByDept(studentId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
+	 }
 	
 }

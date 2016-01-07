@@ -11,10 +11,12 @@ import com.project.business.dto.InstructorDTO;
 import com.project.persistence.dao.AdvisorDao;
 import com.project.persistence.dao.DepartamentDao;
 import com.project.persistence.dao.InstructorDao;
+import com.project.persistence.dao.StudentDao;
 import com.project.persistence.dao.TeachesDao;
 import com.project.persistence.entity.Advisor;
 import com.project.persistence.entity.Department;
 import com.project.persistence.entity.Instructor;
+import com.project.persistence.entity.Student;
 import com.project.persistence.entity.Teaches;
 
 @Service("instructor")
@@ -31,6 +33,9 @@ public class InstructorManagerImpl implements InstructorManager {
 
 	@Autowired
 	private AdvisorDao advisorDao;
+	
+	@Autowired
+	private StudentDao studentDao;
 	
 	@Override
 	public Instructor mappingDTO(InstructorDTO ins) {
@@ -63,8 +68,9 @@ public class InstructorManagerImpl implements InstructorManager {
 	}
 
 	@Override
-	public List<InstructorDTO> getByDept(String deptName) {
-		return mappingList(instructorDao.getByDept(deptName));
+	public List<InstructorDTO> getByDept(String studentId) {
+		Student st = studentDao.getById(studentId);
+		return mappingList(instructorDao.getByDept(st.getDepartment().getDeptName()));
 	}
 
 	@Override

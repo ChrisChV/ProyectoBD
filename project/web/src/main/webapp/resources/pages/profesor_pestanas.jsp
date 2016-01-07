@@ -58,30 +58,28 @@
             <table id="curs_tab2" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th>Id del curso</th>
+                <th>Id del Curso</th>
                 <th>Departamento</th>
-                <th>Título del Curso</th>
-                <th>Créditos del Curso</th>
-                <th>Departamento</th>
-               	<th>Id del section</th>
-               	<th>Semestre</th>
+                <th>Titulo del Curso</th>
+                <th>Creditos del Curso</th>
+                <th>Id del section</th>
+                <th>Semestre</th>
                	<th>Year</th>
-               	<th>Edificio</th>
+                <th>Edificio</th>
                	<th>Room Number</th>
                	<th>Time Slot Id</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Id del curso</th>
+                <th>Id del Curso</th>
                 <th>Departamento</th>
-                <th>Título del Curso</th>
-                <th>Créditos del Curso</th>
-                <th>Departamento</th>
-               	<th>Id del section</th>
-               	<th>Semestre</th>
+                <th>Titulo del Curso</th>
+                <th>Creditos del Curso</th>
+                <th>Id del section</th>
+                <th>Semestre</th>
                	<th>Year</th>
-               	<th>Edificio</th>
+                <th>Edificio</th>
                	<th>Room Number</th>
                	<th>Time Slot Id</th>
             </tr>

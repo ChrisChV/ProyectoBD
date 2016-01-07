@@ -51,8 +51,6 @@ public class ClassroomController {
 	
 	@RequestMapping(value = "/classroom/all", method = RequestMethod.POST)
 	public @ResponseBody List<ClassroomDTO> getAll(){
-		System.out.println("GGGGGGGGGGGGGG");
-		//return "[{\"building\":\"Packard\",\"roomNumber\":\"101\",\"capacity\":500}]";
 		return classrootManager.getAll();
 	}
 	

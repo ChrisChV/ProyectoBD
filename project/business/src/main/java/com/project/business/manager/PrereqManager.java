@@ -30,4 +30,6 @@ public interface PrereqManager {
 	
 	public List<CourseDTO> getPrereq(String courseId);
 	
+	public List<CourseDTO> getPrereqByDepartment(String courseId);
+	
 }

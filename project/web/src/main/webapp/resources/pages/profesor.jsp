@@ -13,6 +13,126 @@
 
 <script>
 
+function pestanasP(){
+	$('#cambio_2').html('');
+	$('#cambio_2').load('resources/pages/profesor_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
+    	$('#curs_tab1').DataTable({
+			"bProcessing": true,
+		    "bServerSide": true,
+		    "bLenthChange" : false,
+		    "iDisplayLength" : 10,
+		    "sAjaxSource": "advisorbyInstructor.do",
+		    'bJQueryUI': true,
+		    "aoColumns":[
+		                 {
+		                	 "sTitle":"Id del estudiante",
+		                	 "mData":"id"
+		                 },
+		                 {
+		                	 "sTitle":"Nombre",
+		                	 "mData":"name"
+		                 },
+		                 {
+		                	 "sTitle":"Departamento",
+		                	 "mData":"dptName"
+		                 },
+		                 {
+		                	 "sTitle":"Credits",
+		                	 "mData":"totCred"
+		                 },
+		             ],
+		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+		    	var j = $('#profesor_id').val();
+		    	var s = {"name" : "instructorId", "value" : j};
+		    	aoData = aoData.concat(s);
+		    	console.log(aoData);
+		        $.ajax( {
+		            "dataType": "json",
+		            "type": "GET",
+		            "url": sSource,
+		            "data": aoData,
+		            "success": function(data, textStatus, jqXHR){
+		            	if(data){
+		            		console.log(data);
+		            		fnCallback(data);
+		            	}
+		            }
+		        } );
+		    },
+		    "sPaginationType" : "full_numbers"
+		});
+    	$('#curs_tab2').DataTable({
+			"bProcessing": true,
+		    "bServerSide": true,
+		    "bLenthChange" : false,
+		    "iDisplayLength" : 10,
+		    "sAjaxSource": "teachesbyInstructor.do",
+		    'bJQueryUI': true,
+		    "aoColumns":[
+		                 {
+		                	 "sTitle":"Id del Curso",
+		                	 "mData":"courseId"
+		                 },
+		                 {
+		                	 "sTitle":"Departamento",
+		                	 "mData":"dptName"
+		                 },
+		                 {
+		                	 "sTitle":"Titulo del Curso",
+		                	 "mData":"courseTitle"
+		                 },
+		                 {
+		                	 "sTitle":"Creditos del Curso",
+		                	 "mData":"courseCredits"
+		                 },
+		                 {
+		                	 "sTitle":"Id del section",
+		                	 "mData":"secId"
+		                 },
+		                 {
+		                	 "sTitle":"Semestre",
+		                	 "mData":"semester"
+		                 },
+		                 {
+		                	 "sTitle":"Year",
+		                	 "mData":"year"
+		                 },
+		                 {
+		                	 "sTitle":"Edificio",
+		                	 "mData":"building"
+		                 },
+		                 {
+		                	 "sTitle":"Room Number",
+		                	 "mData":"roomNumber"
+		                 },
+		                 {
+		                	 "sTitle":"Time Slot Id",
+		                	 "mData":"timeSlotId"
+		                 },
+		             ],
+		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+		    	var j = $('#profesor_id').val();
+		    	var s = {"name" : "instructorId", "value" : j};
+		    	aoData = aoData.concat(s);
+		    	console.log(aoData);
+		        $.ajax( {
+		            "dataType": "json",
+		            "type": "GET",
+		            "url": sSource,
+		            "data": aoData,
+		            "success": function(data, textStatus, jqXHR){
+		            	if(data){
+		            		console.log(data);
+		            		fnCallback(data);
+		            	}
+		            }
+		        } );
+		    },
+		    "sPaginationType" : "full_numbers"
+		});
+	});
+}
+
 $('#borrarp').click(function () {
 	DMLActual = "delete";
     $('#cambio_2').hide();
@@ -81,16 +201,20 @@ $('#editarp').click(function () {
 
 $('#fp').click(function () {
     actualizarEntity('instructor', 'first');
+    pestanasP();
 })
 
 $('#lp').click(function () {
     actualizarEntity('instructor', 'last');
+    pestanasP();
 })
 $('#np').click(function () {
     actualizarEntity('instructor', 'next');
+    pestanasP();
 })
 $('#pp').click(function () {
     actualizarEntity('instructor', 'prev');
+    pestanasP();
 })
 
 

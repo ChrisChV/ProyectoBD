@@ -19,4 +19,6 @@ public interface CourseDao extends GenericDao<Course> {
 	
 	public List<Course> getTable(int iDisplayStart, int iDisplayLength, String s);
 	
+	
+	
 }
