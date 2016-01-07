@@ -12,23 +12,35 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 
 <script>
-$('#guardarcu').click(function(){		
+$('#guardarcu').click(function(){
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('.botonescu').prop('disabled',false);
+    $('#botones').hide();
+    $('.iteradores').show();
+    $('.edit').attr('readonly', true);
+    $('#curso_id').attr('readonly',true);
+    $('#cambio_2').show();
+    $('#departamento0').hide();
+    $('#departamento1').show(); 
 		if(DMLActual == "insert"){	
-			var cursoid = $('#curso_id').val();
+			var idcurso = $('#curso_id').val();
 			var titulo = $('#titulo').val();
 			var departamento = $('#departamento0').val();
 			var creditos = $('#creditos').val();
-			var json = {"id" : idcurso, "tittle" : titulo, "depId" :  departamento, "credits" : creditos};
+			var json = {"id" : idcurso, "title" : titulo, "depId" :  departamento, "credits" : creditos};
 			console.log(json);
-			DML(entityActual, DMLActual, json);		
+			DML(entityActual, DMLActual, json);
+			$('#departamento1').val($('#departamento0').val());
 		}
 		if(DMLActual == "delete"){
 			var cursoid = $("#curso_id").val()
-			var json = {"courseId" : cursoid};
+			var json = {"id" : cursoid};
 			DML(entityActual, DMLActual, json);
 			actualizarEntity(entityActual, "first");
 			getCourse();
 		}	
+	pestanasC();
 			});
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
@@ -44,7 +56,7 @@ $('#cancelarcu').click(function(){
     getCourse();
 	pestanasC();
 	$('.tab_cursos').show();
-	$('#cambio_2').shoe();
+	$('#cambio_2').show();
 });
 
 $('#buscarcu').click(function () {
@@ -146,6 +158,7 @@ $('#nuevocu').click(function () {
 	    success: function(data, textStatus, jqXHR){
 	        if(data) {
 	        	console.log(data);
+	        	$('#departamento0').html('');
 	        	$.each(data, function(index, value) {
 	        		$('#departamento0').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
 	        	});
@@ -176,9 +189,11 @@ $('#editarcu').click(function () {
 	    success: function(data, textStatus, jqXHR){
 	        if(data) {
 	        	console.log(data);
+	        	$('#departamento0').html('');
 	        	$.each(data, function(index, value) {
 	        		$('#departamento0').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
 	        	});
+	        	$('#departamento1').val($('#departamento0').val());
 	        }
 	        else {
 	        	console.log('msg_internal_server_error');
