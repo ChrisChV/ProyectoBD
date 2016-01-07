@@ -13,6 +13,22 @@
 
 <script>
 $('#guardarcu').click(function(){		
+		
+		$('#botones').hide();
+		$('#cambio_2').hide();
+		$('.iteradores').show();
+		$('.botonest').prop('disabled',false);
+
+		if(DMLActual == "search"){
+		var cursoid = tab_time.cell('.selected',0).data();
+		var titulo = tab_time.cell('.selected',1).data();
+		var departamento = tab_time.cell('.selected',2).data();
+		var creditos = tab_time.cell('.selected',3).data();
+		$('#curso_id').val(cursoid);
+		$('#titulo').val(titulo);
+		$('#departamento1').val(departamento);
+		$('#creditos').val(creditos);
+	}
 		if(DMLActual == "insert"){	
 			var cursoid = $('#curso_id').val();
 			var titulo = $('#titulo').val();
@@ -28,7 +44,7 @@ $('#guardarcu').click(function(){
 			DML(entityActual, DMLActual, json);
 			actualizarEntity(entityActual, "first");
 			getCourse();
-		}	
+		}
 			});
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
