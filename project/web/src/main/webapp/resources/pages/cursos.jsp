@@ -13,9 +13,6 @@
 
 <script>
 
-$('#guardarcu').click(function(){
-
-});
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
@@ -29,7 +26,6 @@ $('#buscarcu').click(function () {
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
     $('#cambio_2').show();
 	$('.iteradores').hide();
-
     $('#tablasa').html('');
     $('#tablasa').load('resources/pages/cursos_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
@@ -102,12 +98,33 @@ $('#borrarcu').click(function () {
 $('#nuevocu').click(function () {
 	DMLActual = "insert";
 	$('#cambio_2').hide();
-	$('#departamento0').hide();
-	$('#departamento1').show();
+	$('#departamento0').show();
+	$('#departamento1').hide();
+	$('#curso_id').attr('readonly',false);
+	$('#curso_id').val('');
 	$('#departamento1').attr('readonly',false);
 	$('.edit').attr('readonly',false);
+	$('.edit').val('');
 	$('#botones').show();
 	$('.iteradores').hide();
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/department/all',
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	        	$.each(data, function(index, value) {
+	        		$('#departamento0').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#editarcu').click(function () {
@@ -124,15 +141,13 @@ $('#editarcu').click(function () {
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
-	    url:'/web/student',
-	    data: json,
+	    url:'/web/department/all',
 	    success: function(data, textStatus, jqXHR){
 	        if(data) {
 	        	console.log(data);
-	            $('#estudiante_id').val(data.id);
-	            $('#nombre').val(data.name);
-	            $('#departamentoe1').val(data.dptName);
-	            $('#creditos_t').val(data.totCred);	            
+	        	$.each(data, function(index, value) {
+	        		$('#departamento0').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
 	        }
 	        else {
 	        	console.log('msg_internal_server_error');
