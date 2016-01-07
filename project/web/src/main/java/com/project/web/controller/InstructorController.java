@@ -76,7 +76,7 @@ public class InstructorController {
 		return instructorManager.update(instructorManager.mappingDTO(ins));
 	}
 	
-	@RequestMapping(value = "/instructortable", produces = "application/json")
+	@RequestMapping(value = "/instructorGetDpt", produces = "application/json")
 	 public @ResponseBody String getByDpt(@RequestParam int iDisplayStart,
 	            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String studentId) throws IOException {
 		String method="showUser";

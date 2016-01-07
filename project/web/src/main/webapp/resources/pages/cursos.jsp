@@ -15,6 +15,8 @@
 
 $('#buscarcu').click(function () {
     $('.edit').attr('readonly', true);
+    $('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
     $('#cambio_2').show();
 	$('.iteradores').hide();
 
@@ -105,7 +107,7 @@ $('#editarcu').click(function () {
 	$('#botones').show();
 	$('#botonescu').show();
 	$('.iteradores').hide();
-	pestañasC();
+	pestanasC();
 	$('.tab_cursos').show();
 
 });

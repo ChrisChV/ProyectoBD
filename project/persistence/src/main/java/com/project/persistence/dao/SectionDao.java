@@ -21,4 +21,5 @@ public interface SectionDao extends GenericDao<Section> {
 	
 	public List<Section> getByClassroom(ClassroomId id);
 	
+	
 }
