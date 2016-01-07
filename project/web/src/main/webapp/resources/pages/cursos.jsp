@@ -25,15 +25,15 @@ $('#guardarcu').click(function(){
     $('#departamento1').show(); 		
 		if(DMLActual == "search"){
 		var cursoid = tab_curso.cell('.selected',0).data();
-		var titulo = tab_curso.cell('.selected',1).data();
-		var departamento = tab_curso.cell('.selected',2).data();
+		var titulo = tab_curso.cell('.selected',2).data();
+		var departamento = tab_curso.cell('.selected',1).data();
 		var creditos = tab_curso.cell('.selected',3).data();
 		$('#curso_id').val(cursoid);
 		$('#titulo').val(titulo);
 		$('#departamento1').val(departamento);
 		$('#creditos').val(creditos);
 	}
-		if(DMLActual == "insert"){	
+		if(DMLActual == "insert" || DMLActual == "update"){	
 			var idcurso = $('#curso_id').val();
 			var titulo = $('#titulo').val();
 			var departamento = $('#departamento0').val();
@@ -205,7 +205,7 @@ $('#editarcu').click(function () {
 	        	$.each(data, function(index, value) {
 	        		$('#departamento0').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
 	        	});
-	        	$('#departamento1').val($('#departamento0').val());
+	        	$('#departamento0').val($('#departamento1').val());
 	        }
 	        else {
 	        	console.log('msg_internal_server_error');

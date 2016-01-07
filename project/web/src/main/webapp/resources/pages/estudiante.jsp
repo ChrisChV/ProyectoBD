@@ -13,8 +13,6 @@
 
 <script>
 
-
-
 function pestanasS(){
 	$('#cambio_2').html('');
 	$('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
@@ -156,6 +154,7 @@ tab_ase_est=$('#est_tab1').DataTable({
 $('#borrare').click(function () {
 	DMLActual = "delete";
     $('#cambio_2').hide();
+    $('.botoneses').prop('disabled',true);
     $('#departamentoe').hide();
     $('#departamentoe1').show();
     $('.edit').attr('readonly', true);
@@ -167,6 +166,7 @@ $('#nuevoe').click(function () {
 	DMLActual = "insert";
 	$('.edit').attr('readonly', false);
 	$('#cambio_2').hide();
+	$('.botoneses').prop('disabled',true);
 	$('#estudiante_id').attr('readonly', false);
 	$('.edit').val('');
 	$('#estudiante_id').val('');
@@ -183,6 +183,7 @@ $('#nuevoe').click(function () {
 	    success: function(data, textStatus, jqXHR){
 	        if(data) {
 	        	console.log(data);
+	        	$('#departamentoe').html('');
 	        	$.each(data, function(index, value) {
 	        		$('#departamentoe').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
 	        	});
@@ -198,8 +199,9 @@ $('#buscare').click(function () {
     $('.edit').attr('readonly', true);
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-    
+    $('.botoneses').prop('disabled',true);
     $('#cambio_2').show();
+    $('.iteradores').hide();
     $('#tablasa').load('resources/pages/estudiante_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
         	$('#botones').show();
@@ -258,6 +260,7 @@ $('#buscare').click(function () {
 
 $('#editare').click(function () {
 	DMLActual = "update";
+	$('.botoneses').prop('disabled',true);
 	$('.edit').attr('readonly', false);
 	$('#cambio_2').hide();
 	$('#estudiante_id').attr('readonly', false);
@@ -275,9 +278,11 @@ $('#editare').click(function () {
 	    success: function(data, textStatus, jqXHR){
 	        if(data) {
 	        	console.log(data);
+	        	$('#departamentoe').html('');
 	        	$.each(data, function(index, value) {
 	        		$('#departamentoe').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
 	        	});
+	        	$('#departamentoe').val($('#departamentoe1').val());
 	        }
 	        else {
 	        	console.log('msg_internal_server_error');

@@ -85,7 +85,7 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
 			System.out.println(m + " en UPDATE FROM COURSE");
 			return m;
 		}
-		saveOrUpdate(course);
+		updateSession(course);
 		String m = "EL curso se a actualizado correctamente";
 		System.out.println(m);
 		return m;
