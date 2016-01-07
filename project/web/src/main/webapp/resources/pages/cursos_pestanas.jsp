@@ -41,9 +41,9 @@
 		$('#nuevo_tab_det').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-				$('#tablasa').append("<select id ='idcurso'></select> <select id ='idsection'></select> <select id ='semestre'> <select id ='edificio'> <select id ='room_no'><select id ='idtime'><select id ='year'>");
+				$('#tablasa').append("<inptut type='number' id ='idsection'></input> <select id ='semestre'> <option value='Fall'>Fall</option><option value='Spring'>Spring</option><option value='Winter'>Winter</option><option value='Summer'>Summer</option> </select> <select id ='edificio'> <select id ='room_no'><select id ='idtime'><input type='text' id ='year'>");
 				
-	$('#tablasa').append(" <input type='button' id='agregar_tab_det' value='nuevo' class='tabs_cursos'/>  <input type='button' id='cancelar_tab_det' value='borrar' class='tabs_cursos'/>);
+				$('#tablasa').append(" <input type='button' id='agregar_tab_det' value='nuevo' class='tabs_cursos'/>  <input type='button' id='cancelar_tab_det' value='borrar' class='tabs_cursos'/>);
 					});
 		
 		$('#borrar_tab_det').click(function(){
@@ -78,10 +78,24 @@
 		});
 		
 		$('#agregar_tab_det').click(function(){
-		
+			if(DMLActual == "insert"){			
+			table.row('.selected').remove().draw( false );
+			var json = {"id" : IDcurso, "section" : IDsection, "semester" : semester,"year" : year};
+			console.log(json);
+			DML(entityActual, DMLActual, json);		
+		}
+		if(DMLActual == "delete"){
+			var idcurso = $("#curso_id").val()
+			tab_curso.row('.selected').remove().draw( false );
+			var json = {"courseId" : idcurso_pre,"prereqId" : idcurso };
+			DML(entityActual, DMLActual, json);
+			actualizarEntity(entityActual, "first");
+			getCourse();
+		}	
+			});
 		});
 		$('#cancelar_tab_det').click(function(){
-		
+			pestanasC();
 		});
     </script>
 </head>

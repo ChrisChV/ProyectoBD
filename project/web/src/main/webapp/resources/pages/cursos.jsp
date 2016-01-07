@@ -12,7 +12,24 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 
 <script>
-
+$('#guardarcu').click(function(){		
+		if(DMLActual == "insert"){	
+			var cursoid = $('#curso_id').val();
+			var titulo = $('#titulo').val();
+			var departamento = $('#departamento0').val();
+			var creditos = $('#creditos').val();
+			var json = {"id" : idcurso, "tittle" : titulo, "depId" :  departamento, "credits" : creditos};
+			console.log(json);
+			DML(entityActual, DMLActual, json);		
+		}
+		if(DMLActual == "delete"){
+			var cursoid = $("#curso_id").val()
+			var json = {"courseId" : cursoid};
+			DML(entityActual, DMLActual, json);
+			actualizarEntity(entityActual, "first");
+			getCourse();
+		}	
+			});
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
