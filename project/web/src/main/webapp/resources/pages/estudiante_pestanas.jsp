@@ -93,12 +93,3 @@
             </table>
         </div>
 </html>
-
-
-<script>
-
-</script>
-
-<script>
-    
-</script>

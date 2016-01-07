@@ -163,6 +163,54 @@ $('#borrare').click(function () {
     $('.iteradores').hide();
 });
 
+$('#guardare').click(function(){
+
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('.botonescu').prop('disabled',false);
+    $('#botones').hide();
+    $('.iteradores').show();
+    $('.edit').attr('readonly', true);
+    $('#estudiante_id').attr('readonly',true);
+    $('#cambio_2').show();
+    $('#departamentoe').hide();
+    $('#departamentoe1').show(); 		
+		if(DMLActual == "search"){
+		var estudianteid = tab_estudiante.cell('.selected',0).data();
+		var nombre = tab_estudiante.cell('.selected',1).data();
+		var departamentoe = tab_estudiante.cell('.selected',2).data();
+		var creditos_t = tab_estudiante.cell('.selected',3).data();
+		$('#estudiante_id').val(estudianteid);
+		$('#nombre').val(nombre);
+		$('#departamentoe1').val(departamentoe);
+		$('#creditos_t').val(creditos_t);}
+		if(DMLActual == "insert"){	
+			var idestudiante = $('#estudiante_id').val();
+			var nombre = $('#nombre').val();
+			var departamento = $('#departamentoe1').val();
+			var creditos = $('#creditos_t').val();
+			var json = {"id" : idestudiante, "name" : nombre, "depId" :  departamento, "totCred" : creditos};
+			console.log(json);
+			DML(entityActual, DMLActual, json);
+			$('#departamento1').val($('#departamento0').val());
+		}
+		if(DMLActual == "delete"){
+			var estudianteid = $("#estudiante_id").val()
+			var json = {"id" : estudiante_id};
+			DML(entityActual, DMLActual, json);
+			actualizarEntity(entityActual, "first");
+			getCourse();
+		}	
+	pestanasC();
+
+			
+
+});
+
+$('#cancelare').click(function(){
+
+});
+
 $('#nuevoe').click(function () {
 	DMLActual = "insert";
 	$('.edit').attr('readonly', false);
