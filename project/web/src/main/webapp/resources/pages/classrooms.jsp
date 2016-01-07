@@ -38,10 +38,12 @@ $('#guardarc').click(function(){
 	$('.botonesc').prop('disabled',false);
 	if(DMLActual == "search")
 	{
-		var data = tab_clas.row('.selected').data();
-		$('#building').val(data.building);
-		$('#clase1').val(data.classroom);
-		$('#capacidad').val(data.capacity);	
+		var building = tab_clas.cell('.selected',0).data();
+		var clase = tab_clas.cell('.selected',1).data();
+		var capacidad = tab_clas.cell('.selected',2).data();
+		$('#building').val(building);
+		$('#clase1').val(clase);
+		$('#capacidad').val(capacidad);	
 	}
 	else{
 	var building = $('#building').val();
@@ -94,6 +96,60 @@ $('#editarc').click(function () {
 });
 
 $('#outsidec').click(function () {
+	$('#tablasa').html('');
+    $('#tablasa').load('resources/pages/classroom_buscar.jsp', function (responseTxt, statusTxt, xhr) {
+        if (statusTxt == "success"){
+        	tab_clas =$('#clas_tab').DataTable({
+        		"bProcessing": true,
+                "bServerSide": true,
+                "bLenthChange" : false,
+                "iDisplayLength" : 10,
+                "sAjaxSource": "classroomtable.do",
+                'bJQueryUI': true,
+                "aoColumns":[
+                             {
+                            	 "sTitle":"Building",
+                            	 "mData":"building"
+                             },
+                             {
+                            	 "sTitle":"Room Number",
+                            	 "mData":"roomNumber"
+                             },
+                             {
+                            	 "sTitle":"Capacity",
+                            	 "mData":"capacity"
+                             },
+                         ],
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                    $.ajax( {
+                        "dataType": "json",
+                        "type": "GET",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function(data, textStatus, jqXHR){
+                        	if(data){
+                        		console.log(data);
+                        		fnCallback(data);
+                        	}
+                        }
+                    } );
+                },
+                "sPaginationType" : "full_numbers"
+        	});
+        	$('#body_clas').on('click', 'tr', function () {
+        	    if ($(this).hasClass('selected')) {
+        	        $(this).removeClass('selected');
+        	    }
+        	    else {
+        	        tab_clas.$('tr.selected').removeClass('selected');
+        	        $(this).addClass('selected');
+        	    }
+        	});
+          }
+        if (statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
+	DMLActual = "search";
     $('.edit').attr('readonly', true);
     $('.iteradores').hide();
     $('#cambio_2').show();

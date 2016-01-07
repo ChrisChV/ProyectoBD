@@ -16,6 +16,7 @@
 	<table id="time_tab" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
+            	<th>ID</th>
                 <th>Dia</th>
                 <th>Inicio</th>
                 <th>Final</th>
@@ -25,6 +26,7 @@
 		</tbody>
         <tfoot>
             <tr>
+            	<th>ID</th>
                 <th>Dia</th>
                 <th>Inicio</th>
                 <th>Final</th>

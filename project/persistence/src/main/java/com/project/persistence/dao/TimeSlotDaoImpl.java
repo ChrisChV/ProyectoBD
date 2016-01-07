@@ -108,11 +108,12 @@ public class TimeSlotDaoImpl extends GenericDaoImpl<TimeSlot> implements TimeSlo
 			quer.setMaxResults(iDisplayLength);
 		}
 		String ss = "%" + s + "%";
+		Criterion criterion1 = Restrictions.like("id.timeSlotId", ss);
 		Criterion criterion2 = Restrictions.like("id.day", ss);
 		//int t = Integer.parseInt(s);
 		//Criterion criterion3 = Restrictions.like("capacity", (short) t);
 		Criteria criteria = getCurrentSession().createCriteria(entity);
-		criteria.add(Restrictions.or(criterion2));
+		criteria.add(Restrictions.or(criterion1,criterion2));
 		criteria.setFirstResult(iDisplayStart);
 		criteria.setMaxResults(iDisplayLength);
 		return (List<TimeSlot>) criteria.list();

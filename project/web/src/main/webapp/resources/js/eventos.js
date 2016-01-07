@@ -1,3 +1,7 @@
+var tab_dep;
+var tab_clas;
+var tab_time;
+
 $(document).ready(function () {	
 	console.log("inicie correctamente");
     $('#departamento').click(function () {
@@ -12,62 +16,8 @@ $(document).ready(function () {
                 $("#departamentos").attr('readonly', true);
                 $("#edificio1").attr('readonly', true);
                 $("#presupuesto").attr('readonly', true);
+                $('#cambio_2').hide();
                 getDpt();
-                $('#tablasa').html('');
-                $('#tablasa').load('resources/pages/departamento_buscar.jsp', function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "success"){
-                        $('#cambio_2').hide();
-                        var tab_dep =$('#dep_tab').DataTable({
-                    		"bProcessing": true,
-                            "bServerSide": true,
-                            "bLenthChange" : false,
-                            "iDisplayLength" : 20,
-                            "searchObj" : "Biology",
-                            "sAjaxSource": "departmenttable.do",
-                            'bJQueryUI': true,
-                            "aoColumns":[
-                                         {
-                                        	 "sTitle":"Nombre",
-                                        	 "mData":"dptName"
-                                         },
-                                         {
-                                        	 "sTitle":"Edificio",
-                                        	 "mData":"building"
-                                         },
-                                         {
-                                        	 "sTitle":"Presupuesto",
-                                        	 "mData":"budget"
-                                         },
-                                     ],
-                            "fnServerData": function ( sSource, aoData, fnCallback ) {
-                            	$.ajax( {
-                                    "dataType": "json",
-                                    "type": "GET",
-                                    "url": sSource,
-                                    "data": aoData,
-                                    "success": function(data, textStatus, jqXHR){
-                                    	if(data){
-                                    		console.log(data);
-                                    		fnCallback(data);
-                                    	}
-                                    }
-                                } );
-                            },
-                            "sPaginationType" : "full_numbers"
-                        });
-                        $('#body_dep').on('click', 'tr', function () {
-                            if ($(this).hasClass('selected')) {
-                                $(this).removeClass('selected');
-                            }
-                            else {
-                                tab_dep.$('tr.selected').removeClass('selected');
-                                $(this).addClass('selected');
-                            }
-                        });
-                       }
-                    if (statusTxt == "error")
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                });
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
         });
@@ -84,61 +34,8 @@ $(document).ready(function () {
                 $("#building").attr('readonly', true);
                 $("#clase1").attr('readonly', true);
                 $("#capacidad").attr('readonly', true);
+                $('#cambio_2').hide();
                 getClassroom();
-                $('#tablasa').html('');
-                $('#tablasa').load('resources/pages/classroom_buscar.jsp', function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "success"){
-                    	var tab_clas =$('#clas_tab').DataTable({
-                    		"bProcessing": true,
-                            "bServerSide": true,
-                            "bLenthChange" : false,
-                            "iDisplayLength" : 10,
-                            "sAjaxSource": "classroomtable.do",
-                            'bJQueryUI': true,
-                            "aoColumns":[
-                                         {
-                                        	 "sTitle":"Building",
-                                        	 "mData":"building"
-                                         },
-                                         {
-                                        	 "sTitle":"Room Number",
-                                        	 "mData":"roomNumber"
-                                         },
-                                         {
-                                        	 "sTitle":"Capacity",
-                                        	 "mData":"capacity"
-                                         },
-                                     ],
-                            "fnServerData": function ( sSource, aoData, fnCallback ) {
-                                $.ajax( {
-                                    "dataType": "json",
-                                    "type": "GET",
-                                    "url": sSource,
-                                    "data": aoData,
-                                    "success": function(data, textStatus, jqXHR){
-                                    	if(data){
-                                    		console.log(data);
-                                    		fnCallback(data);
-                                    	}
-                                    }
-                                } );
-                            },
-                            "sPaginationType" : "full_numbers"
-                    	});
-                    	$('#body_clas').on('click', 'tr', function () {
-                    	    if ($(this).hasClass('selected')) {
-                    	        $(this).removeClass('selected');
-                    	    }
-                    	    else {
-                    	        tab_clas.$('tr.selected').removeClass('selected');
-                    	        $(this).addClass('selected');
-                    	    }
-                    	});
-                      }
-                    	$('#cambio_2').hide();
-                    if (statusTxt == "error")
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                });
             if (statusTxt == "error")
                 alert("Error: " + xcambio_1hr.status + ": " + xhr.statusText);
         });
@@ -163,63 +60,10 @@ $(document).ready(function () {
 	        	$('#day2').attr('readonly',true);
 	            $('#start2').attr('readonly',true);
 	        	$('#end2').attr('readonly',true);
-	            
+	        	$('#cambio_2').hide();
 
 	        	getTime();
-                $('#tablasa').html('');
-                $('#tablasa').load('resources/pages/timeslot_buscar.jsp', function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "success"){
-                        $('#cambio_2').hide();
-                            var tab_time =$('#time_tab').DataTable({
-                        		"bProcessing": true,
-                                "bServerSide": true,
-                                "bLenthChange" : false,
-                                "iDisplayLength" : 10,
-                                "sAjaxSource": "timetable.do",
-                                'bJQueryUI': true,
-                                "aoColumns":[
-                                             {
-                                            	 "sTitle":"Dia",
-                                            	 "mData":"day"
-                                             },
-                                             {
-                                            	 "sTitle":"Inicio",
-                                            	 "mData":"start"
-                                             },
-                                             {
-                                            	 "sTitle":"Final",
-                                            	 "mData":"end"
-                                             },
-                                         ],
-                                "fnServerData": function ( sSource, aoData, fnCallback ) {
-                                    $.ajax( {
-                                        "dataType": "json",
-                                        "type": "GET",
-                                        "url": sSource,
-                                        "data": aoData,
-                                        "success": function(data, textStatus, jqXHR){
-                                        	if(data){
-                                        		console.log(data);
-                                        		fnCallback(data);
-                                        	}
-                                        }
-                                    } );
-                                },
-                                "sPaginationType" : "full_numbers"
-                            });
-                            $('#body_time').on('click', 'tr', function () {
-                                if ($(this).hasClass('selected')) {
-                                    $(this).removeClass('selected');
-                                }
-                                else {
-                                    tab_dep.$('tr.selected').removeClass('selected');
-                                    $(this).addClass('selected');
-                                }
-                            });
-                           }
-                    if (statusTxt == "error")
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                });
+                
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
         });
@@ -229,30 +73,30 @@ $(document).ready(function () {
     	DMLActual = "null";
     	$('#cambio_1').html('');
         $('#cambio_1').load('resources/pages/cursos.jsp', function (responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success")
-            	/*$('#cambio_1').load('resources/pages/cursos_pestañas.jsp', function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success"){
+            	$('#cambio_1').load('resources/pages/cursos_pestañas.jsp', function (responseTxt, statusTxt, xhr) {
             		$('#cur_tab1').DataTable({
             			"bProcessing": true,
             		    "bServerSide": true,
             		    "bLenthChange" : false,
             		    "iDisplayLength" : 10,
-            		    "sAjaxSource": "departmenttable.do",
+            		    "sAjaxSource": "prerq.do",
             		    'bJQueryUI': true,
             		    "aoColumns":[
             		                 {
-            		                	 "sTitle":"Nombre",
+            		                	 "sTitle":"Id",
             		                	 "mData":"dptName"
             		                 },
             		                 {
-            		                	 "sTitle":"Edificio",
+            		                	 "sTitle":"Nombre",
             		                	 "mData":"building"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Presupuesto",
-            		                	 "mData":"budget"
             		                 },
             		             ],
             		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+            		    	var j = $('#course_id').val();
+            		    	var s = {"name" : "courseId", "value" : j};
+            		    	aoData = aoData.concat(s);
+            		    	console.log(aoData);
             		        $.ajax( {
             		            "dataType": "json",
             		            "type": "GET",
@@ -268,14 +112,67 @@ $(document).ready(function () {
             		    },
             		    "sPaginationType" : "full_numbers"
             		});
+            	});
             	}
-            	$('#cur_tab1').DataTable({
-                    columns: [
-                    
-
-                    ]
+            	
+            	
+            	$('#cur_tab2').DataTable({
+            		"bProcessing": true,
+        		    "bServerSide": true,
+        		    "bLenthChange" : false,
+        		    "iDisplayLength" : 10,
+        		    "sAjaxSource": "prerq.do",
+        		    'bJQueryUI': true,
+        		    "aoColumns":[
+        		                 {
+        		                	 "sTitle":"Id del Curso",
+        		                	 "mData":"dptName"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Id del Section",
+        		                	 "mData":"building"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Semestre",
+        		                	 "mData":"building"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Edificio",
+        		                	 "mData":"building"
+        		                 },
+        		                 {
+        		                	 "sTitle":"RoomNumber",
+        		                	 "mData":"building"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Id Time",
+        		                	 "mData":"building"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Year",
+        		                	 "mData":"building"
+        		                 },
+        		             ],
+        		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+        		    	var j = $('#course_id').val();
+        		    	var s = {"name" : "courseId", "value" : j};
+        		    	aoData = aoData.concat(s);
+        		    	console.log(aoData);
+        		        $.ajax( {
+        		            "dataType": "json",
+        		            "type": "GET",
+        		            "url": sSource,
+        		            "data": aoData,
+        		            "success": function(data, textStatus, jqXHR){
+        		            	if(data){
+        		            		console.log(data);
+        		            		fnCallback(data);
+        		            	}
+        		            }
+        		        } );
+        		    },
+        		    "sPaginationType" : "full_numbers"
                 });
-                */
                 $("#botones").hide();
                 $("#departamento0").hide();
                 $("#curso_id").attr('readonly', true);

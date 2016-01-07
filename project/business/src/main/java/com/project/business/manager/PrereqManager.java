@@ -3,6 +3,7 @@ package com.project.business.manager;
 import java.util.List;
 
 import com.project.business.dto.CourseDTO;
+import com.project.business.dto.InstructorDTO;
 import com.project.persistence.entity.Course;
 import com.project.persistence.entity.Prereq;
 import com.project.persistence.entity.PrereqId;

@@ -20,7 +20,7 @@ public class PereqController {
 	private PrereqManager prereqManager;
 	
 	@RequestMapping(value = "/prereq", method = RequestMethod.POST)
-	public @ResponseBody List<CourseDTO> getPrereq(@RequestParam("id") String courseId){
+	public @ResponseBody List<CourseDTO> getPrereq(@RequestParam String courseId){
 		return prereqManager.getPrereq(courseId);
 	}
 	

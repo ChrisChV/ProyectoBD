@@ -54,8 +54,16 @@ $('#guardart').click(function(){
 	$('#end2').show();
 	$('#idtime').attr('readonly',true);
 	$('.iteradores').show();
-	if(DMLActual = "search"){
-		
+	if(DMLActual == "search"){
+		console.log("eeeeeeeee");
+		var id = tab_time.cell('.selected',0).data();
+		var day = tab_time.cell('.selected',1).data();
+		var start = tab_time.cell('.selected',2).data();
+		var end = tab_time.cell('.selected',3).data();
+		$('#idtime').val(id);
+		$('#day2').val(day);
+		$('#start2').val(start);
+		$('#end2').val(end);
 	}
 	else{
 		var id = $('#idtime').val();
@@ -64,11 +72,14 @@ $('#guardart').click(function(){
 		var Im = $('#startm1').val();
 		var Eh = $('#endh1').val();
 		var Em = $('#endm1').val();
-		
-		var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMIn" : Em};
+		var json = {"id" : id, "day" : day, "startHr" : Ih, "startMin" : Im, "endHr" : Eh, "endMin" : Em};
+		console.log(json);
 		DML(entityActual, DMLActual, json);		
 	}
 	if(DMLActual == "delete"){
+		var id = $('#idtime').val();
+		var json = {"id" : id};
+		DML(entityActual, DMLActual, json);
 		actualizarEntity(entityActual, "first");
 	}
 });
@@ -139,6 +150,63 @@ $('#editart').click(function () {
 
 $('#outsidet').click(function () {
 	DMLActual = "search";
+	$('#tablasa').html('');
+    $('#tablasa').load('resources/pages/timeslot_buscar.jsp', function (responseTxt, statusTxt, xhr) {
+        if (statusTxt == "success"){
+                tab_time = $('#time_tab').DataTable({
+            		"bProcessing": true,
+                    "bServerSide": true,
+                    "bLenthChange" : false,
+                    "iDisplayLength" : 10,
+                    "sAjaxSource": "timetable.do",
+                    'bJQueryUI': true,
+                    "aoColumns":[
+                                 {
+                                	 "sTitle":"ID",
+                                	 "mData":"id"
+                                 },                                 
+                                 {
+                                	 "sTitle":"Dia",
+                                	 "mData":"day"
+                                 },
+                                 {
+                                	 "sTitle":"Inicio",
+                                	 "mData":"start"
+                                 },
+                                 {
+                                	 "sTitle":"Final",
+                                	 "mData":"end"
+                                 },
+                             ],
+                    "fnServerData": function ( sSource, aoData, fnCallback ) {
+                        $.ajax( {
+                            "dataType": "json",
+                            "type": "GET",
+                            "url": sSource,
+                            "data": aoData,
+                            "success": function(data, textStatus, jqXHR){
+                            	if(data){
+                            		console.log(data);
+                            		fnCallback(data);
+                            	}
+                            }
+                        } );
+                    },
+                    "sPaginationType" : "full_numbers"
+                });
+                $('#body_time').on('click', 'tr', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        tab_time.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                });
+               }
+        if (statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
     $('#botones').show();

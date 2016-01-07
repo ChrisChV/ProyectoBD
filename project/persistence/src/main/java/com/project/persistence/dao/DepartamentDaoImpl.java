@@ -38,7 +38,7 @@ public class DepartamentDaoImpl extends GenericDaoImpl<Department> implements De
 			return m;
 		}
 		dep = new Department(depName, building, budget);
-		getCurrentSession().update(dep);
+		saveOrUpdate(dep);
 		String m = "El departamento a sido ingresado correctamente";
 		System.out.println(m);
 		return m;

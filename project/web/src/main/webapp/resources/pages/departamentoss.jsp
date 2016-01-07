@@ -39,10 +39,15 @@ $('#guardard').click(function(){
 	$('.botonesd').prop('disabled',false);
 	if(DMLActual == "search")
 	{
-		var data = tab_dep.row('.selected').data();
-		$('#departamentos').val(data.Nombre);
-		$('#edificio1').val(data.Edificio);
-		$('#presupuesto').val(data.Presupuesto);
+		console.log("entreeeeeeeeeee");
+		var departamento = tab_dep.cell('.selected',0).data();
+		var edificio = tab_dep.cell('.selected',1).data();
+		var presupuesto = tab_dep.cell('.selected',2).data();
+		console.log(departamento);
+		$('#departamentos').val(departamento);
+		$('#edificio1').val(edificio);
+		$('#presupuesto').val(presupuesto);
+		
 	}
 	else {
 		var nombre = $('#departamentos').val();
@@ -93,6 +98,62 @@ $('#editard').click(function () {
 });
 
 $('#outsided').click(function () {
+	DMLActual = "search";
+	$('#tablasa').html('');
+    $('#tablasa').load('resources/pages/departamento_buscar.jsp', function (responseTxt, statusTxt, xhr) {
+        if (statusTxt == "success"){
+            
+            tab_dep =$('#dep_tab').DataTable({
+        		"bProcessing": true,
+                "bServerSide": true,
+                "bLenthChange" : false,
+                "iDisplayLength" : 20,
+                "searchObj" : "Biology",
+                "sAjaxSource": "departmenttable.do",
+                'bJQueryUI': true,
+                "aoColumns":[
+                             {
+                            	 "sTitle":"Nombre",
+                            	 "mData":"dptName"
+                             },
+                             {
+                            	 "sTitle":"Edificio",
+                            	 "mData":"building"
+                             },
+                             {
+                            	 "sTitle":"Presupuesto",
+                            	 "mData":"budget"
+                             },
+                         ],
+                "fnServerData": function ( sSource, aoData, fnCallback ) {
+                	$.ajax( {
+                        "dataType": "json",
+                        "type": "GET",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function(data, textStatus, jqXHR){
+                        	if(data){
+                        		console.log(data);
+                        		fnCallback(data);
+                        	}
+                        }
+                    } );
+                },
+                "sPaginationType" : "full_numbers"
+            });
+            $('#body_dep').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    tab_dep.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+           }
+        if (statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
     $('.edit').attr('readonly', true);
     $('#cambio_2').show();
     $('#botones').show();
