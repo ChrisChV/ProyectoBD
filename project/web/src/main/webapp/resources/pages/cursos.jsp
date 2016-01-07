@@ -22,7 +22,17 @@ $('#guardarcu').click(function(){
     $('#curso_id').attr('readonly',true);
     $('#cambio_2').show();
     $('#departamento0').hide();
-    $('#departamento1').show(); 
+    $('#departamento1').show(); 		
+		if(DMLActual == "search"){
+		var cursoid = tab_time.cell('.selected',0).data();
+		var titulo = tab_time.cell('.selected',1).data();
+		var departamento = tab_time.cell('.selected',2).data();
+		var creditos = tab_time.cell('.selected',3).data();
+		$('#curso_id').val(cursoid);
+		$('#titulo').val(titulo);
+		$('#departamento1').val(departamento);
+		$('#creditos').val(creditos);
+	}
 		if(DMLActual == "insert"){	
 			var idcurso = $('#curso_id').val();
 			var titulo = $('#titulo').val();
@@ -41,6 +51,7 @@ $('#guardarcu').click(function(){
 			getCourse();
 		}	
 	pestanasC();
+
 			});
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
