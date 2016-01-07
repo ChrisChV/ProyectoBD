@@ -2,7 +2,6 @@ package com.project.business.dto;
 
 public class TakesDTO {
 
-	
 	private String courseId;
 	
 	private String secId;

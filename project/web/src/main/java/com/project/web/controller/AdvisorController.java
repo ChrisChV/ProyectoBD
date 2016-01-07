@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.business.DataTablesTO.DataTablesTO;
 import com.project.business.dto.AdvisorDTO;
+import com.project.business.dto.CourseDTO;
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.StudentDTO;
 import com.project.business.manager.AdvisorManager;
@@ -20,14 +23,30 @@ public class AdvisorController {
 	@Autowired
 	private AdvisorManager advisorManager;
 	
-	@RequestMapping(value = "/advisor/byStudent", method = RequestMethod.POST)
-	public @ResponseBody List<InstructorDTO> getByStudent(@RequestParam("id") String studentId){
-		return advisorManager.getByStudent(studentId);
+	@RequestMapping(value = "/advisorbyStudent", produces = "application/json")
+	public @ResponseBody String getByStudent(@RequestParam int iDisplayStart,
+            @RequestParam int iDisplayLength, @RequestParam int sEcho,@RequestParam String studentId) throws IOException{
+		String method="showUser";
+		DataTablesTO<InstructorDTO> dt = new DataTablesTO<InstructorDTO>();
+		List<InstructorDTO> accts = advisorManager.getByStudent(studentId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
 	}
 	
-	@RequestMapping(value = "/advisor/byInstructor" , method = RequestMethod.POST)
-	public @ResponseBody List<StudentDTO> getByInstructor(@RequestParam("id") String instructorId){
-		return advisorManager.getByInstructor(instructorId);
+	@RequestMapping(value = "/advisorbyInstructor", produces = "application/json")
+	public @ResponseBody String getByInstructor(@RequestParam int iDisplayStart,
+            @RequestParam int iDisplayLength, @RequestParam int sEcho,@RequestParam String instructorId) throws IOException{
+		String method="showUser";
+		DataTablesTO<StudentDTO> dt = new DataTablesTO<StudentDTO>();
+		List<StudentDTO> accts = advisorManager.getByInstructor(instructorId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
 	}
 	
 	@RequestMapping(value = "/advisor/insert" , method = RequestMethod.POST)

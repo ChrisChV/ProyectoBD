@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.business.DataTablesTO.DataTablesTO;
 import com.project.business.dto.CourseDTO;
+import com.project.business.dto.DepartmentDTO;
 import com.project.business.manager.PrereqManager;
 import com.project.persistence.entity.PrereqId;
 
@@ -19,9 +22,17 @@ public class PereqController {
 	@Autowired
 	private PrereqManager prereqManager;
 	
-	@RequestMapping(value = "/prereq", method = RequestMethod.POST)
-	public @ResponseBody List<CourseDTO> getPrereq(@RequestParam String courseId){
-		return prereqManager.getPrereq(courseId);
+	@RequestMapping(value = "/prereq", produces = "application/json")
+	public @ResponseBody String getPrereq(@RequestParam int iDisplayStart,
+            @RequestParam int iDisplayLength, @RequestParam int sEcho, @RequestParam String courseId) throws IOException{
+		String method="showUser";
+		DataTablesTO<CourseDTO> dt = new DataTablesTO<CourseDTO>();
+		List<CourseDTO> accts = prereqManager.getPrereq(courseId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
 	}
 	
 	@RequestMapping(value = "/prereq/insert", method = RequestMethod.POST)

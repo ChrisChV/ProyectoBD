@@ -21,7 +21,7 @@ public class SectionController {
 	private SectionManager sectionManager;
 	
 	@RequestMapping(value = "/section", method = RequestMethod.POST)
-	public @ResponseBody List<SectionDTO> getByCourse(@RequestParam("id") String courseId){
+	public @ResponseBody List<SectionDTO> getByCourse(@RequestParam String courseId){
 		return sectionManager.getByCourse(courseId);
 	}
 	

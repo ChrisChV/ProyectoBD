@@ -1,5 +1,6 @@
 package com.project.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.business.DataTablesTO.DataTablesTO;
+import com.project.business.dto.CourseDTO;
 import com.project.business.dto.InstructorDTO;
 import com.project.business.dto.SectionDTO;
 import com.project.business.manager.TeachesManager;
@@ -21,9 +24,17 @@ public class TeachesController {
 	@Autowired
 	private TeachesManager teachesManager;
 	
-	@RequestMapping(value = "/teaches/byInstructor", method = RequestMethod.POST)
-	public @ResponseBody List<SectionDTO> getByInstructor(@RequestParam("id") String instructorId){
-		return teachesManager.getByInstructor(instructorId);
+	@RequestMapping(value = "/teachesbyInstructor", produces = "application/json")
+	public @ResponseBody String getByInstructor(@RequestParam int iDisplayStart,
+            @RequestParam int iDisplayLength, @RequestParam int sEcho,@RequestParam String instructorId) throws IOException{
+		String method="showUser";
+		DataTablesTO<SectionDTO> dt = new DataTablesTO<SectionDTO>();
+		List<SectionDTO> accts = teachesManager.getByInstructor(instructorId);
+		dt.setAaData(accts);
+		dt.setiTotalDisplayRecords(accts.size());
+		dt.setiTotalRecords(accts.size()); 
+		dt.setsEcho(sEcho);
+		return dt.toJson(dt);
 	}
 	
 	@RequestMapping(value = "/teaches/bySection", method = RequestMethod.POST)

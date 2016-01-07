@@ -118,7 +118,7 @@ public class TeachesManagerImpl implements TeachesManager{
 	}
 
 	@Override
-	public List<SectionDTO> getByInstructor(String instructorId) {
+	public List<SectionDTO> getByInstructor(String instructorId) {	
 		return mappingListSec(teachesDao.getByInstructor(instructorId));
 	}
 
@@ -132,7 +132,4 @@ public class TeachesManagerImpl implements TeachesManager{
 		return new Teaches(new TeachesId(tea.getInstructorId()
 				, tea.getCourseId(), tea.getSecId(), tea.getSemester(), (short) tea.getYear()));
 	}
-
-	
-	
 }

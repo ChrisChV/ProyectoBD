@@ -96,6 +96,108 @@ $('#pcu').click(function () {
     actualizarEntity('course', 'prev');
 })
 
+function pestanasC(){
+        	$('#cambio_2').html('');
+        	$('#cambio_2').load('resources/pages/cursos_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
+        		$('#cur_tab1').DataTable({
+        			"bProcessing": true,
+        		    "bServerSide": true,
+        		    "bLenthChange" : false,
+        		    "iDisplayLength" : 10,
+        		    "sAjaxSource": "prereq.do",
+        		    'bJQueryUI': true,
+        		    "aoColumns":[
+        		                 {
+        		                	 "sTitle":"Id",
+        		                	 "mData":"id"
+        		                 },
+        		                 {
+        		                	 "sTitle":"Nombre",
+        		                	 "mData":"title"
+        		                 },
+        		             ],
+        		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+        		    	var j = $('#curso_id').val();
+        		    	console.log("log ->" + j);
+        		    	var s = {"name" : "courseId", "value" : j};
+        		    	aoData = aoData.concat(s);
+        		    	console.log(aoData);
+        		        $.ajax( {
+        		            "dataType": "json",
+        		            "type": "GET",
+        		            "url": sSource,
+        		            "data": aoData,
+        		            "success": function(data, textStatus, jqXHR){
+        		            	if(data){
+        		            		console.log(data);
+        		            		fnCallback(data);
+        		            	}
+        		            }
+        		        } );
+        		    },
+        		    "sPaginationType" : "full_numbers"
+        		});
+        	});
+        	$('#cur_tab2').DataTable({
+        		"bProcessing": true,
+    		    "bServerSide": true,
+    		    "bLenthChange" : false,
+    		    "iDisplayLength" : 10,
+    		    "sAjaxSource": "section.do",
+    		    'bJQueryUI': true,
+    		    "aoColumns":[
+    		                 {
+    		                	 "sTitle":"Id del Curso",
+    		                	 "mData":"courseId"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Id del Section",
+    		                	 "mData":"secId"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Semestre",
+    		                	 "mData":"semester"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Edificio",
+    		                	 "mData":"building"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Room Number",
+    		                	 "mData":"roomNumber"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Id Time",
+    		                	 "mData":"timeSlotId"
+    		                 },
+    		                 {
+    		                	 "sTitle":"Year",
+    		                	 "mData":"year"
+    		                 },
+    		             ],
+    		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+    		    	var j = $('#curso_id').val();
+    		    	var s = {"name" : "courseId", "value" : j};
+    		    	aoData = aoData.concat(s);
+    		    	console.log(aoData);
+    		        $.ajax( {
+    		            "dataType": "json",
+    		            "type": "GET",
+    		            "url": sSource,
+    		            "data": aoData,
+    		            "success": function(data, textStatus, jqXHR){
+    		            	if(data){
+    		            		console.log(data);
+    		            		fnCallback(data);
+    		            	}
+    		            }
+    		        } );
+    		    },
+    		    "sPaginationType" : "full_numbers"
+            });
+        };
+ 
+
 </script>
 
 <div id="curso">

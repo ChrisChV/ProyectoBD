@@ -19,6 +19,7 @@ function DML(classEntity, polarity, json){
         url:'/web/' + classEntity + "/" + polarity,
         success: function(data, textStatus, jqXHR){
             if(data) {
+            	console.log(data);
             	alert(data);
             }
             else {

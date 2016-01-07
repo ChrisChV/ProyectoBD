@@ -14,7 +14,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/ui-lightness/jquery-ui.css" />
 
-<head>
     <script>
         $(function () {
             $("#tab").tabs();
@@ -24,60 +23,78 @@
 <body>
     <div id="tab">
         <ul class="tabs">
-            <li><a href="#tabs-1">Prerequisito</a></li>
-            <li><a href="#tabs-2">Detalles</a></li>
+            <li><a href="#tabs-1">Asesor</a></li>
+            <li><a href="#tabs-2">Curso</a></li>
         </ul>
         <div class="tab-content" id="tabs-1">
             <input type="button" id="nuevo" value="nuevo" />
             <input type="button" id="borrar" value="borrar" />
             <input type="button" id="editar" value="editar" /></p>
-            <table id="cur_tab1" class="display" cellspacing="0" width="100%">
+            
+            <table id="est_tab1" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th>ID del Curso</th>
+                <th>ID del Profesor</th>
                	<th>Nombre</th>
+               	<th>Departamento</th>
+               	<th>Salario</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>ID del Curso</th>
+                <th>ID del Profesor</th>
                	<th>Nombre</th>
+               	<th>Departamento</th>
+               	<th>Salario</th>
             </tr>
         </tfoot>
-            
             </table>
-            
-            
         </div>
         <div class="tab-content" id="tabs-2">
             <input type="button" id="nuevo" value="nuevo" />
             <input type="button" id="borrar" value="borrar" />
             <input type="button" id="editar" value="editar" /></p>
-
-            <table id="cur_tab2" class="display" cellspacing="0" width="100%">
+            
+            
+            <table id="est_tab2" class="display" cellspacing="0" width="100%">
                 <thead>
             <tr>
-                <th>ID del Curso</th>
+                <th>Id del curso</th>
+                <th>Departamento</th>
+                <th>Título del Curso</th>
+                <th>Créditos del Curso</th>
+                <th>Departamento</th>
+               	<th>Id del section</th>
                	<th>Semestre</th>
-                <th>Edificio</th>
-                <th>Room Number</th>
-                <th>Id Time</th>
-                <th>Año</th>
+               	<th>Year</th>
+               	<th>Edificio</th>
+               	<th>Room Number</th>
+               	<th>Time Slot Id</th>
+               	<th>Nota</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>ID del Curso</th>
+                <th>Id del curso</th>
+                <th>Departamento</th>
+                <th>Título del Curso</th>
+                <th>Créditos del Curso</th>
+                <th>Departamento</th>
+               	<th>Id del section</th>
                	<th>Semestre</th>
-                <th>Edificio</th>
-                <th>Room Number</th>
-                <th>Id Time</th>
-                <th>Año</th>
+               	<th>Year</th>
+               	<th>Edificio</th>
+               	<th>Room Number</th>
+               	<th>Time Slot Id</th>
+               	<th>Nota</th>
             </tr>
         </tfoot>
+                
             </table>
         </div>
 </html>
+
+
 <script>
 
 </script>

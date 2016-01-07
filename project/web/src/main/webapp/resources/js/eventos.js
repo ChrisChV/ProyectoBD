@@ -61,9 +61,7 @@ $(document).ready(function () {
 	            $('#start2').attr('readonly',true);
 	        	$('#end2').attr('readonly',true);
 	        	$('#cambio_2').hide();
-
 	        	getTime();
-                
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
         });
@@ -74,27 +72,131 @@ $(document).ready(function () {
     	$('#cambio_1').html('');
         $('#cambio_1').load('resources/pages/cursos.jsp', function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success"){
-            	$('#cambio_1').load('resources/pages/cursos_pestañas.jsp', function (responseTxt, statusTxt, xhr) {
-            		$('#cur_tab1').DataTable({
+            	getCourse();
+            	$("#botones").hide();
+                $("#departamento0").hide();
+                $("#curso_id").attr('readonly', true);
+                $("#titulo").attr('readonly', true);
+                $("#departamento1").attr('readonly', true);
+                $("#creditos").attr('readonly', true);
+                pestanasC();
+            }	
+            if (statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        });
+    });
+    $('#estudiante').click(function () {
+    	entityActual = "student";
+    	DMLActual = "null";
+    	$('#cambio_1').html('');
+        $('#cambio_1').load('resources/pages/estudiante.jsp', function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success"){
+            	getStudent();
+                $("#botones").hide();
+                $("#cambio_2").hide();
+                $("#departamentoe").hide();
+                $("#estudiante_id").attr('readonly', true);
+                $("#nombre").attr('readonly', true);
+                $("#departamentoe1").attr('readonly', true);
+                $("#creditos_t").attr('readonly', true);
+                $('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
+                	$('#est_tab1').DataTable({
             			"bProcessing": true,
             		    "bServerSide": true,
             		    "bLenthChange" : false,
             		    "iDisplayLength" : 10,
-            		    "sAjaxSource": "prerq.do",
+            		    "sAjaxSource": "advisorbyStudent.do",
             		    'bJQueryUI': true,
             		    "aoColumns":[
             		                 {
-            		                	 "sTitle":"Id",
-            		                	 "mData":"dptName"
+            		                	 "sTitle":"Id del Profesor",
+            		                	 "mData":"id"
             		                 },
             		                 {
             		                	 "sTitle":"Nombre",
-            		                	 "mData":"building"
+            		                	 "mData":"name"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Departamento",
+            		                	 "mData":"dptName"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Salario",
+            		                	 "mData":"salary"
             		                 },
             		             ],
             		    "fnServerData": function ( sSource, aoData, fnCallback ) {
-            		    	var j = $('#course_id').val();
-            		    	var s = {"name" : "courseId", "value" : j};
+            		    	var j = $('#estudiante_id').val();
+            		    	var s = {"name" : "studentId", "value" : j};
+            		    	aoData = aoData.concat(s);
+            		    	console.log(aoData);
+            		        $.ajax( {
+            		            "dataType": "json",
+            		            "type": "GET",
+            		            "url": sSource,
+            		            "data": aoData,
+            		            "success": function(data, textStatus, jqXHR){
+            		            	if(data){
+            		            		console.log(data);
+            		            		fnCallback(data);
+            		            	}
+            		            }
+            		        } );
+            		    },
+            		    "sPaginationType" : "full_numbers"
+            		});
+                	$('#est_tab2').DataTable({
+            			"bProcessing": true,
+            		    "bServerSide": true,
+            		    "bLenthChange" : false,
+            		    "iDisplayLength" : 10,
+            		    "sAjaxSource": "takesbyStudent.do",
+            		    'bJQueryUI': true,
+            		    "aoColumns":[
+            		                 {
+            		                	 "sTitle":"Id del Curso",
+            		                	 "mData":"courseId"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Departamento",
+            		                	 "mData":"dptName"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Título del Curso",
+            		                	 "mData":"courseTitle"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Créditos del Curso",
+            		                	 "mData":"courseCredits"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Id del section",
+            		                	 "mData":"secId"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Semestre",
+            		                	 "mData":"semester"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Year",
+            		                	 "mData":"year"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Edificio",
+            		                	 "mData":"building"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Room Number",
+            		                	 "mData":"romNumber"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Time Slot Id",
+            		                	 "mData":"timeSlotId"
+            		                 },
+            		             ],
+            		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+            		    	var j = $('#estudiante_id').val();
+            		    	var s = {"name" : "studentId", "value" : j};
             		    	aoData = aoData.concat(s);
             		    	console.log(aoData);
             		        $.ajax( {
@@ -113,92 +215,7 @@ $(document).ready(function () {
             		    "sPaginationType" : "full_numbers"
             		});
             	});
-            	}
-            	
-            	
-            	$('#cur_tab2').DataTable({
-            		"bProcessing": true,
-        		    "bServerSide": true,
-        		    "bLenthChange" : false,
-        		    "iDisplayLength" : 10,
-        		    "sAjaxSource": "prerq.do",
-        		    'bJQueryUI': true,
-        		    "aoColumns":[
-        		                 {
-        		                	 "sTitle":"Id del Curso",
-        		                	 "mData":"dptName"
-        		                 },
-        		                 {
-        		                	 "sTitle":"Id del Section",
-        		                	 "mData":"building"
-        		                 },
-        		                 {
-        		                	 "sTitle":"Semestre",
-        		                	 "mData":"building"
-        		                 },
-        		                 {
-        		                	 "sTitle":"Edificio",
-        		                	 "mData":"building"
-        		                 },
-        		                 {
-        		                	 "sTitle":"RoomNumber",
-        		                	 "mData":"building"
-        		                 },
-        		                 {
-        		                	 "sTitle":"Id Time",
-        		                	 "mData":"building"
-        		                 },
-        		                 {
-        		                	 "sTitle":"Year",
-        		                	 "mData":"building"
-        		                 },
-        		             ],
-        		    "fnServerData": function ( sSource, aoData, fnCallback ) {
-        		    	var j = $('#course_id').val();
-        		    	var s = {"name" : "courseId", "value" : j};
-        		    	aoData = aoData.concat(s);
-        		    	console.log(aoData);
-        		        $.ajax( {
-        		            "dataType": "json",
-        		            "type": "GET",
-        		            "url": sSource,
-        		            "data": aoData,
-        		            "success": function(data, textStatus, jqXHR){
-        		            	if(data){
-        		            		console.log(data);
-        		            		fnCallback(data);
-        		            	}
-        		            }
-        		        } );
-        		    },
-        		    "sPaginationType" : "full_numbers"
-                });
-                $("#botones").hide();
-                $("#departamento0").hide();
-                $("#curso_id").attr('readonly', true);
-                $("#titulo").attr('readonly', true);
-                $("#departamento1").attr('readonly', true);
-                $("#creditos").attr('readonly', true);
-                $("#cambio_2").hide();
-                getCourse();
-            if (statusTxt == "error")
-                alert("Error: " + xhr.status + ": " + xhr.statusText);
-        });
-    });
-    $('#estudiante').click(function () {
-    	entityActual = "student";
-    	DMLActual = "null";
-    	$('#cambio_1').html('');
-        $('#cambio_1').load('resources/pages/estudiante.jsp', function (responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success")
-                $("#botones").hide();
-                $("#cambio_2").hide();
-                $("#departamentoe").hide();
-                $("#estudiante_id").attr('readonly', true);
-                $("#nombre").attr('readonly', true);
-                $("#departamentoe1").attr('readonly', true);
-                $("#creditos_t").attr('readonly', true);
-                getStudent();
+            }
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
         });
@@ -208,15 +225,135 @@ $(document).ready(function () {
     	DMLActual = "null";
     	$('#cambio_1').html('');
         $('#cambio_1').load('resources/pages/profesor.jsp', function (responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success")
+            if (statusTxt == "success"){
                 $("#botones").hide();
                 $("#departamentop").hide();
                 $("#profesor_id").attr('readonly', true);
                 $("#nombre_p").attr('readonly', true);
                 $("#departamentop1").attr('readonly', true);
                 $("#salario").attr('readonly', true);
-                $("#cambio_2").hide();
+                $('#cambio_2').load('resources/pages/profesor_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
+                	$('#curs_tab1').DataTable({
+            			"bProcessing": true,
+            		    "bServerSide": true,
+            		    "bLenthChange" : false,
+            		    "iDisplayLength" : 10,
+            		    "sAjaxSource": "advisorbyInstructor.do",
+            		    'bJQueryUI': true,
+            		    "aoColumns":[
+            		                 {
+            		                	 "sTitle":"Id del estudiante",
+            		                	 "mData":"id"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Nombre",
+            		                	 "mData":"name"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Departamento",
+            		                	 "mData":"dptName"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Credits",
+            		                	 "mData":"totCred"
+            		                 },
+            		             ],
+            		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+            		    	var j = $('#profesor_id').val();
+            		    	var s = {"name" : "instructorId", "value" : j};
+            		    	aoData = aoData.concat(s);
+            		    	console.log(aoData);
+            		        $.ajax( {
+            		            "dataType": "json",
+            		            "type": "GET",
+            		            "url": sSource,
+            		            "data": aoData,
+            		            "success": function(data, textStatus, jqXHR){
+            		            	if(data){
+            		            		console.log(data);
+            		            		fnCallback(data);
+            		            	}
+            		            }
+            		        } );
+            		    },
+            		    "sPaginationType" : "full_numbers"
+            		});
+                	$('#curs_tab2').DataTable({
+            			"bProcessing": true,
+            		    "bServerSide": true,
+            		    "bLenthChange" : false,
+            		    "iDisplayLength" : 10,
+            		    "sAjaxSource": "teachesbyInstructor.do",
+            		    'bJQueryUI': true,
+            		    "aoColumns":[
+            		                 {
+            		                	 "sTitle":"Id del Curso",
+            		                	 "mData":"courseId"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Departamento",
+            		                	 "mData":"dptName"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Título del Curso",
+            		                	 "mData":"courseTitle"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Créditos del Curso",
+            		                	 "mData":"courseCredits"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Id del section",
+            		                	 "mData":"secId"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Semestre",
+            		                	 "mData":"semester"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Year",
+            		                	 "mData":"year"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Edificio",
+            		                	 "mData":"building"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Room Number",
+            		                	 "mData":"romNumber"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Time Slot Id",
+            		                	 "mData":"timeSlotId"
+            		                 },
+            		                 {
+            		                	 "sTitle":"Nota",
+            		                	 "mData":"takeGrade"
+            		                 },
+            		             ],
+            		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+            		    	var j = $('#profesor_id').val();
+            		    	var s = {"name" : "instructorId", "value" : j};
+            		    	aoData = aoData.concat(s);
+            		    	console.log(aoData);
+            		        $.ajax( {
+            		            "dataType": "json",
+            		            "type": "GET",
+            		            "url": sSource,
+            		            "data": aoData,
+            		            "success": function(data, textStatus, jqXHR){
+            		            	if(data){
+            		            		console.log(data);
+            		            		fnCallback(data);
+            		            	}
+            		            }
+            		        } );
+            		    },
+            		    "sPaginationType" : "full_numbers"
+            		});
+            	});
                 getInstructor();
+            }
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
         });
