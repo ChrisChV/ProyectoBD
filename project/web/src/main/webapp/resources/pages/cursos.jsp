@@ -71,6 +71,7 @@ $('#cancelarcu').click(function(){
 });
 
 $('#buscarcu').click(function () {
+	DMLActual = "search";
     $('.edit').attr('readonly', true);
     $('#botones').show();
     $('#cambio_2').html('');
