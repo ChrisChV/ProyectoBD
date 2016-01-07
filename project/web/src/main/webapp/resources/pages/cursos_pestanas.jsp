@@ -59,8 +59,8 @@
             <table id="cur_tab2" class="display" cellspacing="0" width="100%">
                 <thead>
             <tr>
-                <th>ID del Curso</th>
-                <th>ID del Section</th>
+                <th>Id del Curso</th>
+                <th>Id del Section</th>
                	<th>Semestre</th>
                 <th>Edificio</th>
                 <th>Room Number</th>
@@ -70,8 +70,8 @@
         </thead>
         <tfoot>
             <tr>
-                <th>ID del Curso</th>
-                <th>ID del Section</th>
+                <th>Id del Curso</th>
+                <th>Id del Section</th>
                	<th>Semestre</th>
                 <th>Edificio</th>
                 <th>Room Number</th>

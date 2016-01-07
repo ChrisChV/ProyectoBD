@@ -120,8 +120,4 @@ public class SectionDaoImpl extends GenericDaoImpl<Section> implements SectionDa
 		Criterion criterion = Restrictions.ge("classroom.id", id);
 		return findByCriteria(criterion);
 	}
-
-	
-	
-	
 }

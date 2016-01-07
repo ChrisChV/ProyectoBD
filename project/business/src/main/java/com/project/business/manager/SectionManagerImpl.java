@@ -48,10 +48,12 @@ public class SectionManagerImpl implements SectionManager {
 
 	@Override
 	public SectionDTO mappingDTO(Section sec) {
+		Course cour = courseDao.getById(sec.getId().getCourseId());
+		Classroom cla = classroomDao.getById(sec.getClassroom().getId());
 		return new SectionDTO(sec.getId().getCourseId(), sec.getId().getSecId(), sec.getId().getSemester()
-				, sec.getId().getYear(),sec.getCourse().getDepartment().getDeptName()
-				, sec.getCourse().getTitle(), sec.getCourse().getCredits()
-				, sec.getClassroom().getId().getBuilding(), sec.getClassroom().getId().getRoomNumber()
+				, sec.getId().getYear(),cour.getDepartment().getDeptName()
+				, cour.getTitle(), cour.getCredits()
+				, cla.getId().getBuilding(), cla.getId().getRoomNumber()
 				, sec.getTimeSlotId());
 	}
 

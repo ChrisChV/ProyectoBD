@@ -42,8 +42,9 @@ public class AdvisorManagerImpl implements AdvisorManager {
 
 	@Override
 	public StudentDTO mappingDTOS(Advisor ad) {
-		return new StudentDTO(ad.getStudent().getId(), ad.getStudent().getDepartment().getDeptName()
-				, ad.getStudent().getName(), ad.getStudent().getTotCred());
+		Student st = studentDao.getById(ad.getSId());
+		return new StudentDTO(st.getId(), st.getDepartment().getDeptName()
+				, st.getName(), st.getTotCred());
 	}
 
 	@Override
@@ -63,8 +64,9 @@ public class AdvisorManagerImpl implements AdvisorManager {
 
 	@Override
 	public InstructorDTO mappingDTOI(Advisor ins) {
-		return new InstructorDTO(ins.getInstructor().getId(), ins.getStudent().getDepartment().getDeptName()
-				, ins.getInstructor().getName(), ins.getInstructor().getSalary().longValue());
+		Instructor in = instructorDao.getById(ins.getInstructor().getId());
+		return new InstructorDTO(in.getId(), in.getDepartment().getDeptName()
+				, in.getName(), in.getSalary().longValue());
 	}
 
 	@Override

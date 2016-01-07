@@ -57,6 +57,7 @@ function getAll(classEntity, table){
 function verificarIndex(classEntity, index, result){
 	var json = {"index" : index};
 	$.ajax({
+		async:false,
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
@@ -76,6 +77,7 @@ function verificarIndex(classEntity, index, result){
 
 function getLastIndex(classEntity, result){
 	$.ajax({
+		async:false,
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
@@ -159,6 +161,7 @@ function getEntity(classEntity){
 function getCourse(){
 	var json = {"index" : indexCourse};
 	$.ajax({
+		async:false,
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
@@ -204,6 +207,7 @@ function getClassroom(){
 function getInstructor(){
 	var json = {"index" : indexInstructor};
 	$.ajax({
+		async:false,
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
@@ -269,6 +273,7 @@ function getDpt(){
 function getStudent(){
 	var json = {"index" : indexStudent};
 	$.ajax({
+		async:false,
 	    dataType:'json',
 	    type:'post',
 	    cache:false,
@@ -287,4 +292,11 @@ function getStudent(){
 	        }
 	    }
 	});
+}
+
+function esperar(i){
+	while(i != 0){
+		console.log(i);
+		i--;
+	}
 }

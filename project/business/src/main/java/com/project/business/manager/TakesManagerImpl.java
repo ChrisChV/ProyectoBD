@@ -56,11 +56,16 @@ public class TakesManagerImpl implements TakesManager {
 
 	@Override
 	public SectionDTO mappingDTOSec(Takes take) {
-		return new SectionDTO(take.getSection().getCourse().getCourseId(), take.getId().getSecId()
-				, take.getId().getSemester(), take.getId().getYear(), take.getSection().getCourse().getDepartment().getDeptName()
-				, take.getSection().getCourse().getTitle(), take.getSection().getCourse().getCredits()
-				, take.getSection().getClassroom().getId().getBuilding(), take.getSection().getClassroom().getId().getRoomNumber()
-				, take.getSection().getTimeSlotId(), take.getGrade());
+		Section sec = sectionDao.getById(take.getSection().getId());
+		Course cour = courseDao.getById(sec.getId().getCourseId());
+		Classroom cla = classroomDao.getById(sec.getClassroom().getId());
+		String grade = take.getGrade();
+		if(grade == null) grade = "-";
+		return new SectionDTO(sec.getCourse().getCourseId(), take.getId().getSecId()
+				, take.getId().getSemester(), take.getId().getYear(), cour.getDepartment().getDeptName()
+				, cour.getTitle(), cour.getCredits()
+				, cla.getId().getBuilding(), cla.getId().getRoomNumber()
+				, sec.getTimeSlotId(), grade);
 	}
 
 	@Override

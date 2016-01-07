@@ -12,6 +12,127 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 
 <script>
+
+function pestanasS(){
+	$('#cambio_2').html('');
+	$('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
+    	$('#est_tab1').DataTable({
+			"bProcessing": true,
+		    "bServerSide": true,
+		    "bLenthChange" : false,
+		    "iDisplayLength" : 10,
+		    "sAjaxSource": "advisorbyStudent.do",
+		    'bJQueryUI': true,
+		    "aoColumns":[
+		                 {
+		                	 "sTitle":"Id del Profesor",
+		                	 "mData":"id"
+		                 },
+		                 {
+		                	 "sTitle":"Nombre",
+		                	 "mData":"name"
+		                 },
+		                 {
+		                	 "sTitle":"Departamento",
+		                	 "mData":"dptName"
+		                 },
+		                 {
+		                	 "sTitle":"Salario",
+		                	 "mData":"salary"
+		                 },
+		             ],
+		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+		    	var j = $('#estudiante_id').val();
+		    	var s = {"name" : "studentId", "value" : j};
+		    	aoData = aoData.concat(s);
+		    	console.log(aoData);
+		        $.ajax( {
+		            "dataType": "json",
+		            "type": "GET",
+		            "url": sSource,
+		            "data": aoData,
+		            "success": function(data, textStatus, jqXHR){
+		            	if(data){
+		            		console.log(data);
+		            		fnCallback(data);
+		            	}
+		            }
+		        } );
+		    },
+		    "sPaginationType" : "full_numbers"
+		});
+    	$('#est_tab2').DataTable({
+			"bProcessing": true,
+		    "bServerSide": true,
+		    "bLenthChange" : false,
+		    "iDisplayLength" : 10,
+		    "sAjaxSource": "takesbyStudent.do",
+		    'bJQueryUI': true,
+		    "aoColumns":[
+		                 {
+		                	 "sTitle":"Id del Curso",
+		                	 "mData":"courseId"
+		                 },
+		                 {
+		                	 "sTitle":"Departamento",
+		                	 "mData":"dptName"
+		                 },
+		                 {
+		                	 "sTitle":"Título del Curso",
+		                	 "mData":"courseTitle"
+		                 },
+		                 {
+		                	 "sTitle":"Id del section",
+		                	 "mData":"secId"
+		                 },
+		                 {
+		                	 "sTitle":"Semestre",
+		                	 "mData":"semester"
+		                 },
+		                 {
+		                	 "sTitle":"Year",
+		                	 "mData":"year"
+		                 },
+		                 {
+		                	 "sTitle":"Edificio",
+		                	 "mData":"building"
+		                 },
+		                 {
+		                	 "sTitle":"Room Number",
+		                	 "mData":"roomNumber"
+		                 },
+		                 {
+		                	 "sTitle":"Time Slot Id",
+		                	 "mData":"timeSlotId"
+		                 },
+		                 {
+		                	 "sTitle":"Nota",
+		                	 "mData":"takeGrade"
+		                 },
+		             ],
+		    "fnServerData": function ( sSource, aoData, fnCallback ) {
+		    	var j = $('#estudiante_id').val();
+		    	var s = {"name" : "studentId", "value" : j};
+		    	aoData = aoData.concat(s);
+		    	console.log(aoData);
+		        $.ajax( {
+		            "dataType": "json",
+		            "type": "GET",
+		            "url": sSource,
+		            "data": aoData,
+		            "success": function(data, textStatus, jqXHR){
+		            	if(data){
+		            		console.log(data);
+		            		fnCallback(data);
+		            	}
+		            }
+		        } );
+		    },
+		    "sPaginationType" : "full_numbers"
+		});
+	});
+}
+
 $('#borrare').click(function () {
 	DMLActual = "delete";
     $('#cambio_2').hide();
@@ -80,16 +201,20 @@ $('#editare').click(function () {
 
 $('#fe').click(function () {
     actualizarEntity('student', 'first');
+    pestanasS();
 })
 
 $('#le').click(function () {
     actualizarEntity('student', 'last');
+    pestanasS();
 })
 $('#ne').click(function () {
     actualizarEntity('student', 'next');
+    pestanasS();
 })
 $('#pe').click(function () {
     actualizarEntity('student', 'prev');
+    pestanasS();
 })
 </script>
 

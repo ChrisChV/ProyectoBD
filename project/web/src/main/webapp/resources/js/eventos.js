@@ -93,128 +93,12 @@ $(document).ready(function () {
             if (statusTxt == "success"){
             	getStudent();
                 $("#botones").hide();
-                $("#cambio_2").hide();
                 $("#departamentoe").hide();
                 $("#estudiante_id").attr('readonly', true);
                 $("#nombre").attr('readonly', true);
                 $("#departamentoe1").attr('readonly', true);
                 $("#creditos_t").attr('readonly', true);
-                $('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
-                	$('#est_tab1').DataTable({
-            			"bProcessing": true,
-            		    "bServerSide": true,
-            		    "bLenthChange" : false,
-            		    "iDisplayLength" : 10,
-            		    "sAjaxSource": "advisorbyStudent.do",
-            		    'bJQueryUI': true,
-            		    "aoColumns":[
-            		                 {
-            		                	 "sTitle":"Id del Profesor",
-            		                	 "mData":"id"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Nombre",
-            		                	 "mData":"name"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Departamento",
-            		                	 "mData":"dptName"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Salario",
-            		                	 "mData":"salary"
-            		                 },
-            		             ],
-            		    "fnServerData": function ( sSource, aoData, fnCallback ) {
-            		    	var j = $('#estudiante_id').val();
-            		    	var s = {"name" : "studentId", "value" : j};
-            		    	aoData = aoData.concat(s);
-            		    	console.log(aoData);
-            		        $.ajax( {
-            		            "dataType": "json",
-            		            "type": "GET",
-            		            "url": sSource,
-            		            "data": aoData,
-            		            "success": function(data, textStatus, jqXHR){
-            		            	if(data){
-            		            		console.log(data);
-            		            		fnCallback(data);
-            		            	}
-            		            }
-            		        } );
-            		    },
-            		    "sPaginationType" : "full_numbers"
-            		});
-                	$('#est_tab2').DataTable({
-            			"bProcessing": true,
-            		    "bServerSide": true,
-            		    "bLenthChange" : false,
-            		    "iDisplayLength" : 10,
-            		    "sAjaxSource": "takesbyStudent.do",
-            		    'bJQueryUI': true,
-            		    "aoColumns":[
-            		                 {
-            		                	 "sTitle":"Id del Curso",
-            		                	 "mData":"courseId"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Departamento",
-            		                	 "mData":"dptName"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Título del Curso",
-            		                	 "mData":"courseTitle"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Créditos del Curso",
-            		                	 "mData":"courseCredits"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Id del section",
-            		                	 "mData":"secId"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Semestre",
-            		                	 "mData":"semester"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Year",
-            		                	 "mData":"year"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Edificio",
-            		                	 "mData":"building"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Room Number",
-            		                	 "mData":"romNumber"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Time Slot Id",
-            		                	 "mData":"timeSlotId"
-            		                 },
-            		             ],
-            		    "fnServerData": function ( sSource, aoData, fnCallback ) {
-            		    	var j = $('#estudiante_id').val();
-            		    	var s = {"name" : "studentId", "value" : j};
-            		    	aoData = aoData.concat(s);
-            		    	console.log(aoData);
-            		        $.ajax( {
-            		            "dataType": "json",
-            		            "type": "GET",
-            		            "url": sSource,
-            		            "data": aoData,
-            		            "success": function(data, textStatus, jqXHR){
-            		            	if(data){
-            		            		console.log(data);
-            		            		fnCallback(data);
-            		            	}
-            		            }
-            		        } );
-            		    },
-            		    "sPaginationType" : "full_numbers"
-            		});
-            	});
+                pestanasS();
             }
             if (statusTxt == "error")
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
@@ -325,10 +209,6 @@ $(document).ready(function () {
             		                 {
             		                	 "sTitle":"Time Slot Id",
             		                	 "mData":"timeSlotId"
-            		                 },
-            		                 {
-            		                	 "sTitle":"Nota",
-            		                	 "mData":"takeGrade"
             		                 },
             		             ],
             		    "fnServerData": function ( sSource, aoData, fnCallback ) {

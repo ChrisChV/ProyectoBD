@@ -62,8 +62,6 @@
                 <th>Id del curso</th>
                 <th>Departamento</th>
                 <th>Título del Curso</th>
-                <th>Créditos del Curso</th>
-                <th>Departamento</th>
                	<th>Id del section</th>
                	<th>Semestre</th>
                	<th>Year</th>
@@ -78,8 +76,6 @@
                 <th>Id del curso</th>
                 <th>Departamento</th>
                 <th>Título del Curso</th>
-                <th>Créditos del Curso</th>
-                <th>Departamento</th>
                	<th>Id del section</th>
                	<th>Semestre</th>
                	<th>Year</th>
