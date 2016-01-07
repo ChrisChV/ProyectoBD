@@ -13,6 +13,8 @@
 
 <script>
 
+
+
 function pestanasS(){
 	$('#cambio_2').html('');
 	$('#cambio_2').load('resources/pages/estudiante_pestanas.jsp', function (responseTxt, statusTxt, xhr) {
