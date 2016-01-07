@@ -39,7 +39,10 @@ $('#guardard').click(function(){
 	$('.botonesd').prop('disabled',false);
 	if(DMLActual == "search")
 	{
-		
+		var data = tab_dep.row('.selected').data();
+		$('#departamentos').val(data.Nombre);
+		$('#edificio1').val(data.Edificio);
+		$('#presupuesto').val(data.Presupuesto);
 	}
 	else {
 		var nombre = $('#departamentos').val();

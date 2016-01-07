@@ -36,11 +36,20 @@ $('#guardarc').click(function(){
 	$('#cambio_2').hide();
 	$('.iteradores').show();
 	$('.botonesc').prop('disabled',false);
+	if(DMLActual == "search")
+	{
+		var data = tab_clas.row('.selected').data();
+		$('#building').val(data.building);
+		$('#clase1').val(data.classroom);
+		$('#capacidad').val(data.capacity);	
+	}
+	else{
 	var building = $('#building').val();
 	var clase = $('#clase1').val();
 	var capacidad = $('#capacidad').val();
 	var json = {"building" : building, "roomNumber" : clase, "capacity" : capacidad};
 	DML(entityActual, DMLActual, json);
+	}
 	if(DMLActual == "delete"){
 		actualizarEntity(entityActual, "first");
 	}
