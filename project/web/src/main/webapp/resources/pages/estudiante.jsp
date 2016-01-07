@@ -70,7 +70,7 @@ tab_ase_est=$('#est_tab1').DataTable({
 							$(this).addClass('selected');
 							}
 							});
-    		 tab_ase_est=$('#est_tab2').DataTable({
+    		 tab_cur_est=$('#est_tab2').DataTable({
 			"bProcessing": true,
 		    "bServerSide": true,
 		    "bLenthChange" : false,
@@ -139,12 +139,12 @@ tab_ase_est=$('#est_tab1').DataTable({
 		    },
 		    "sPaginationType" : "full_numbers"
 		});
-		$('#body_ase_est').on('click', 'tr', function () {
+		$('#body_cur_est').on('click', 'tr', function () {
 							if ($(this).hasClass('selected')) {
 							$(this).removeClass('selected');
 							}
 							else {
-							tab_ase_est.$('tr.selected').removeClass('selected');
+							tab_cur_est.$('tr.selected').removeClass('selected');
 							$(this).addClass('selected');
 							}
 							});
@@ -166,6 +166,9 @@ $('#nuevoe').click(function () {
 
 $('#buscare').click(function () {
     $('.edit').attr('readonly', true);
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    
     $('#cambio_2').show();
     $('#tablasa').load('resources/pages/estudiante_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
