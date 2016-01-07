@@ -158,10 +158,38 @@ $('#borrare').click(function () {
     $('#departamentoe1').show();
     $('.edit').attr('readonly', true);
     $('#botones').show();
+    $('.iteradores').hide();
 });
 
 $('#nuevoe').click(function () {
 	DMLActual = "insert";
+	$('.edit').attr('readonly', false);
+	$('#cambio_2').hide();
+	$('#estudiante_id').attr('readonly', false);
+	$('.edit').val('');
+	$('#estudiante_id').val('');
+	$('#departamentoe1').hide();
+	$('#departamentoe').show();
+	$('#botones').show();
+	$('.iteradores').hide();
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/department/all',
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	        	$.each(data, function(index, value) {
+	        		$('#departamentoe').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#buscare').click(function () {
@@ -228,6 +256,32 @@ $('#buscare').click(function () {
 
 $('#editare').click(function () {
 	DMLActual = "update";
+	$('.edit').attr('readonly', false);
+	$('#cambio_2').hide();
+	$('#estudiante_id').attr('readonly', false);
+	$('.edit').attr('readonly', false);
+	$('#departamentoe1').hide();
+	$('#departamentoe').show();
+	$('#botones').show();
+	$('.iteradores').hide();
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/department/all',
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	        	$.each(data, function(index, value) {
+	        		$('#departamentoe').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#fe').click(function () {
@@ -254,10 +308,10 @@ $('#pe').click(function () {
     <table>
         <tr>
             <td>
-                <input type="button" value="nuevo" name="nuevo" id="nuevoe" />
-                <input type="button" value="editar" name="editar" id="editare" />
-                <input type="button" value="buscar" name="buscar" id="buscare" />
-                <input type="button" value="borrar" name="borrar" id="borrare" />
+                <input type="button" value="nuevo" name="nuevo" id="nuevoe" class="botoneses"/>
+                <input type="button" value="editar" name="editar" id="editare" class="botoneses"/>
+                <input type="button" value="buscar" name="buscar" id="buscare" class="botoneses"/>
+                <input type="button" value="borrar" name="borrar" id="borrare" class="botoneses"/>
             </td>
 
         </tr>
@@ -273,7 +327,7 @@ $('#pe').click(function () {
         <tr>
             <td>Nombre</td>
             <td>
-                <input type="text" name="nombre" id="nombre" />
+                <input type="text" name="nombre" id="nombre" class="edit"/>
             </td>
 
         </tr>
@@ -281,28 +335,28 @@ $('#pe').click(function () {
             <td>Departamento</td>
             <td>
                 <select name="departamentoe" id="departamentoe"></select>
-                <input type="text" name="departamentoe1" id="departamentoe1" />
+                <input type="text" name="departamentoe1" id="departamentoe1" class="edit"/>
             </td>
 
         </tr>
         <tr>
             <td>Creditos Totales</td>
             <td>
-                <input type="text" name="creditos_t" id="creditos_t" />
+                <input type="text" name="creditos_t" id="creditos_t" class="edit" />
             </td>
 
         </tr>
         <tr>
             <td>
-                <input type="button" name="first" value="<|" id="fe"/>
-                <input type="button" name="previous" value="<<"id="pe"/>
-                <input type="button" name="next" value=">>" id="ne"/>
-                <input type="button" name="last" value="|>" id="le"/>
+                <input type="button" name="first" value="<|" id="fe"class="iteradores"/>
+                <input type="button" name="previous" value="<<"id="pe"class="iteradores"/>
+                <input type="button" name="next" value=">>" id="ne"class="iteradores"/>
+                <input type="button" name="last" value="|>" id="le"class="iteradores"/>
             </td>
             <td>
                 <div id="botones">
-                    <input type="submit" name="guardar" value="guardar" />
-                    <input type="submit" name="cancelar" value="cancelar" />
+                    <input type="submit" name="guardar" value="guardar" id = "guardares" />
+                    <input type="submit" name="cancelar" value="cancelar" id = "cancelares" />
                 </div>
             </td>
         </tr>

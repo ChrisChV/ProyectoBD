@@ -16,13 +16,25 @@
 $('#cancelarcu').click(function(){
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('.botonescu').prop('disabled',false);
+    $('#botones').hide();
+    $('.iteradores').show();
+    $('.edit').attr('readonly', true);
+    $('#curso_id').attr('readonly',true);
+    
+    $('#departamento0').hide();
+    $('#departamento1').show(); 
+    getCourse();
 	pestanasC();
 	$('.tab_cursos').show();
+	$('#cambio_2').shoe();
 });
 
 $('#buscarcu').click(function () {
     $('.edit').attr('readonly', true);
+    $('#botones').show();
     $('#cambio_2').html('');
+    $('.botonescu').prop('disabled',true);
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
     $('#cambio_2').show();
 	$('.iteradores').hide();
@@ -92,10 +104,11 @@ $('#borrarcu').click(function () {
     $('.edit').attr('readonly', true);
     $('#botones').show();
 	$('.iteradores').hide();
-	$('.botonescu').hide();
+	$('.botonescu').prop('disabled',true);
 });
 
 $('#nuevocu').click(function () {
+	$('.botonescu').prop('disabled',true);
 	DMLActual = "insert";
 	$('#cambio_2').hide();
 	$('#departamento0').show();
@@ -128,6 +141,7 @@ $('#nuevocu').click(function () {
 });
 
 $('#editarcu').click(function () {
+	$('.botonescu').prop('disabled',true);
 	DMLActual = "update";
 	$('#departamento1').hide();
 	$('#departamento0').show();
@@ -351,7 +365,7 @@ function pestanasC(){
             </td>
             <td>
                 <div id="botones">
-                    <input type="submit" name="guardar" value="guardar" id="guardarcu"/>
+                    <input type="submit" name="guardar" value="guardar" id="guardarcu" />
                     <input type="submit" name="cancelar" value="cancelar"id="cancelarcu" />
                 </div>
             </td>

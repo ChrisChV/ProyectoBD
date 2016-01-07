@@ -242,7 +242,7 @@ $( "#day2" ).validate({
   rules: {
     field: {
       required: true,
-	  number: true;
+	  number: true
     }
   }
 });
