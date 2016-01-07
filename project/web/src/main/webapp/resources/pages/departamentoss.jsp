@@ -174,7 +174,15 @@ $('#nd').click(function () {
 $('#pd').click(function () {
     actualizarEntity('department', 'prev');
 })
-$( "#departamentos" ).validate({
+
+function validate(){
+	var a = $('#departamentos').val();
+	var b = $('#edificio1').val();
+	var c = $('#presupuesto').val();
+	
+}
+
+$("#departamentos").validate({
   rules: {
     field: {
       required: true
@@ -182,7 +190,7 @@ $( "#departamentos" ).validate({
   }
 });
 
-$( "#edificio1" ).validate({
+$("#edificio1").validate({
   rules: {
     field: {
       required: true
@@ -190,7 +198,7 @@ $( "#edificio1" ).validate({
   }
 });
 
-$( "#presupuesto" ).validate({
+$("#presupuesto").validate({
   rules: {
     field: {
       required: true,

@@ -83,7 +83,7 @@ $('#buscarcu').click(function () {
 							$(this).addClass('selected');
 							}
 							});
-						   }
+			}
                 if (statusTxt == "error")
                     alert("Error: " + xhr.status + ": " + xhr.statusText);
     });
@@ -119,7 +119,26 @@ $('#editarcu').click(function () {
 	$('#botonescu').show();
 	$('.iteradores').hide();
 	$('#cambio_2').hide();
-
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/student',
+	    data: json,
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	            $('#estudiante_id').val(data.id);
+	            $('#nombre').val(data.name);
+	            $('#departamentoe1').val(data.dptName);
+	            $('#creditos_t').val(data.totCred);	            
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#fcu').click(function () {

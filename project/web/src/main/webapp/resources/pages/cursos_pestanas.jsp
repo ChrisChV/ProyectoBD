@@ -24,7 +24,7 @@
 		$('#nuevo_tab_pre').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-				$('#tablasa').append("<select id ="idpre"></select> <select id ="cursopre"></select>");	
+				$('#tablasa').append("<select id ='idpre'></select> <select id ='cursopre'></select>");	
 		});
 		
 		$('#borrar_tab_pre').click(function(){
@@ -36,7 +36,7 @@
 		$('#nuevo_tab_det').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-				$('#tablasa').append("<select id ="idcurso"></select> <select id ="idsection"></select> <select id ="semestre"> <select id ="edificio"> <select id ="room_no"><select id ="idtime"><select id ="year">");
+				$('#tablasa').append("<select id ='idcurso'></select> <select id ='idsection'></select> <select id ='semestre'> <select id ='edificio'> <select id ='room_no'><select id ='idtime'><select id ='year'>");
 		});
 		
 		$('#borrar_tab_det').click(function(){
