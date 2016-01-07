@@ -24,10 +24,10 @@ $('#guardarcu').click(function(){
     $('#departamento0').hide();
     $('#departamento1').show(); 		
 		if(DMLActual == "search"){
-		var cursoid = tab_time.cell('.selected',0).data();
-		var titulo = tab_time.cell('.selected',1).data();
-		var departamento = tab_time.cell('.selected',2).data();
-		var creditos = tab_time.cell('.selected',3).data();
+		var cursoid = tab_curso.cell('.selected',0).data();
+		var titulo = tab_curso.cell('.selected',1).data();
+		var departamento = tab_curso.cell('.selected',2).data();
+		var creditos = tab_curso.cell('.selected',3).data();
 		$('#curso_id').val(cursoid);
 		$('#titulo').val(titulo);
 		$('#departamento1').val(departamento);
