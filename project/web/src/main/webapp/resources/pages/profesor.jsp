@@ -153,20 +153,109 @@ function pestanasP(){
 	});
 }
 
+$('#guardarp').click(function () {
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('.botonesp').prop('disabled',false);
+    $('#botones').hide();
+    $('.iteradores').show();
+    $('.edit').attr('readonly', true);
+    $('#profesor_id').attr('readonly',true);
+    $('#cambio_2').show();
+    $('#departamentop').hide();
+    $('#departamentop1').show(); 		
+		if(DMLActual == "search"){
+		var profesorid = tab_profesor.cell('.selected',0).data();
+		var name = tab_profesor.cell('.selected',1).data();
+		var departamento = tab_profesor.cell('.selected',2).data();
+		var salary = tab_profesor.cell('.selected',3).data();
+		$('#profesor_id').val(profesorid);
+		$('#nombre_p').val(name);
+		$('#departamentop1').val(departamento);
+		$('#salario').val(salary);
+	}
+		if(DMLActual == "insert" || DMLActual == "update"){	
+			var profesorid = $('#profesor_id').val();
+			var name = $('#nombre_p').val();
+			var departamento = $('#departamentop').val();
+			var salary = $('#salario').val();
+			var json = {"id" : profesorid, "name" : name, "depId" :  departamento, "salary" : salary};
+			console.log(json);
+			DML(entityActual, DMLActual, json);
+			$('#departamentop1').val($('#departamentop').val());
+		}
+		if(DMLActual == "delete"){
+			var profesorId = $("#profesor_id").val();
+			var json = {"id" : profesorId};
+			DML(entityActual, DMLActual, json);
+			actualizarEntity(entityActual, "first");
+			getInstructor();
+		}	
+	pestanasP();
+});
+
+$('#cancelarp').click(function () {
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('.botonesp').prop('disabled',false);
+    $('#botones').hide();
+    $('.iteradores').show();
+    $('.edit').attr('readonly', true);
+    $('#profesor_id').attr('readonly',true);
+    $('#cambio_2').show();
+    $('#departamentop').hide();
+    $('#departamentop1').show();
+    pestanasP();
+});
+	
 $('#borrarp').click(function () {
 	DMLActual = "delete";
     $('#cambio_2').hide();
     $('#departamentop').hide();
+    $('.botonesp').prop('disabled',false);
     $('#departamentop1').show();
+    $('.iteradores').hide();
     $('.edit').attr('readonly', true);
     $('#botones').show();
 });
 
 $('#nuevop').click(function () {
 	DMLActual = "insert";
+	$('.edit').attr('readonly', false);
+	$('.edit').val('');
+	$('#profesor_id').attr('readonly',false);
+	$('#profesor_id').val('');
+	$('#cambio_2').hide();
+	$('.iteradores').hide();
+	$('#departamentop').show();
+    $('#departamentop1').hide();
+	$('.botonesp').prop('disabled',true);
+	$('#botones').show();
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/department/all',
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	        	$('#departamentop').html('');
+	        	$.each(data, function(index, value) {
+	        		$('#departamentop').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#buscarp').click(function () {
+	DMLActual = "search";
+	$('.iteradores').hide();
+	$('.botonesp').prop('disabled',true);
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
     $('.edit').attr('readonly', true);
@@ -174,7 +263,7 @@ $('#buscarp').click(function () {
     $('#tablasa').load('resources/pages/profesor_buscar.jsp', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success"){
             $('#botones').show();
-            $('#pro_tab').DataTable({
+            tab_profesor = $('#pro_tab').DataTable({
         		"bProcessing": true,
                 "bServerSide": true,
                 "bLenthChange" : false,
@@ -182,6 +271,10 @@ $('#buscarp').click(function () {
                 "sAjaxSource": "instructortable.do",
                 'bJQueryUI': true,
                 "aoColumns":[
+							{
+	 							"sTitle":"Id del profesor",
+	 							"mData":"id"
+							},
                              {
                             	 "sTitle":"Nombre",
                             	 "mData":"name"
@@ -211,6 +304,15 @@ $('#buscarp').click(function () {
                 },
                 "sPaginationType" : "full_numbers"
             });
+            $('#body_prof').on('click', 'tr', function () {
+				if ($(this).hasClass('selected')) {
+				$(this).removeClass('selected');
+				}
+				else {
+				tab_profesor.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+				}
+				});
         }
         if (statusTxt == "error")
             alert("Error: " + xhr.status + ": " + xhr.statusText);
@@ -219,6 +321,33 @@ $('#buscarp').click(function () {
 
 $('#editarp').click(function () {
 	DMLActual = "update";
+	$('.edit').attr('readonly', false);
+	$('#cambio_2').hide();
+	$('.iteradores').hide();
+	$('#departamentop').show();
+    $('#departamentop1').hide();
+	$('.botonesp').prop('disabled',true);
+	$('#botones').show();
+	$.ajax({
+		async:false,
+	    dataType:'json',
+	    type:'post',
+	    cache:false,
+	    url:'/web/department/all',
+	    success: function(data, textStatus, jqXHR){
+	        if(data) {
+	        	console.log(data);
+	        	$('#departamentop').html('');
+	        	$.each(data, function(index, value) {
+	        		$('#departamentop').append("<option value = '" + value.dptName + "'>" + value.dptName + "</option>");	
+	        	});
+	        	$('#departamentop').val($('#departamentop1').val());
+	        }
+	        else {
+	        	console.log('msg_internal_server_error');
+	        }
+	    }
+	});
 });
 
 $('#fp').click(function () {
@@ -247,10 +376,10 @@ $('#pp').click(function () {
     <table>
         <tr>
             <td>
-                <input type="button" value="nuevo"  name="nuevo"  id="nuevop" />
-                <input type="button" value="editar" name="editar" id="editarp" />
-                <input type="button" value="buscar" name="buscar" id="buscarp" />
-                <input type="button" value="borrar" name="borrar" id="borrarp" />
+                <input type="button" value="nuevo"  name="nuevo"  id="nuevop" class= "botonesp" />
+                <input type="button" value="editar" name="editar" id="editarp" class= "botonesp" />
+                <input type="button" value="buscar" name="buscar" id="buscarp" class= "botonesp"/>
+                <input type="button" value="borrar" name="borrar" id="borrarp" class= "botonesp"/>
             </td>
 
         </tr>
@@ -266,36 +395,36 @@ $('#pp').click(function () {
         <tr>
             <td>Nombre</td>
             <td>
-                <input type="text" name="nombre_p" id="nombre_p" />
+                <input type="text" name="nombre_p" id="nombre_p" class = "edit"/>
             </td>
 
         </tr>
         <tr>
             <td>Departamento</td>
             <td>
-                <select name="departamentop" id="departamentop"></select>
-                <input type="text" name="departamentop1" id="departamentop1" />
+                <select name="departamentop" id="departamentop" ></select>
+                <input type="text" name="departamentop1" id="departamentop1" class = "edit"/>
             </td>
 
         </tr>
         <tr>
             <td>Salario</td>
             <td>
-                <input type="text" name="salario" id="salario" />
+                <input type="text" name="salario" id="salario" class = "edit"/>
             </td>
 
         </tr>
         <tr>
             <td>
-                <input type="button" name="first" value="<|" id="fp"/>
-                <input type="button" name="previous" value="<<"id="pp"/>
-                <input type="button" name="next" value=">>" id="np"/>
-                <input type="button" name="last" value="|>" id="lp"/>
+                <input type="button" name="first" value="<|" id="fp" class = "iteradores"/>
+                <input type="button" name="previous" value="<<"id="pp" class = "iteradores"/>
+                <input type="button" name="next" value=">>" id="np" class = "iteradores"/>
+                <input type="button" name="last" value="|>" id="lp" class = "iteradores"/>
             </td>
             <td>
                 <div id="botones">
-                    <input type="submit" name="guardar" value="guardar" />
-                    <input type="submit" name="cancelar" value="cancelar" />
+                    <input type="submit" name="guardar" value="guardar"  id = "guardarp"/>
+                    <input type="submit" name="cancelar" value="cancelar" id = "cancelarp"/>
                 </div>
             </td>
         </tr>

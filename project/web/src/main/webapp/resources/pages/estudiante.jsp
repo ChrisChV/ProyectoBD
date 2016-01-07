@@ -162,52 +162,59 @@ $('#borrare').click(function () {
     $('.iteradores').hide();
 });
 
-$('#guardare').click(function(){
-
+$('#guardares').click(function(){
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
-    $('.botonescu').prop('disabled',false);
+    $('.botoneses').prop('disabled',false);
     $('#botones').hide();
     $('.iteradores').show();
     $('.edit').attr('readonly', true);
     $('#estudiante_id').attr('readonly',true);
     $('#cambio_2').show();
     $('#departamentoe').hide();
-    $('#departamentoe1').show(); 		
+    $('#departamentoe1').show();
 		if(DMLActual == "search"){
-		var estudianteid = tab_estudiante.cell('.selected',0).data();
-		var nombre = tab_estudiante.cell('.selected',1).data();
-		var departamentoe = tab_estudiante.cell('.selected',2).data();
-		var creditos_t = tab_estudiante.cell('.selected',3).data();
+		var estudianteid = tab_alumno.cell('.selected',0).data();
+		var nombre = tab_alumno.cell('.selected',1).data();
+		var departamentoe = tab_alumno.cell('.selected',2).data();
+		var creditos_t = tab_alumno.cell('.selected',3).data();
 		$('#estudiante_id').val(estudianteid);
 		$('#nombre').val(nombre);
 		$('#departamentoe1').val(departamentoe);
-		$('#creditos_t').val(creditos_t);}
-		if(DMLActual == "insert"){	
+		$('#creditos_t').val(creditos_t);
+		}
+		if(DMLActual == "insert" || DMLActual == "update"){	
 			var idestudiante = $('#estudiante_id').val();
 			var nombre = $('#nombre').val();
-			var departamento = $('#departamentoe1').val();
+			var departamento = $('#departamentoe').val();
 			var creditos = $('#creditos_t').val();
 			var json = {"id" : idestudiante, "name" : nombre, "depId" :  departamento, "totCred" : creditos};
 			console.log(json);
 			DML(entityActual, DMLActual, json);
-			$('#departamento1').val($('#departamento0').val());
+			$('#departamentoe1').val($('#departamentoe').val());
 		}
 		if(DMLActual == "delete"){
 			var estudianteid = $("#estudiante_id").val()
-			var json = {"id" : estudiante_id};
+			var json = {"id" : estudianteid};
 			DML(entityActual, DMLActual, json);
 			actualizarEntity(entityActual, "first");
-			getCourse();
+			getStudent();
 		}	
-	pestanasC();
-
-			
-
+	pestanasS();
 });
 
-$('#cancelare').click(function(){
-
+$('#cancelares').click(function(){
+	$('#cambio_2').html('');
+    $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+    $('#cambio_2').show();
+    $('#departamentoe').hide();
+    $('.botoneses').prop('disabled',false);
+    $('.edit').attr('readonly', true);
+    $('#estudiante_id').attr('readonly',true);
+    $('#departamentoe1').show();
+    $('.iteradores').show();
+    $('#botones').hide();
+	pestanasS();
 });
 
 $('#nuevoe').click(function () {
@@ -244,6 +251,7 @@ $('#nuevoe').click(function () {
 });
 
 $('#buscare').click(function () {
+	DMLActual = "search";
     $('.edit').attr('readonly', true);
 	$('#cambio_2').html('');
     $('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
@@ -261,6 +269,10 @@ $('#buscare').click(function () {
                 "sAjaxSource": "studenttable.do",
                 'bJQueryUI': true,
                 "aoColumns":[
+							{
+	 							"sTitle":"Id del Estudiante",
+	 							"mData":"id"
+							},
                              {
                             	 "sTitle":"Nombre",
                             	 "mData":"name"
@@ -311,7 +323,6 @@ $('#editare').click(function () {
 	$('.botoneses').prop('disabled',true);
 	$('.edit').attr('readonly', false);
 	$('#cambio_2').hide();
-	$('#estudiante_id').attr('readonly', false);
 	$('.edit').attr('readonly', false);
 	$('#departamentoe1').hide();
 	$('#departamentoe').show();

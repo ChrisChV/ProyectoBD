@@ -182,7 +182,7 @@ function validate(){
 	
 }
 
-$("#departamentos").validate({
+/*$("#departamentos").validate({
   rules: {
     field: {
       required: true
@@ -206,6 +206,7 @@ $("#presupuesto").validate({
     }
   }
 });
+*/
 </script>
 
 <div id="departamento">

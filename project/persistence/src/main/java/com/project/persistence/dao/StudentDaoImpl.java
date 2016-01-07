@@ -86,7 +86,7 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
 			System.out.println(m + " en UPDATE FROM STUDENT");
 			return m;
 		}
-		saveOrUpdate(st);
+		updateSession(st);
 		String m = "EL estudiante se actualizo correctamente";
 		System.out.println(m);
 		return m;

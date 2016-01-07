@@ -229,6 +229,7 @@ $('#nt').click(function () {
 $('#pt').click(function () {
     actualizarEntity('time', 'prev');
 })
+/*
 $( "#id_time" ).validate({
   rules: {
     field: {
@@ -264,7 +265,7 @@ $( "#end2" ).validate({
     }
   }
 });
-
+*/
 </script>
 <div id="time">
     <table>

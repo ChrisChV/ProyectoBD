@@ -16,6 +16,7 @@
 	<table id="pro_tab" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
+            	<th>Id del profesor</th>
                 <th>Name</th>               	
                 <th>Departamento</th>
                 <th>Salario</th>
@@ -25,6 +26,7 @@
 		</tbody>
         <tfoot>
             <tr>
+            	<th>Id del profesor</th>
                 <th>Name</th>               	
                 <th>Departamento</th>
                 <th>Salario</th>

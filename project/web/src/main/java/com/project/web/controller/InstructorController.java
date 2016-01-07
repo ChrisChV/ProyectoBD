@@ -54,7 +54,7 @@ public class InstructorController {
 	@RequestMapping(value = "/instructor/all", method = RequestMethod.POST)
 	public @ResponseBody List<InstructorDTO> getAll(){
 		return instructorManager.getAll();
-	}
+	}	
 	
 	@RequestMapping(value = "/instructor/insert", method = RequestMethod.POST)
 	public @ResponseBody String insert(@RequestParam("id") String insId

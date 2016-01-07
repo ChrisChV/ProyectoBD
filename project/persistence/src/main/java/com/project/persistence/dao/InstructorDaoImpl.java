@@ -82,7 +82,7 @@ public class InstructorDaoImpl extends GenericDaoImpl<Instructor> implements Ins
 			System.out.println(m + " en UPDATE FROM INSTRUCTOR");
 			return m;
 		}
-		saveOrUpdate(ins);
+		updateSession(ins);
 		String m = "El instructor a sido actualizado con exito";
 		System.out.println(m + " en UPDATE FROM INSTRUCTOR");
 		return m;

@@ -173,6 +173,8 @@ $('#pc').click(function () {
     actualizarEntity('classroom', 'prev');
 })
 
+/*
+
 $( "#building" ).validate({
   rules: {
     field: {
@@ -198,7 +200,7 @@ $( "#capacidad" ).validate({
     }
   }
 });
-
+*/
 </script>
 
 

@@ -64,7 +64,6 @@ $('#cancelarcu').click(function(){
     
     $('#departamento0').hide();
     $('#departamento1').show(); 
-    getCourse();
 	pestanasC();
 	$('.tab_cursos').show();
 	$('#cambio_2').show();
