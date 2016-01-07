@@ -83,6 +83,7 @@ $('#guardart').click(function(){
 		var json = {"id" : id};
 		DML(entityActual, DMLActual, json);
 		actualizarEntity(entityActual, "first");
+		getTime();
 	}
 });
 

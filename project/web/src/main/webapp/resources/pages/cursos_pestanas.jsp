@@ -24,19 +24,27 @@
 		$('#nuevo_tab_pre').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
+				$('#tablasa').append("Nombre");
 				$('#tablasa').append("<select id ='idpre'></select> <select id ='cursopre'></select>");	
+				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
+				
+				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
 		});
 		
 		$('#borrar_tab_pre').click(function(){
 				var ID = tab_curso.cell('.selected',0).data();
 				var nombre = tab_curso.cell('.selected',1).data();
 				tab_curso.row('.selected').remove().draw( false );
+				
+				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
 		});		
 		
 		$('#nuevo_tab_det').click(function(){
 			    $('#cambio_2').html('');
 				$('#cambio_2').append("<div id ='buscadores'> </div> <div id='tablasa'> </div>");
 				$('#tablasa').append("<select id ='idcurso'></select> <select id ='idsection'></select> <select id ='semestre'> <select id ='edificio'> <select id ='room_no'><select id ='idtime'><select id ='year'>");
+				
+				$('#tablasa').append(" <input type='button' id='nuevo_tab_det' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_det' value='borrar' class='tabs_cursos'/>);
 		});
 		
 		$('#borrar_tab_det').click(function(){
@@ -46,16 +54,27 @@
 				var year = tab_curso.cell('.selected',7).data();
 
 				tab_curso.row('.selected').remove().draw( false );
+				
+				$('#tablasa').append(" <input type='button' id='nuevo_tab_pre' value='nuevo' class='tabs_cursos'/>  <input type='button' id='borrar_tab_pre' value='borrar' class='tabs_cursos'/>);
 		});		
 		
-		$('#guardarcu').click(function(){
+		
+		$('#nuevo_tab_pre').click(function(){
 		
 		});
 		
-		$('#cancelarcu').click(function(){
+		$('#borrar_tab_pre').click(function(){
 		
 		});
 		
+		
+		$('#nuevo_tab_det').click(function(){
+		
+		});
+		
+		$('#borrar_tab_det').click(function(){
+		
+		});
     </script>
 </head>
 <body>
@@ -65,8 +84,6 @@
             <li><a href="#tabs-2">Detalles</a></li>
         </ul>
         <div class="tab-content" id="tabs-1">
-            <input type="button" id="nuevo_tab_pre" value="nuevo" class="tabs_cursos"/>
-            <input type="button" id="borrar_tab_pre" value="borrar" class="tabs_cursos"/>
             <input type="button" id="guardarpc" value="guardar" class="tabs_cursos"/>
             <input type="button" id="cancelarpc" value="cancelar" class="tabs_cursos"/></p>
             <table id="cur_tab1" class="display" cellspacing="0" width="100%">
@@ -119,8 +136,5 @@
             </tr>
         </tfoot>
             </table>
-			<input  type="submit" value="guardar"id="guardar_tabpre"/>
-			
-			<input  type="submit"value="cancelar" id="cancelar_tabpre"/>
         </div>
 </html>
